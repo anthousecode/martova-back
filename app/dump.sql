@@ -18,9 +18,9 @@ DROP TABLE IF EXISTS "admin_menu";
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE "admin_menu" (
-  "id" int(10) unsigned NOT NULL,
-  "parent_id" int(11) NOT NULL DEFAULT '0',
-  "order" int(11) NOT NULL DEFAULT '0',
+  "id" int unsigned NOT NULL,
+  "parent_id" int NOT NULL DEFAULT '0',
+  "order" int NOT NULL DEFAULT '0',
   "title" varchar(50) COLLATE utf8mb4_unicode_ci NOT NULL,
   "icon" varchar(50) COLLATE utf8mb4_unicode_ci NOT NULL,
   "uri" varchar(50) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
@@ -49,8 +49,8 @@ DROP TABLE IF EXISTS "admin_operation_log";
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE "admin_operation_log" (
-  "id" int(10) unsigned NOT NULL,
-  "user_id" int(11) NOT NULL,
+  "id" int unsigned NOT NULL,
+  "user_id" int NOT NULL,
   "path" varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   "method" varchar(10) COLLATE utf8mb4_unicode_ci NOT NULL,
   "ip" varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
@@ -80,7 +80,7 @@ DROP TABLE IF EXISTS "admin_permissions";
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE "admin_permissions" (
-  "id" int(10) unsigned NOT NULL,
+  "id" int unsigned NOT NULL,
   "name" varchar(50) COLLATE utf8mb4_unicode_ci NOT NULL,
   "slug" varchar(50) COLLATE utf8mb4_unicode_ci NOT NULL,
   "http_method" varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
@@ -111,8 +111,8 @@ DROP TABLE IF EXISTS "admin_role_menu";
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE "admin_role_menu" (
-  "role_id" int(11) NOT NULL,
-  "menu_id" int(11) NOT NULL,
+  "role_id" int NOT NULL,
+  "menu_id" int NOT NULL,
   "created_at" timestamp NULL DEFAULT NULL,
   "updated_at" timestamp NULL DEFAULT NULL,
   KEY "admin_role_menu_role_id_menu_id_index" ("role_id","menu_id")
@@ -137,8 +137,8 @@ DROP TABLE IF EXISTS "admin_role_permissions";
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE "admin_role_permissions" (
-  "role_id" int(11) NOT NULL,
-  "permission_id" int(11) NOT NULL,
+  "role_id" int NOT NULL,
+  "permission_id" int NOT NULL,
   "created_at" timestamp NULL DEFAULT NULL,
   "updated_at" timestamp NULL DEFAULT NULL,
   KEY "admin_role_permissions_role_id_permission_id_index" ("role_id","permission_id")
@@ -163,8 +163,8 @@ DROP TABLE IF EXISTS "admin_role_users";
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE "admin_role_users" (
-  "role_id" int(11) NOT NULL,
-  "user_id" int(11) NOT NULL,
+  "role_id" int NOT NULL,
+  "user_id" int NOT NULL,
   "created_at" timestamp NULL DEFAULT NULL,
   "updated_at" timestamp NULL DEFAULT NULL,
   KEY "admin_role_users_role_id_user_id_index" ("role_id","user_id")
@@ -189,7 +189,7 @@ DROP TABLE IF EXISTS "admin_roles";
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE "admin_roles" (
-  "id" int(10) unsigned NOT NULL,
+  "id" int unsigned NOT NULL,
   "name" varchar(50) COLLATE utf8mb4_unicode_ci NOT NULL,
   "slug" varchar(50) COLLATE utf8mb4_unicode_ci NOT NULL,
   "created_at" timestamp NULL DEFAULT NULL,
@@ -218,8 +218,8 @@ DROP TABLE IF EXISTS "admin_user_permissions";
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE "admin_user_permissions" (
-  "user_id" int(11) NOT NULL,
-  "permission_id" int(11) NOT NULL,
+  "user_id" int NOT NULL,
+  "permission_id" int NOT NULL,
   "created_at" timestamp NULL DEFAULT NULL,
   "updated_at" timestamp NULL DEFAULT NULL,
   KEY "admin_user_permissions_user_id_permission_id_index" ("user_id","permission_id")
@@ -243,7 +243,7 @@ DROP TABLE IF EXISTS "admin_users";
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE "admin_users" (
-  "id" int(10) unsigned NOT NULL,
+  "id" int unsigned NOT NULL,
   "username" varchar(190) COLLATE utf8mb4_unicode_ci NOT NULL,
   "password" varchar(60) COLLATE utf8mb4_unicode_ci NOT NULL,
   "name" varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
@@ -310,7 +310,7 @@ CREATE TABLE "areas" (
   "color" varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   "created_at" timestamp NULL DEFAULT NULL,
   "updated_at" timestamp NULL DEFAULT NULL,
-  "status_id" int(11) NOT NULL,
+  "status_id" int NOT NULL,
   PRIMARY KEY ("id")
 );
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -416,7 +416,7 @@ CREATE TABLE "infrastructures" (
   "id" bigint(20) unsigned NOT NULL,
   "created_at" timestamp NULL DEFAULT NULL,
   "updated_at" timestamp NULL DEFAULT NULL,
-  "category_id" int(11) NOT NULL,
+  "category_id" int NOT NULL,
   "ru_name" varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   "ru_description" text COLLATE utf8mb4_unicode_ci NOT NULL,
   "ua_name" varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
@@ -446,7 +446,7 @@ CREATE TABLE "menus" (
   "link" varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   "created_at" timestamp NULL DEFAULT NULL,
   "updated_at" timestamp NULL DEFAULT NULL,
-  "order" int(11) NOT NULL,
+  "order" int NOT NULL,
   "ru_name" varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   "ua_name" varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   PRIMARY KEY ("id"),
@@ -472,9 +472,9 @@ DROP TABLE IF EXISTS "migrations";
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE "migrations" (
-  "id" int(10) unsigned NOT NULL,
+  "id" int unsigned NOT NULL,
   "migration" varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  "batch" int(11) NOT NULL,
+  "batch" int NOT NULL,
   PRIMARY KEY ("id")
 );
 /*!40101 SET character_set_client = @saved_cs_client */;
