@@ -15,7 +15,7 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        \DB::unprepared(file_get_contents(app_path() . '/dump.sql'));
+       // \DB::unprepared(file_get_contents(app_path() . '/dump.sql'));
     }
 
     /**
