@@ -43,18 +43,33 @@ class AreaController extends Controller
     }
 
     /**
+     * Download XML
+     *
      * @param null $id
      */
     public function downloadPlan($id = null)
     {
-        // todo: download XML file from storage for area, that's id was passed
+        $filePath = Area::select('plan')->where('id', $id)->get()->pluck('plan')->toArray()[0];
+        $filePath = public_path() . '/upload/' . $filePath;
+        $headers = [
+            'Content-type' => 'application/xml'
+        ];
+        return response()->download('/' . $filePath, 'plan.xml', $headers);
     }
 
     /**
+     * Download PDF / DWG
+     *
      * @param null $id
      */
     public function downloadSurvey($id = null)
     {
-        // todo: download survey from storage by path for area, of waht id was passed
+        $filePath = Area::select('survey')->where('id', $id)->get()->pluck('survey')->toArray()[0];
+        $filePath = public_path() . '/upload/' . $filePath;
+        $headers = [
+            'Content-type' => 'application/dwg',
+            'Content-type' => 'application/pdf',
+        ];
+        return response()->download('/' . $filePath, 'survey', $headers);
     }
 }

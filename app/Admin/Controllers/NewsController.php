@@ -65,9 +65,15 @@ class NewsController extends AdminController
     {
         $form = new Form(new News);
 
-        $form->text('name', __('Name'));
-        $form->textarea('description', __('Description'));
         $form->image('image', __('Image'));
+
+        $form->tab('RU', function(Form $form){
+            $form->text('ru_name', __('Name'));
+            $form->ckeditor('ru_description', __('Description'));
+        })->tab('UA', function(Form $form){
+            $form->text('ua_name', __('Name'));
+            $form->ckeditor('ua_description', __('Description'));
+        });
 
         return $form;
     }

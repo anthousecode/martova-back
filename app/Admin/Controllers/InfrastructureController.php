@@ -71,9 +71,13 @@ class InfrastructureController extends AdminController
         $form->select('category_id', 'Категория объекта инфраструктуры')
             ->options(CategoryInfrastructure::all()->pluck('name', 'id'));
 
-        $form->text('name', __('Name'));
-        $form->textarea('description', __('Description'));
-
+        $form->tab('RU', function(Form $form){
+            $form->text('ru_name', __('Name'));
+            $form->ckeditor('ru_description', __('Description'));
+        })->tab('UA', function(Form $form) {
+            $form->text('ua_name', __('Name'));
+            $form->ckeditor('ua_description', __('Description'));
+        });
         return $form;
     }
 }

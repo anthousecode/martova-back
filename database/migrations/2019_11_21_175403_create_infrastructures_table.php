@@ -16,8 +16,10 @@ class CreateInfrastructuresTable extends Migration
         Schema::create('infrastructures', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->integer('category_id');
-            $table->string('name');
-            $table->text('description');
+            $table->string('ru_name');
+            $table->text('ru_description');
+            $table->string('ua_name');
+            $table->text('ua_description');
             $table->timestamps();
         });
     }

@@ -15,7 +15,8 @@ class CreateAreaStatusesTable extends Migration
     {
         Schema::create('area_statuses', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->string('name');
+            $table->string('ru_name');
+            $table->string('ua_name');
             $table->timestamps();
         });
     }

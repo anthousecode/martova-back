@@ -19,12 +19,26 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 });
 
 Route::namespace('API')->group(function(){
+
     Route::get('/search-area/{num}', ['uses' => 'AreaController@searchArea', 'as' => 'search_area']);
     Route::get('/fetch-areas', ['uses' => 'AreaController@fetchAreas', 'as' => 'fetch_areas']);
+    Route::get('/filter-by-status/{status}', ['uses' => 'AreaController@filterByStatus', 'as' => 'filter_by_status']);
+    Route::get('/show-specific/{id}', ['uses' => 'AreaController@show', 'as' => 'show_specific']);
+    Route::get('/download-plan/{id}', ['uses' => 'AreaController@downloadPlan', 'as' => 'download_plan']);
+    Route::get('/download-survey/{id}', ['uses' => 'AreaController@downloadSurvey', 'as' => 'download_survey']);
+
+    Route::get('/pages', function(){
+        return App\Models\Page::all()->toJson();
+    });
+
+    Route::get('/page/{title}', function($title = null){
+        return App\Models\Page::where('title', $title)->get()->toJson();
+    });
+
     Route::get('/news', function(){
        return App\Models\News::all()->toJson();
     });
-    Route::get('/infrastructures', function(){
+    Route::get('/infrastructure-items', function(){
         return App\Models\Infrastructure::with('category')->get()->toJson();
     });
     Route::get('/gallery-items', function(){

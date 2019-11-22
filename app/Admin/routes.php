@@ -26,4 +26,6 @@ Route::group([
 
     $router->resource('area-statuses', AreasStatusesController::class);
 
+    $router->resource('pages', PagesController::class);
+
 });

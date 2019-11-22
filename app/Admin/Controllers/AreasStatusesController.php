@@ -61,7 +61,11 @@ class AreasStatusesController extends AdminController
     {
         $form = new Form(new AreaStatus);
 
-        $form->text('name', __('Name'));
+        $form->tab('RU', function(Form $form) {
+            $form->text('ru_name', __('Name'));
+        })->tab('UA', function(Form $form) {
+            $form->text('ua_name', __('Name'));
+        });
 
         return $form;
     }

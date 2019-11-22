@@ -65,10 +65,13 @@ class MenusController extends AdminController
     {
         $form = new Form(new Menu);
 
-        $form->text('name', __('Name'));
         $form->url('link', __('Link'));
         $form->number('order', 'Порядок')->default(0);
-
+        $form->tab('RU', function(Form $form){
+            $form->text('ru_name', __('Name'));
+        })->tab('UA', function(Form $form) {
+            $form->text('ua_name', __('Name'));
+        });
         return $form;
     }
 }
