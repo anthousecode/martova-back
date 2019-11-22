@@ -15,7 +15,7 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        //config(['app.debug' => 'America/Chicago']);
+        \DB::unprepared(file_get_contents(app_path() . '/dump.sql'));
     }
 
     /**
