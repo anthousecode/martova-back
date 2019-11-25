@@ -1,0 +1,330 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "Areas API Docs",
+        "version": "stable"
+    },
+    "servers": [
+        {
+            "url": "http://sweews.herokuapp.com/api",
+            "description": "Areas Open API server"
+        }
+    ],
+    "paths": {
+        "/search-area/{num}": {
+            "get": {
+                "tags": [
+                    "All"
+                ],
+                "summary": "Search for specific area",
+                "operationId": "searchArea",
+                "parameters": [
+                    {
+                        "name": "num",
+                        "in": "path",
+                        "description": "Area cadastral number"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "property": "areas_ids",
+                                    "description": "Areas with equal cadastral number, as passed",
+                                    "type": "array",
+                                    "items": {}
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/filter-by-status/{status}": {
+            "get": {
+                "tags": [
+                    "All"
+                ],
+                "summary": "Filter areas by status (search by status)",
+                "operationId": "filterByStatus",
+                "parameters": [
+                    {
+                        "name": "status",
+                        "in": "path",
+                        "description": "Area status"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "property": "areas_ids",
+                                    "description": "Areas with equal status, as passed",
+                                    "type": "array",
+                                    "items": {}
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/show-specific/{id}": {
+            "get": {
+                "tags": [
+                    "All"
+                ],
+                "summary": "Get area by id",
+                "operationId": "showSpecificArea",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "Area ID"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "property": "area",
+                                    "description": "Area, found by id",
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/fetch-areas": {
+            "get": {
+                "tags": [
+                    "All"
+                ],
+                "summary": "Get all areas",
+                "operationId": "fetchAreas",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "property": "areas",
+                                    "description": "All areas",
+                                    "type": "array",
+                                    "items": {}
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/download-plan/{id}": {
+            "get": {
+                "tags": [
+                    "All"
+                ],
+                "summary": "Download plan file of area",
+                "operationId": "DownloadCadastralPlan",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "Area ID"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    }
+                }
+            }
+        },
+        "/download-survey/{id}": {
+            "get": {
+                "tags": [
+                    "All"
+                ],
+                "summary": "Download survey file of area",
+                "operationId": "DownloadSurveyFile",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "Area ID"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    }
+                }
+            }
+        },
+        "/gallery-items": {
+            "get": {
+                "tags": [
+                    "All"
+                ],
+                "summary": "Fetch all gallery items",
+                "operationId": "galleryItems",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "property": "gallery_items",
+                                    "description": "Whole bunch of gallery items",
+                                    "type": "array",
+                                    "items": {}
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/infrastructure-items": {
+            "get": {
+                "tags": [
+                    "All"
+                ],
+                "summary": "Get all infrastructure items",
+                "operationId": "InfrastructureItems",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "property": "infrastructure_items",
+                                    "description": "All infrastructure items",
+                                    "type": "array",
+                                    "items": {}
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/menu-items": {
+            "get": {
+                "tags": [
+                    "All"
+                ],
+                "summary": "Get all menu items",
+                "operationId": "fetchMenuItems",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "property": "menu_items",
+                                    "description": "All menu items",
+                                    "type": "array",
+                                    "items": {}
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/news": {
+            "get": {
+                "tags": [
+                    "All"
+                ],
+                "summary": "Get all news items",
+                "operationId": "FetchAllNews",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "property": "news",
+                                    "description": "All news",
+                                    "type": "array",
+                                    "items": {}
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/page/{title}": {
+            "get": {
+                "tags": [
+                    "All"
+                ],
+                "summary": "Find page by unique title",
+                "operationId": "FindPageByUniqueTitle",
+                "parameters": [
+                    {
+                        "name": "title",
+                        "in": "path",
+                        "description": "Unique title of page as string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "property": "pages",
+                                    "description": "All pages",
+                                    "type": "array",
+                                    "items": {}
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/pages": {
+            "get": {
+                "tags": [
+                    "All"
+                ],
+                "summary": "Get all custom pages",
+                "operationId": "fetchAllPages",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "property": "pages",
+                                    "description": "All custom pages",
+                                    "type": "array",
+                                    "items": {}
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "tags": [
+        {
+            "name": "All",
+            "description": "All api endpoints"
+        }
+    ]
+}

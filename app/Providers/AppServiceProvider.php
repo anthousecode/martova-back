@@ -16,6 +16,7 @@ class AppServiceProvider extends ServiceProvider
     public function register()
     {
        // \DB::unprepared(file_get_contents(app_path() . '/dump.sql'));
+        $this->app->register(\L5Swagger\L5SwaggerServiceProvider::class);
     }
 
     /**

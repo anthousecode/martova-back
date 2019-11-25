@@ -9,43 +9,143 @@ use App\Models\Area;
 class AreaController extends Controller
 {
     /**
-     * @param null $num
+     * @OA\Get(
+     *  path="/search-area/{num}",
+     *  operationId="searchArea",
+     *  tags={"All"},
+     *  summary="Search for specific area",
+     *  @OA\Parameter(
+     *     name="num",
+     *     in="path",
+     *     description="Area cadastral number",
+     *  ),
+     *  @OA\Response(
+     *    response=200,
+     *    description="OK",
+     *     @OA\MediaType(
+     *        mediaType="application/json",
+     *        @OA\Property(
+     *           property="areas_ids",
+     *           type="array",
+     *           @OA\Items(),
+     *           description="Areas with equal cadastral number, as passed"
+     *         ),
+     *     )
+     *  )
+     * )
      */
     public function searchArea($num = null)
     {
-        return Area::where('number', $num)->get()->pluck('id')->toJson();
+        return json_encode(['areas_ids' => Area::where('number', $num)->get()->pluck('id')->toArray()]);
     }
 
     /**
-     * @param null $status
+     * @OA\Get(
+     *  path="/filter-by-status/{status}",
+     *  operationId="filterByStatus",
+     *  tags={"All"},
+     *  summary="Filter areas by status (search by status)",
+     *  @OA\Parameter(
+     *     name="status",
+     *     in="path",
+     *     description="Area status",
+     *  ),
+     *  @OA\Response(
+     *    response=200,
+     *    description="OK",
+     *     @OA\MediaType(
+     *        mediaType="application/json",
+     *        @OA\Property(
+     *           property="areas_ids",
+     *           type="array",
+     *           @OA\Items(),
+     *           description="Areas with equal status, as passed"
+     *         ),
+     *     )
+     *  )
+     * )
      */
     public function filterByStatus($status = null)
     {
-        return Area::where('status', $status)->get()->pluck('id')->toJson();
+        return json_encode(['areas_ids' => Area::where('status', $status)->get()->pluck('id')->toArray()]);
     }
 
     /**
-     * @param null $id
-     *
-     * @return mixed
+     * @OA\Get(
+     *  path="/show-specific/{id}",
+     *  operationId="showSpecificArea",
+     *  tags={"All"},
+     *  summary="Get area by id",
+     *  @OA\Parameter(
+     *     name="id",
+     *     in="path",
+     *     description="Area ID",
+     *  ),
+     *  @OA\Response(
+     *    response=200,
+     *    description="OK",
+     *     @OA\MediaType(
+     *        mediaType="application/json",
+     *        @OA\Property(
+     *           property="area",
+     *           type="object",
+     *           description="Area, found by id"
+     *         ),
+     *     )
+     *  )
+     * )
      */
     public function show($id = null)
     {
-        return Area::where('id', $id)->get()->toJson();
+        return json_encode(['area' => Area::where('id', $id)->get()->toArray()]);
     }
 
     /**
-     * @return string
+     * @OA\Get(
+     *  path="/fetch-areas",
+     *  operationId="fetchAreas",
+     *  tags={"All"},
+     *  summary="Get all areas",
+     *  @OA\Response(
+     *    response=200,
+     *    description="OK",
+     *     @OA\MediaType(
+     *        mediaType="application/json",
+     *        @OA\Property(
+     *           property="areas",
+     *           type="array",
+     *           @OA\Items(),
+     *           description="All areas"
+     *         ),
+     *     )
+     *  )
+     * )
      */
     public function fetchAreas()
     {
-        return Area::all()->toJson();
+        return json_encode(['areas' => Area::all()->toArray()]);
     }
 
     /**
-     * Download XML
-     *
-     * @param null $id
+     * @OA\Get(
+     *  path="/download-plan/{id}",
+     *  operationId="DownloadCadastralPlan",
+     *  tags={"All"},
+     *  summary="Download plan file of area",
+     *  @OA\Parameter(
+     *   name="id",
+     *   in="path",
+     *   description="Area ID"
+     * ),
+     *  @OA\Response(
+     *    response=200,
+     *    description="OK",
+     *     @OA\Schema(
+     *       type="string",
+     *       format="binary"
+     *     )
+     *  )
+     * )
      */
     public function downloadPlan($id = null)
     {
@@ -58,9 +158,25 @@ class AreaController extends Controller
     }
 
     /**
-     * Download PDF / DWG
-     *
-     * @param null $id
+     * @OA\Get(
+     *  path="/download-survey/{id}",
+     *  operationId="DownloadSurveyFile",
+     *  tags={"All"},
+     *  summary="Download survey file of area",
+     *  @OA\Parameter(
+     *   name="id",
+     *   in="path",
+     *   description="Area ID"
+     * ),
+     *  @OA\Response(
+     *    response=200,
+     *    description="OK",
+     *     @OA\Schema(
+     *       type="string",
+     *       format="binary"
+     *     )
+     *  )
+     * )
      */
     public function downloadSurvey($id = null)
     {

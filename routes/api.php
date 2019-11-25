@@ -27,24 +27,11 @@ Route::namespace('API')->group(function(){
     Route::get('/download-plan/{id}', ['uses' => 'AreaController@downloadPlan', 'as' => 'download_plan']);
     Route::get('/download-survey/{id}', ['uses' => 'AreaController@downloadSurvey', 'as' => 'download_survey']);
 
-    Route::get('/pages', function(){
-        return App\Models\Page::all()->toJson();
-    });
+    Route::get('/pages', ['uses' => 'PagesController@fetchPages']);
+    Route::get('/page/{title}', ['uses' => 'PagesController@getByUniqueTitle']);
 
-    Route::get('/page/{title}', function($title = null){
-        return App\Models\Page::where('title', $title)->get()->toJson();
-    });
-
-    Route::get('/news', function(){
-       return App\Models\News::all()->toJson();
-    });
-    Route::get('/infrastructure-items', function(){
-        return App\Models\Infrastructure::with('category')->get()->toJson();
-    });
-    Route::get('/gallery-items', function(){
-        return App\Models\Gallery::all()->toJson();
-    });
-    Route::get('/menu-items', function(){
-        return App\Models\Menu::orderBy('order', 'ASC')->get()->toJson();
-    });
+    Route::get('/news', ['uses' => 'NewsController@fetchNews']);
+    Route::get('/infrastructure-items', ['uses' => 'InfrastructureController@fetchInfrastructureItems']);
+    Route::get('/gallery-items', ['uses' => 'GalleryController@fetchGalleryItems']);
+    Route::get('/menu-items', ['uses' => 'MenuController@fetchMenuItems']);
 });
