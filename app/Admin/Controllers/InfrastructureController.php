@@ -69,7 +69,7 @@ class InfrastructureController extends AdminController
         $form = new Form(new Infrastructure);
 
         $form->select('category_id', 'Категория объекта инфраструктуры')
-            ->options(CategoryInfrastructure::all()->pluck('name', 'id'));
+            ->options(CategoryInfrastructure::all()->pluck('ru_name', 'id'));
 
         $form->tab('RU', function(Form $form){
             $form->text('ru_name', __('Name'));

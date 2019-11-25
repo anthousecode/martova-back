@@ -79,7 +79,7 @@ class AreasController extends AdminController
         $form = new Form(new Area);
 
         $form->select('status_id', 'Статус Участка')
-            ->options(AreaStatus::all()->pluck('name', 'id'));
+            ->options(AreaStatus::all()->pluck('ru_name', 'id'));
         $form->text('number', __('Number'));
         $form->decimal('square', __('Square'));
         $form->decimal('price', __('Price'));
