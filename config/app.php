@@ -53,7 +53,7 @@ return [
     |
     */
 
-    'url' => 'https://sweews.herokuapp.com',//env('APP_URL', 'http://localhost'),
+    'url' => env('APP_URL', 'http://localhost'),//'https://sweews.herokuapp.com',//env('APP_URL', 'http://localhost'),
 
     'asset_url' => env('ASSET_URL', null),
 
