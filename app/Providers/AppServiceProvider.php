@@ -18,7 +18,7 @@ class AppServiceProvider extends ServiceProvider
        // \DB::unprepared(file_get_contents(app_path() . '/dump.sql'));
         if (!Schema::hasColumn('pages', 'slug')) {
             Schema::table('pages', function (Blueprint $table) {
-                $table->string('slug')->unique();
+                $table->string('slug')->nullable()->unique();
             });
         }
         if (Schema::hasColumn('pages', 'link')) {
@@ -28,7 +28,7 @@ class AppServiceProvider extends ServiceProvider
         }
         if (!Schema::hasColumn('menus', 'slug')) {
             Schema::table('menus', function (Blueprint $table) {
-                $table->string('slug')->unique();
+                $table->string('slug')->nullable()->unique();
             });
         }
         if (Schema::hasColumn('menus', 'link')) {
