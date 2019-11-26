@@ -36,6 +36,7 @@ class AppServiceProvider extends ServiceProvider
 //                $table->dropColumn('link');
 //            });
 //        }catch(\Illuminate\Database\QueryException $ex){}
+
         \URL::forceScheme('https');
         $this->app->register(\L5Swagger\L5SwaggerServiceProvider::class);
     }
