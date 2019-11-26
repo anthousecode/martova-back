@@ -10,14 +10,14 @@ class PagesController extends Controller
 {
     /**
      * @OA\Get(
-     *     path="/page/{title}",
-     *     operationId="FindPageByUniqueTitle",
-     *     summary="Find page by unique title",
+     *     path="/page/{slug}",
+     *     operationId="FindPageByUniqueSlug",
+     *     summary="Find page by unique slug",
      *     tags={"All"},
      *     @OA\Parameter(
-     *         name="title",
+     *         name="slug",
      *         in="path",
-     *         description="Unique title of page as string"
+     *         description="Unique slug of page as string"
      *     ),
      *     @OA\Response(
      *         response=200,
@@ -34,9 +34,9 @@ class PagesController extends Controller
      *     )
      * )
      */
-    public function getByUniqueTitle($title = null)
+    public function getByUniqueTitle($slug = null)
     {
-        return json_encode(['pages' => Page::where('title', $title)->get()->toArray()]);
+        return json_encode(['pages' => Page::where('slug', $slug)->get()->toArray()]);
     }
 
     /**

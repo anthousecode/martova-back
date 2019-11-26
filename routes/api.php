@@ -28,7 +28,7 @@ Route::namespace('API')->group(function(){
     Route::get('/download-survey/{id}', ['uses' => 'AreaController@downloadSurvey', 'as' => 'download_survey']);
 
     Route::get('/pages', ['uses' => 'PagesController@fetchPages']);
-    Route::get('/page/{title}', ['uses' => 'PagesController@getByUniqueTitle']);
+    Route::get('/page/{slug}', ['uses' => 'PagesController@getByUniqueSlug']);
 
     Route::get('/news', ['uses' => 'NewsController@fetchNews']);
     Route::get('/infrastructure-items', ['uses' => 'InfrastructureController@fetchInfrastructureItems']);
