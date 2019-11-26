@@ -15,7 +15,7 @@
 
 
 <div class="layout hide" id="layout">
-  <iframe class="hide" id="tour" src="{{ route('360p')  }}" frameborder="0">
+  <iframe class="hide" id="tour" src="https://sweews.herokuapp.com/360" frameborder="0">
   </iframe>
 </div>
 
