@@ -265,18 +265,18 @@
                 }
             }
         },
-        "/page/{title}": {
+        "/page/{slug}": {
             "get": {
                 "tags": [
                     "All"
                 ],
-                "summary": "Find page by unique title",
-                "operationId": "FindPageByUniqueTitle",
+                "summary": "Find page by unique slug",
+                "operationId": "FindPageByUniqueSlug",
                 "parameters": [
                     {
-                        "name": "title",
+                        "name": "slug",
                         "in": "path",
-                        "description": "Unique title of page as string"
+                        "description": "Unique slug of page as string"
                     }
                 ],
                 "responses": {
