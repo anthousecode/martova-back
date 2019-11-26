@@ -16,26 +16,26 @@ class AppServiceProvider extends ServiceProvider
     public function register()
     {
        // \DB::unprepared(file_get_contents(app_path() . '/dump.sql'));
-//        try {
-//            Schema::table('pages', function (Blueprint $table) {
-//                $table->string('slug')->unique();
-//            });
-//        }catch(\Illuminate\Database\QueryException $ex){}
-//        try{
-//            Schema::table('pages', function (Blueprint $table) {
-//                $table->dropColumn('link');
-//            });
-//        }catch(\Illuminate\Database\QueryException $ex){}
-//        try{
-//            Schema::table('menus', function (Blueprint $table) {
-//                $table->string('slug')->unique();
-//            });
-//        }catch(\Illuminate\Database\QueryException $ex){}
-//        try{
-//            Schema::table('menus', function (Blueprint $table) {
-//                $table->dropColumn('link');
-//            });
-//        }catch(\Illuminate\Database\QueryException $ex){}
+        try {
+            Schema::table('pages', function (Blueprint $table) {
+                $table->string('slug')->unique();
+            });
+        }catch(\Illuminate\Database\QueryException $ex){}
+        try{
+            Schema::table('pages', function (Blueprint $table) {
+                $table->dropColumn('link');
+            });
+        }catch(\Illuminate\Database\QueryException $ex){}
+        try{
+            Schema::table('menus', function (Blueprint $table) {
+                $table->string('slug')->unique();
+            });
+        }catch(\Illuminate\Database\QueryException $ex){}
+        try{
+            Schema::table('menus', function (Blueprint $table) {
+                $table->dropColumn('link');
+            });
+        }catch(\Illuminate\Database\QueryException $ex){}
 
         \URL::forceScheme('https');
         $this->app->register(\L5Swagger\L5SwaggerServiceProvider::class);
