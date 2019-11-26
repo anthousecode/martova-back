@@ -16,21 +16,26 @@ class AppServiceProvider extends ServiceProvider
     public function register()
     {
        // \DB::unprepared(file_get_contents(app_path() . '/dump.sql'));
-
+        if (!Schema::hasColumn('pages', 'slug')) {
             Schema::table('pages', function (Blueprint $table) {
                 $table->string('slug')->unique();
             });
-
+        }
+        if (Schema::hasColumn('pages', 'link')) {
             Schema::table('pages', function (Blueprint $table) {
                 $table->dropColumn('link');
             });
-
+        }
+        if (!Schema::hasColumn('menus', 'slug')) {
             Schema::table('menus', function (Blueprint $table) {
                 $table->string('slug')->unique();
             });
+        }
+        if (Schema::hasColumn('menus', 'link')) {
             Schema::table('menus', function (Blueprint $table) {
                 $table->dropColumn('link');
             });
+        }
 
         \URL::forceScheme('https');
         $this->app->register(\L5Swagger\L5SwaggerServiceProvider::class);
