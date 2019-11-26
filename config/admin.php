@@ -139,6 +139,7 @@ return [
             'auth/login',
             'auth/logout',
             '_handle_action_',
+            'locale',
         ],
     ],
 
@@ -396,7 +397,17 @@ return [
     |
     */
     'extensions' => [
-
+        'multi-language' => [
+            'enable' => true,
+            // the key should be same as var locale in config/app.php
+            // the value is used to show
+            'languages' => [
+                'en' => 'English',
+                'ru' => 'Russian',
+            ],
+            // default locale
+            'default' => 'ru',
+        ],
     ],
 
     'upload'  => [

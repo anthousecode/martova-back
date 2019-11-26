@@ -15,7 +15,7 @@ class NewsController extends AdminController
      *
      * @var string
      */
-    protected $title = 'App\Models\News';
+    protected $title = 'Новости';
 
     /**
      * Make a grid builder.
@@ -26,12 +26,12 @@ class NewsController extends AdminController
     {
         $grid = new Grid(new News);
 
-        $grid->column('id', __('Id'));
-        $grid->column('name', __('Name'));
-        $grid->column('description', __('Description'));
-        $grid->column('image', __('Image'));
-        $grid->column('created_at', __('Created at'));
-        $grid->column('updated_at', __('Updated at'));
+        $grid->column('id', 'Идентификатор');
+        $grid->column('ru_name', 'Название');
+        $grid->column('ru_description', 'Описание');
+        $grid->column('image', 'Изображение');
+        $grid->column('created_at', 'Дата создания');
+        $grid->column('updated_at', 'Дата обновления');
 
         return $grid;
     }
@@ -46,12 +46,12 @@ class NewsController extends AdminController
     {
         $show = new Show(News::findOrFail($id));
 
-        $show->field('id', __('Id'));
-        $show->field('name', __('Name'));
-        $show->field('description', __('Description'));
-        $show->field('image', __('Image'));
-        $show->field('created_at', __('Created at'));
-        $show->field('updated_at', __('Updated at'));
+        $show->field('id', 'Идентификатор');
+        $show->field('ru_name', 'Название');
+        $show->field('ru_description', 'Описание');
+        $show->field('image', 'Изображение');
+        $show->field('created_at', 'Дата создания');
+        $show->field('updated_at', 'Дата обновления');
 
         return $show;
     }
@@ -65,14 +65,14 @@ class NewsController extends AdminController
     {
         $form = new Form(new News);
 
-        $form->image('image', __('Image'));
+        $form->image('image', 'Изображение');
 
         $form->tab('RU', function(Form $form){
-            $form->text('ru_name', __('Name'));
-            $form->ckeditor('ru_description', __('Description'));
+            $form->text('ru_name', 'Название (рус.)');
+            $form->ckeditor('ru_description', 'Описание (рус.)');
         })->tab('UA', function(Form $form){
-            $form->text('ua_name', __('Name'));
-            $form->ckeditor('ua_description', __('Description'));
+            $form->text('ua_name', 'Название (укр.)');
+            $form->ckeditor('ua_description', 'Описание (укр.)');
         });
 
         return $form;

@@ -16,7 +16,7 @@ class AreasController extends AdminController
      *
      * @var string
      */
-    protected $title = 'App\Models\Area';
+    protected $title = 'Участки';
 
     /**
      * Make a grid builder.
@@ -27,17 +27,17 @@ class AreasController extends AdminController
     {
         $grid = new Grid(new Area);
 
-        $grid->column('id', __('Id'));
-        $grid->column('status.name', __('Status'));
-        $grid->column('number', __('Number'));
-        $grid->column('square', __('Square'));
-        $grid->column('price', __('Price'));
-        $grid->column('image', __('Image'));
-        $grid->column('plan', __('Plan'));
-        $grid->column('survey', __('Survey'));
-        $grid->column('color', __('Color'));
-        $grid->column('created_at', __('Created at'));
-        $grid->column('updated_at', __('Updated at'));
+        $grid->column('id', 'Идентификатор');
+        $grid->column('status.ru_name', 'Статус');
+        $grid->column('number', 'Номер');
+        $grid->column('square', 'Площадь');
+        $grid->column('price', 'Цена');
+        $grid->column('image', 'Изображение');
+        $grid->column('plan', 'Кадастровый план');
+        $grid->column('survey','Геодезическая съемка');
+        $grid->column('color', 'Цвет');
+        $grid->column('created_at', 'Время создания');
+        $grid->column('updated_at','Время обновления');
 
         return $grid;
     }
@@ -52,19 +52,19 @@ class AreasController extends AdminController
     {
         $show = new Show(Area::findOrFail($id));
 
-        $show->field('id', __('Id'));
-        $show->field('status', __('Status'))->as(function ($default) {
-            return $default ? $default->name : '-';
+        $show->field('id', 'Идентификатор');
+        $show->field('status', 'Статус')->as(function ($default) {
+            return $default ? $default->ru_name : '-';
         });
-        $show->field('number', __('Number'));
-        $show->field('square', __('Square'));
-        $show->field('price', __('Price'));
-        $show->field('image', __('Image'));
-        $show->field('plan', __('Plan'));
-        $show->field('survey', __('Survey'));
-        $show->field('color', __('Color'));
-        $show->field('created_at', __('Created at'));
-        $show->field('updated_at', __('Updated at'));
+        $show->field('number', 'Номер');
+        $show->field('square', 'Площадь');
+        $show->field('price', 'Цена');
+        $show->field('image', 'Изображение');
+        $show->field('plan', 'Кадастровый план');
+        $show->field('survey', 'Геодезическая съемка');
+        $show->field('color', 'Цвет');
+        $show->field('created_at', 'Время создания');
+        $show->field('updated_at', 'Время обновления');
 
         return $show;
     }
@@ -81,12 +81,12 @@ class AreasController extends AdminController
         $form->select('status_id', 'Статус Участка')
             ->options(AreaStatus::all()->pluck('ru_name', 'id'));
         $form->text('number', __('Number'));
-        $form->decimal('square', __('Square'));
-        $form->decimal('price', __('Price'));
-        $form->image('image', __('Image'));
-        $form->file('plan', __('Plan'))->rules('mimes:xml,txt');
-        $form->file('survey', __('Survey'))->rules('mimes:pdf,dwg');
-        $form->color('color', __('Color'));
+        $form->decimal('square', 'Площадь');
+        $form->decimal('price', 'Цена');
+        $form->image('image', 'Изображение');
+        $form->file('plan', 'Кадастровый план')->rules('mimes:xml,txt');
+        $form->file('survey', 'Геодезическая съемка')->rules('mimes:pdf,dwg');
+        $form->color('color', 'Цвет');
 
         return $form;
     }

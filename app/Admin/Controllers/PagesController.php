@@ -15,7 +15,7 @@ class PagesController extends AdminController
      *
      * @var string
      */
-    protected $title = 'App\Models\Page';
+    protected $title = 'Кастомизируемые Страницы';
 
     /**
      * Make a grid builder.
@@ -26,11 +26,12 @@ class PagesController extends AdminController
     {
         $grid = new Grid(new Page);
 
-        $grid->column('id', __('Id'));
-        $grid->column('title', 'Title');
-        $grid->column('content', __('Content'));
-        $grid->column('created_at', __('Created at'));
-        $grid->column('updated_at', __('Updated at'));
+        $grid->column('id', 'Идентификатор');
+        $grid->column('slug', 'Элемент URL');
+        $grid->column('ru_title', 'Заголовок');
+        $grid->column('ru_content', 'Контент');
+        $grid->column('created_at', 'Время создания');
+        $grid->column('updated_at', 'Время обновления');
 
         return $grid;
     }
@@ -45,11 +46,12 @@ class PagesController extends AdminController
     {
         $show = new Show(Page::findOrFail($id));
 
-        $show->field('id', __('Id'));
-        $show->field('title', 'Title');
-        $show->field('content', __('Content'));
-        $show->field('created_at', __('Created at'));
-        $show->field('updated_at', __('Updated at'));
+        $show->field('id', 'Идентификатор');
+        $show->field('slug', 'Элемент URL');
+        $show->field('ru_title', 'Заголовок');
+        $show->field('ru_content', 'Контент');
+        $show->field('created_at', 'Время создания');
+        $show->field('updated_at', 'Время обновления');
 
         return $show;
     }
@@ -63,12 +65,13 @@ class PagesController extends AdminController
     {
         $form = new Form(new Page);
 
+        $form->text('slug', 'Элемент URL');
         $form->tab('RU', function(Form $form){
-            $form->text('ru_title');
-            $form->ckeditor('ru_content', __('Content'));
+            $form->text('ru_title', 'Заголовок (рус.)');
+            $form->ckeditor('ru_content', 'Контент (рус.)');
         })->tab('UA', function(Form $form){
-            $form->text('ua_title');
-            $form->ckeditor('ua_content', __('Content'));
+            $form->text('ua_title', 'Заголовок (укр.)');
+            $form->ckeditor('ua_content', 'Контент (укр.)');
         });
 
         return $form;

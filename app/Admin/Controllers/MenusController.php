@@ -15,7 +15,7 @@ class MenusController extends AdminController
      *
      * @var string
      */
-    protected $title = 'App\Models\Menu';
+    protected $title = 'Навигация';
 
     /**
      * Make a grid builder.
@@ -26,12 +26,12 @@ class MenusController extends AdminController
     {
         $grid = new Grid(new Menu);
 
-        $grid->column('id', __('Id'));
-        $grid->column('name', __('Name'));
-        $grid->column('link', __('Link'));
-        $grid->column('order', 'Order');
-        $grid->column('created_at', __('Created at'));
-        $grid->column('updated_at', __('Updated at'));
+        $grid->column('id', 'Идентификатор');
+        $grid->column('ru_name', 'Название');
+        $grid->column('slug','Элемент URL');
+        $grid->column('order', 'Порядковый номер');
+        $grid->column('created_at', 'Время создания');
+        $grid->column('updated_at', 'Время обновления');
 
         return $grid;
     }
@@ -46,12 +46,12 @@ class MenusController extends AdminController
     {
         $show = new Show(Menu::findOrFail($id));
 
-        $show->field('id', __('Id'));
-        $show->field('name', __('Name'));
-        $show->field('link', __('Link'));
-        $show->field('order', 'Order');
-        $show->field('created_at', __('Created at'));
-        $show->field('updated_at', __('Updated at'));
+        $show->field('id', 'Идентификатор');
+        $show->field('ru_name', 'Название');
+        $show->field('slug', 'Элемент URL');
+        $show->field('order', 'Порядковый номер');
+        $show->field('created_at', 'Время создания');
+        $show->field('updated_at', 'Время обновления');
 
         return $show;
     }
@@ -65,12 +65,12 @@ class MenusController extends AdminController
     {
         $form = new Form(new Menu);
 
-        $form->url('link', __('Link'));
+        $form->text('slug', 'Элемент URL');
         $form->number('order', 'Порядок')->default(0);
         $form->tab('RU', function(Form $form){
-            $form->text('ru_name', __('Name'));
+            $form->text('ru_name', 'Название (рус.)');
         })->tab('UA', function(Form $form) {
-            $form->text('ua_name', __('Name'));
+            $form->text('ua_name', 'Название (укр.)');
         });
         return $form;
     }

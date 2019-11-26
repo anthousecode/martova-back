@@ -15,7 +15,7 @@ class GalleryController extends AdminController
      *
      * @var string
      */
-    protected $title = 'App\Models\Gallery';
+    protected $title = 'Галерея';
 
     /**
      * Make a grid builder.
@@ -26,10 +26,10 @@ class GalleryController extends AdminController
     {
         $grid = new Grid(new Gallery);
 
-        $grid->column('id', __('Id'));
-        $grid->column('image', __('Image'));
-        $grid->column('created_at', __('Created at'));
-        $grid->column('updated_at', __('Updated at'));
+        $grid->column('id', 'Идентификатор');
+        $grid->column('image', 'Изображение');
+        $grid->column('created_at', 'Время создания');
+        $grid->column('updated_at', 'Время обновления');
 
         return $grid;
     }
@@ -44,10 +44,10 @@ class GalleryController extends AdminController
     {
         $show = new Show(Gallery::findOrFail($id));
 
-        $show->field('id', __('Id'));
-        $show->field('image', __('Image'));
-        $show->field('created_at', __('Created at'));
-        $show->field('updated_at', __('Updated at'));
+        $show->field('id', 'Идентификатор');
+        $show->field('image', 'Изображение');
+        $show->field('created_at', 'Время создания');
+        $show->field('updated_at', 'Время обновления');
 
         return $show;
     }
@@ -61,7 +61,7 @@ class GalleryController extends AdminController
     {
         $form = new Form(new Gallery);
 
-        $form->image('image', __('Image'));
+        $form->image('image', 'Изображение');
 
         return $form;
     }
