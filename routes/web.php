@@ -22,3 +22,9 @@ Route::get('/3d', function(){
 Route::get('/360', function(){
     return view('360');
 })->name('360p');
+
+Route::get('/clear-cache', function(){
+    \Artisan::call('cache:clear');
+    \Artisan::call('config:clear');
+    \Artisan::call('view:clear');
+});
