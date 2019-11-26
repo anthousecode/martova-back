@@ -37,6 +37,8 @@ class AppServiceProvider extends ServiceProvider
             });
         }catch(\Illuminate\Database\QueryException $ex){}
 
+        dd(\DB::select('describe pages'));
+
         \URL::forceScheme('https');
         $this->app->register(\L5Swagger\L5SwaggerServiceProvider::class);
     }
