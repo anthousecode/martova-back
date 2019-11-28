@@ -1,3 +1,49 @@
+/* new */
+
+.wrapper {
+    display: grid;
+    width: 100vw;
+    height: 100vh;
+    overflow: hidden;
+    position: relative;
+}
+
+.big-img {
+    width: 100vw;
+    height: 100vh;
+    object-fit: none;
+    display: block;
+    position: relative;
+    z-index: 1;
+}
+
+.item {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    display: grid;
+}
+
+.wrapper-content-svg {
+    display: grid;
+}
+
+.item img {
+    align-self: center;
+    justify-self: center;
+    display: block;
+    width: 1320px;
+    height: 678px;
+    position: relative;
+    z-index: 10;
+}
+
+
+/* new */
+
+
 body, html, *{
     padding: 0;
     margin: 0;
@@ -60,7 +106,7 @@ a:hover{
     width: 100%;
     height: 100%;
     background: rgba(0,0,0,0.6);
-    z-index: 9;
+    z-index: 900;
 }
 #modal{
     display: flex;
@@ -74,14 +120,13 @@ a:hover{
     align-items: center;
     justify-content: center;
     height: 100vh;
-    overflow: hidden;
+
 }
 #container{
     position: relative;
     width: 100%;
     max-width: 100%;
     max-height: 100%;
-    height: 100%;
 }
 #map{
     position: absolute;
@@ -91,23 +136,28 @@ a:hover{
     bottom: 0;
      width: 100%;
     height: 100%;
-    background-size: 100% 100%!important;
+    z-index: 10;
+    background-size: cover!important;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
 }
-@media screen and (max-width: 1281px){
-    #map{
-        background: url("../images/setka23.jpg") center no-repeat;
-    }
-}
-@media screen and (min-width: 1281px) and (max-width: 1940px){
-    #map{
-        background: url("../images/setka22.jpg") center no-repeat;
-    }
-}
-@media screen and  (min-width: 1940px){
-    #map{
-        background: url("../images/setka2.jpg") center no-repeat;
-    }
-}
+/*@media screen and (max-width: 1280px){*/
+/*    #map{*/
+/*        background: url("../images/setka23.jpg") center no-repeat;*/
+/*    }*/
+/*}*/
+/*@media screen and (min-width: 1280px) and (max-width: 1920px){*/
+/*    #map{*/
+/*        background: url("../images/setka22.jpg") center no-repeat;*/
+/*    }*/
+/*}*/
+/*@media screen and  (min-width: 1920px){*/
+/*    #map{*/
+/*        background: url("../images/setka2.jpg") center no-repeat;*/
+/*    }*/
+/*}*/
 
 .viewport-map{
     padding-top: 56%;
@@ -135,13 +185,14 @@ polygon:hover{
     transition:.7s ease-in;
 }
 
+
 .hide{
     display: none!important;
 }
 
 /*modal*/
 #modal{
-    /*position: absolute;*/
+    position: absolute;
     top:0;
     left: 0;
     margin-top: -100px;
@@ -210,9 +261,8 @@ polygon:hover{
     height: 100px;
 }
 img{
-    width: 100% !important;
-    height: 100% !important;
-    display: block;
+    width: 100%;
+    height: 100%;
 }
 .header-part{
     width: 50%;
@@ -222,38 +272,11 @@ img{
     text-align: right;
     font-size: 18px;
 }
-
-
-.hui{
-    background: url("http://qnimate.com/wp-content/uploads/2014/03/images2.jpg") no-repeat center;
-    background-size: 100% 100%!important;
+.addBlur{
+    filter: blur(4px);
 }
-image{
-    overflow: auto;
-}
-#closer1{
-    position: fixed;
-    top: 50px;
-    right: 60px;
-    z-index: 1600;
-    color:black;
-    cursor: pointer;
-    width: 50px;
-    height: 50px;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-}
-#closer1:hover{
-    color:red;
-    transition: 1s ease-in-out;
-}
-button{
-    position: relative;
-    z-index: 99999;
-    right: 0;
-    bottom: 0;
+.removeBlur{
+    filter: none;
 }
 
 .zoom{

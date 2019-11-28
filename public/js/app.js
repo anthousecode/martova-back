@@ -6,7 +6,7 @@ let rendererD3 = {
         zoom: d3.zoom()
             .on('zoom', () => {
                 d3.select('svg').attr('transform', d3.event.transform);
-            }),
+            })
     },
     moca: {
         objects: [
@@ -22,13 +22,13 @@ let rendererD3 = {
                 },
                 modelView: {
                     polygon: [
-                        {"x": 27.6, "y": 39.8},
-                        {"x": 25.5, "y": 40.8},
-                        {"x": 18.7, "y": 44.8},
-                        {"x": 19, "y": 47.5},
-                        {"x": 19.4, "y": 48.4},
-                        {"x": 23, "y": 46.2},
-                        {"x": 28.9, "y": 42.5},
+                        {"x": 181, "y": 453},
+                        {"x": 150, "y": 443},
+                        {"x": 16, "y": 398},
+                        {"x": 26, "y": 358},
+                        {"x": 30, "y": 354},
+                        {"x": 130, "y": 394},
+                        {"x": 207, "y": 423},
                     ],
                     fill: 'yellow',
                     stroke: 'red'
@@ -63,13 +63,11 @@ let rendererD3 = {
                 },
                 modelView: {
                     polygon: [
-                        {"x": 22.6, "y": 38.8},
-                        {"x": 19.5, "y": 40.3},
-                        {"x": 11.8, "y": 44.8},
-                        {"x": 12.4, "y": 49},
-                        {"x": 12.8, "y": 49.3},
-                        {"x": 17, "y": 46.5},
-                        {"x": 24.5, "y": 42.1},
+                        {"x": 181, "y": 453},
+                        {"x": 16, "y": 398},
+                        {"x": 26, "y": 358},
+                        {"x": 30, "y": 354},
+                        {"x": 207, "y": 423}
                     ],
                     fill: 'yellow',
                     stroke: 'red'
@@ -104,13 +102,13 @@ let rendererD3 = {
                 },
                 modelView: {
                     polygon: [
-                        {"x": 16.8, "y": 37.1},
-                        {"x": 10.5, "y": 40.4},
-                        {"x": 3.9, "y": 44.5},
-                        {"x": 4.7, "y": 49.9},
-                        {"x": 5, "y": 50.3},
-                        {"x": 12, "y": 45.3},
-                        {"x": 18.9, "y": 41.4},
+                        {"x": 181, "y": 453},
+                        {"x": 150, "y": 443},
+                        {"x": 16, "y": 398},
+                        {"x": 26, "y": 358},
+                        {"x": 30, "y": 354},
+                        {"x": 130, "y": 394},
+                        {"x": 207, "y": 423},
                     ],
                     fill: 'yellow',
                     stroke: 'red'
@@ -158,60 +156,38 @@ let rendererD3 = {
                 d3.select('svg').remove();
             },
             createzoomsvg: () => {
-                rendererD3.ui.appendSvg()
-                rendererD3.ui.appendG()
-                rendererD3.elements.svg.d3El.call(d3.zoom().scaleExtent([1, 100]).on("zoom", rendererD3.handlers.zoom.zoomed))
+                rendererD3.ui.appendSvg();
+                rendererD3.ui.appendG();
+                rendererD3.elements.svg.d3El.call(d3.zoom().scaleExtent([1, 100]).on("zoom", rendererD3.handlers.zoom.zoomed));
                 rendererD3.elements.g.d3El.append('rect').attr("width", rendererD3.data.widthMap)
                     .attr("height", rendererD3.data.heightMap)
                     .style("fill", "none")
-                    .style("pointer-events", "none")
+                    .style("pointer-events", "none");
 
-                // media
-                let k = ''
-                if (window.matchMedia('(min-width: 1940px)').matches) {
-                    k = './images/setka2.jpg'
-                }
-                if (window.matchMedia('(min-width: 1281px)').matches && window.matchMedia('(max-width: 1940px)').matches) {
-                    k = './images/setka22.jpg'
-                }
-                if (window.matchMedia('(max-width: 1281px)').matches) {
-                    k = './images/setka23.jpg'
-                }
-                // media
-                rendererD3.data.widthMap = rendererD3.ui.getWidthD3(map);
-                rendererD3.data.heighthMap = rendererD3.ui.getHeightD3(map);
                 rendererD3.elements.g.d3El.append('g')
                     .append('svg:image')
-                    .attr("href", k)
-                    .attr("display", 'block')
+                    .attr("href", './images/current-img.jpg')
                     .attr("width", rendererD3.data.widthMap)
                     .attr("height", rendererD3.data.heightMap);
-
+                // rendererD3.data.widthMap = rendererD3.ui.getWidthD3(map);
+                // rendererD3.data.heighthMap = rendererD3.ui.getHeightD3(map);
 
             },
             addfild: () => {
                 rendererD3.ui.appendScaleLiner;
                 window.removeEventListener('resize', rendererD3.resize.handlers.resize);
                 window.addEventListener('resize', rendererD3.resize.handlers.resize);
-                if (window.matchMedia('(min-width: 1920px)').matches) {
-                    rendererD3.ui.reCreatePolygon(rendererD3.moca.objects);
-                }
-                if (window.matchMedia('(min-width: 1281px)').matches && window.matchMedia('(max-width: 1920px)').matches) {
-                    rendererD3.ui.reCreatePolygon(rendererD3.moca.objects2);
-                }
-                if (window.matchMedia('(max-width: 1281px)').matches) {
-                    rendererD3.ui.reCreatePolygon(rendererD3.moca.objects3);
-                }
+                rendererD3.ui.reCreatePolygon(rendererD3.moca.objects3);
             },
             zoomed: () => {
                 d3.select('svg').select('g').select('g')
                     .attr("transform", d3.event.transform)
-                rendererD3.actions.initZoomActions();
                 if (d3.event.transform.k === 1) {
                     // d3.event.transform.x=0;
                     // d3.event.transform.y=0;
                     rendererD3.actions.init();
                 }
+                rendererD3.actions.initZoomActions();
             },
             //stop
             backtopaint: () => {
@@ -223,6 +199,7 @@ let rendererD3 = {
                 rendererD3.actions.initActions();
             }
         }
+
     },
 
     actions: {
@@ -236,6 +213,7 @@ let rendererD3 = {
                 rendererD3.actions.hideModalSec()
                 rendererD3.actions.hideTour()
                 rendererD3.actions.hideLayout()
+                rendererD3.handlers.zoom.backtopaint();
             })
             rendererD3.elements.layout.el.addEventListener('click', () => {
                 rendererD3.actions.hideModal()
@@ -243,9 +221,7 @@ let rendererD3 = {
                 rendererD3.actions.hideTour()
                 rendererD3.actions.hideLayout()
             })
-            rendererD3.ui.getElId('linkD').addEventListener('click', (e) => {
-                e.stopPropagation()
-                rendererD3.actions.hideX()
+            rendererD3.ui.getElId('linkD').addEventListener('click', () => {
                 rendererD3.actions.hideModal()
                 rendererD3.actions.showTour()
                 rendererD3.actions.showLayout()
@@ -267,9 +243,9 @@ let rendererD3 = {
             rendererD3.elements.stop.el = rendererD3.ui.getElId(rendererD3.elements.stop.id);
         },
         initData: () => {
-            const map = `#${rendererD3.elements.map.id}`;
-            rendererD3.data.widthMap = rendererD3.ui.getWidthD3(map);
-            rendererD3.data.heightMap = rendererD3.ui.getHeightD3(map);
+            const mapImg = rendererD3.ui.getElId('mapImg')
+            rendererD3.data.widthMap = rendererD3.ui.getWidthD3(mapImg);
+            rendererD3.data.heightMap = rendererD3.ui.getHeightD3(mapImg);
         },
         initView: () => {
             rendererD3.handlers.zoom.removesvg();
@@ -279,16 +255,6 @@ let rendererD3 = {
             window.removeEventListener('resize', rendererD3.resize.handlers.resize);
             window.addEventListener('resize', rendererD3.resize.handlers.resize);
             // rendererD3.actions.setMapSize()
-
-            rendererD3.ui.getElId('closer1').addEventListener('click', ()=> {
-                rendererD3.actions.addX()
-                rendererD3.actions.hideModal()
-                rendererD3.actions.hideModalSec()
-                rendererD3.actions.hideTour()
-                rendererD3.actions.hideLayout()
-            })
-
-
             rendererD3.ui.getElId('map').addEventListener('wheel', w => {
                 if (w.deltaY < 0) {
                     w.preventDefault()
@@ -299,25 +265,17 @@ let rendererD3 = {
                     rendererD3.ui.getElId('map').classList.remove('zoom')
                 }
             })
-
-
-            if (window.matchMedia('(min-width: 1940px)').matches) {
-                rendererD3.ui.createPolygon(rendererD3.moca.objects);
-            }
-            if (window.matchMedia('(min-width: 1281px)').matches && window.matchMedia('(max-width: 1940px)').matches) {
-                rendererD3.ui.createPolygon(rendererD3.moca.objects2);
-            }
-            if (window.matchMedia('(max-width: 1281px)').matches) {
-                rendererD3.ui.createPolygon(rendererD3.moca.objects3);
-            }
+            // rendererD3.handlers.zoom.increasezoom()
+            // rendererD3.ui.createPolygon(rendererD3.moca.objects);
         },
         initActions: () => {
+
             d3.select("svg")
                 .selectAll("polygon")
                 .on("click", (d) => {
-                    d3.event.stopPropagation()
-                    // rendererD3.handlers.zoom.backtopaint
-                    // rendererD3.actions.modalPosition(d)
+                  console.log(d)
+                    d3.event.stopPropagation();
+                    rendererD3.actions.modalPosition(d);
                     rendererD3.actions.showModalSec();
                     rendererD3.actions.showModal();
                     rendererD3.actions.showLayout();
@@ -333,12 +291,10 @@ let rendererD3 = {
             d3.select("svg").select("g").select("g")
                 .selectAll("polygon")
                 .on("click", (d) => {
-                    d3.event.stopPropagation()
-                    // rendererD3.handlers.zoom.backtopaint
-                    // rendererD3.actions.modalPosition(d)
+                    d3.event.stopPropagation();
+                    rendererD3.actions.modalPosition(d)
                     rendererD3.actions.showModalSec();
                     rendererD3.actions.showModal();
-                    rendererD3.actions.showLayout();
                 })
         },
         showModal: () => {
@@ -355,12 +311,6 @@ let rendererD3 = {
         },
         hideModal: () => {
             rendererD3.elements.modal.el.classList.add('hide')
-        },
-        hideX: () => {
-            rendererD3.ui.getElId('closer1').classList.remove('hide')
-        },
-        addX: () => {
-            rendererD3.ui.getElId('closer1').classList.add('hide')
         },
         showTour: () => {
             rendererD3.ui.getElId('tour').classList.remove('hide')
@@ -389,8 +339,8 @@ let rendererD3 = {
 
 
         modalPosition: (d) => {
-            // rendererD3.elements.modal.el.style.left = 100 * (d.modelView.polygon[d.modelView.polygon.length - 1]['x']) / rendererD3.data.widthMap + '%',
-            //     rendererD3.elements.modal.el.style.top = 100 * (d.modelView.polygon[d.modelView.polygon.length - 1]['y']) / rendererD3.data.heightMap + '%'
+            rendererD3.elements.modal.el.style.left = 100 * (d.modelView.polygon[d.modelView.polygon.length - 1]['x']) / 1200 + '%',
+                rendererD3.elements.modal.el.style.top = 100 * (d.modelView.polygon[d.modelView.polygon.length - 1]['y']) / 675 + '%'
         },
     },
     resize: {
@@ -426,7 +376,6 @@ let rendererD3 = {
             rendererD3.elements.svg.d3El = d3.select("#map").append("svg")
                 .attr("width", rendererD3.data.widthMap)
                 .attr("height", rendererD3.data.heightMap)
-                .attr("preserveAspectRatio", 'none')
 
             ;
         },
@@ -434,64 +383,63 @@ let rendererD3 = {
             rendererD3.elements.g.d3El = d3.select('svg').append("g")
         },
         appendScaleLiner: () => {
-            // rendererD3.elements.scaleLinerX = d3.scaleLinear().domain([0, 1200]).range([0, rendererD3.data.widthMap]);
-            // rendererD3.elements.scaleLinerY = d3.scaleLinear().domain([0, 675]).range([rendererD3.data.heightMap, 0]);
+            rendererD3.elements.scaleLinerX = d3.scaleLinear().domain([0, 1200]).range([0, rendererD3.data.widthMap]);
+            rendererD3.elements.scaleLinerY = d3.scaleLinear().domain([0, 675]).range([rendererD3.data.heightMap, 0]);
+
+            // // TODO delete in feature
+            // d3.select('svg').append("g")
+            //     .attr("transform", "translate(0, 635)")
+            //     .call(d3.axisBottom(rendererD3.elements.scaleLinerX));
+            // // TODO delete in feature
+            // d3.select('svg').append("g")
+            //     .attr("transform", "translate(40,0)")
+            //     .call(d3.axisLeft(rendererD3.elements.scaleLinerY));
         },
-        createPolygon: (data) => {
-            d3.select('g')
-                .selectAll('polygon')
-                .data(data)
-                .enter().append("polygon")
-                .attr("points", (d) => {
-                    return d.modelView.polygon.map(d => {
-                        return [d.x * rendererD3.data.widthMap / 100, d.y * rendererD3.data.heightMap / 100].join(",");
-                    }).join(" ");
-                })
-                .attr("stroke", item => item.modelView.stroke)
-                .attr("fill", item => item.modelView.fill)
-                .attr("id", item => item.id)
-                .attr("stroke-width", 1)
-            d3.select('svg')
-                .select('g')
-                .selectAll('polygon')
-                .data('dataset')
-                .enter()
-                .append("text")
-                .attr("x", data[0].modelView.polygon[1]['x'] - 2 + '%')
-                .attr("y", data[0].modelView.polygon[1]['y'] + 3.4 + '%')
-                .text("10");
-        },
+        // createPolygon: (data) => {
+        //
+        //     d3.select('g')
+        //         .selectAll('polygon').select('g')
+        //         .data(data)
+        //         .enter().append("polygon")
+        //         .attr("points", (d) => {
+        //             return d.modelView.polygon.map(d => {
+        //                 return [rendererD3.elements.scaleLinerX(d.x), rendererD3.elements.scaleLinerY(d.y)].join(",");
+        //             }).join(" ");
+        //         })
+        //         .attr("stroke", item => item.modelView.stroke)
+        //         .attr("fill", item => item.modelView.fill)
+        //         .attr("id", item => item.id)
+        //         .attr("stroke-width", 1)
+        // },
 
 
         reCreatePolygon: (data) => {
-            d3.select('svg')
-                .select('g')
-                .select('g')
-                .attr('width', rendererD3.data.widthMap)
-                .attr('height', rendererD3.data.heightMap)
-                .attr('padding', 0)
+            d3.select('svg').select('g').select('g')
                 .selectAll('polygon')
                 .data(data)
-                .enter().append("polygon")
+                .enter()
+                .append("polygon")
                 .attr("points", (d) => {
                     return d.modelView.polygon.map(d => {
-                        return [d.x * rendererD3.data.widthMap / 100, d.y * rendererD3.data.heighthMap / 100].join(",");
+                        return [rendererD3.elements.scaleLinerX(d.x), rendererD3.elements.scaleLinerY(d.y)].join(",");
                     }).join(" ");
                 })
                 .attr("stroke", item => item.modelView.stroke)
                 .attr("fill", item => item.modelView.fill)
                 .attr("id", item => item.id)
-                .attr("stroke-width", 1)
+                .attr("stroke-width", 1);
 
-            // d3.select('svg')
-            //     .select('g')
-            //     .selectAll('polygon')
-            //     .data('dataset')
-            //     .enter()
-            //     .append("text")
-            //     .attr("x", data[0].modelView.polygon[0]['x']+'%')
-            //     .attr("y", data[0].modelView.polygon[0]['y']+'%')
-            //     .text("10");
+          d3.select('svg')
+              .select('g')
+              .select('g')
+              .selectAll('polygon')
+              .data("dataset")
+              .enter()
+              .append("text")
+              // Add your code below this line
+              // .attr("fill", "red")
+              // .text('gfdsgdf')
+
         }
     },
     ajax: {
@@ -500,5 +448,3 @@ let rendererD3 = {
 };
 
 window.addEventListener("load", rendererD3.actions.init());
-
-
