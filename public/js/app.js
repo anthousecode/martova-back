@@ -289,12 +289,12 @@ let rendererD3 = {
             })
 
 
-            // rendererD3.ui.getElId('map').addEventListener('wheel', w => {
-            //     if (w.deltaY < 0) {
-            //         w.preventDefault()
-            //         rendererD3.handlers.zoom.increasezoom()
-            //     }
-            // })
+            rendererD3.ui.getElId('map').addEventListener('wheel', w => {
+                if (w.deltaY < 0) {
+                    w.preventDefault()
+                    rendererD3.handlers.zoom.increasezoom()
+                }
+            })
 
 
             if (window.matchMedia('(min-width: 1920px)').matches) {
