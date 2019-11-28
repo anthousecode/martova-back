@@ -98,12 +98,12 @@ a:hover{
         background: url("../images/setka23.jpg") center no-repeat;
     }
 }
-@media screen and (min-width: 1281px) and (max-width: 1920px){
+@media screen and (min-width: 1281px) and (max-width: 1940px){
     #map{
         background: url("../images/setka22.jpg") center no-repeat;
     }
 }
-@media screen and  (min-width: 1920px){
+@media screen and  (min-width: 1940px){
     #map{
         background: url("../images/setka2.jpg") center no-repeat;
     }

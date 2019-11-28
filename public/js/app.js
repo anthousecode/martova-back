@@ -167,16 +167,16 @@ let rendererD3 = {
                     .style("pointer-events", "none")
 
                 // media
-                let k = './images/setka2.jpg'
-                // if (window.matchMedia('(min-width: 1920px)').matches) {
-                //     k = './images/setka2.jpg'
-                // }
-                // if (window.matchMedia('(min-width: 1281px)').matches && window.matchMedia('(max-width: 1920px)').matches) {
-                //     k = './images/setka22.jpg'
-                // }
-                // if (window.matchMedia('(max-width: 1281px)').matches) {
-                //     k = './images/setka23.jpg'
-                // }
+                let k = ''
+                if (window.matchMedia('(min-width: 1940px)').matches) {
+                    k = './images/setka2.jpg'
+                }
+                if (window.matchMedia('(min-width: 1281px)').matches && window.matchMedia('(max-width: 1940px)').matches) {
+                    k = './images/setka22.jpg'
+                }
+                if (window.matchMedia('(max-width: 1281px)').matches) {
+                    k = './images/setka23.jpg'
+                }
                 // media
                 rendererD3.data.widthMap = rendererD3.ui.getWidthD3(map);
                 rendererD3.data.heighthMap = rendererD3.ui.getHeightD3(map);
@@ -301,10 +301,10 @@ let rendererD3 = {
             })
 
 
-            if (window.matchMedia('(min-width: 1920px)').matches) {
+            if (window.matchMedia('(min-width: 1940px)').matches) {
                 rendererD3.ui.createPolygon(rendererD3.moca.objects);
             }
-            if (window.matchMedia('(min-width: 1281px)').matches && window.matchMedia('(max-width: 1920px)').matches) {
+            if (window.matchMedia('(min-width: 1281px)').matches && window.matchMedia('(max-width: 1940px)').matches) {
                 rendererD3.ui.createPolygon(rendererD3.moca.objects2);
             }
             if (window.matchMedia('(max-width: 1281px)').matches) {
