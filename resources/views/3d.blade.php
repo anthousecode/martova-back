@@ -59,7 +59,7 @@
             <a href="#">геодезическая съемка участка (pdf/ dwg)</a>
         </div>
     </div>
-    <iframe class="hide" id="tour" style="position:relative;" src="https://sweews.herokuapp.com/360" frameborder="0">
+    <iframe class="hide" id="tour" style="position:relative;" src="http://sweews.herokuapp.com/360" frameborder="0">
     </iframe>
     <a href="#" class="hide" id="closer1"><span style="font-size: 18px">×</span></a>
 </div>
@@ -76,7 +76,6 @@
 <!--</p>-->
 
 
-
 <!--<div class="btn-group fixed" style="z-index: 999">-->
 <!--    <button class="btn btn-primary" id="zoom-in">+</button>-->
 <!--    <button class="btn btn-danger" id="zoom-out">-</button>-->
@@ -88,13 +87,14 @@
         <div class="viewport-map" style="position: relative">
         </div>
         <div id="map">
-<!--            <div class="btn-group">-->
-<!--                <button class="btn btn-primary fixed control" id="start">start</button>-->
-<!--                <button class="btn btn-danger fixed control" id="stop">stop</button>-->
-<!--            </div>-->
+            <!--            <div class="btn-group">-->
+            <!--                <button class="btn btn-primary fixed control" id="start">start</button>-->
+            <!--                <button class="btn btn-danger fixed control" id="stop">stop</button>-->
+            <!--            </div>-->
         </div>
     </div>
 </div>
+
 <script src="/js/d3.js"></script>
 <script src="/js/d3-selection.js"></script>
 <script src="/js/app.js"></script>

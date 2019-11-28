@@ -167,16 +167,16 @@ let rendererD3 = {
                     .style("pointer-events", "none")
 
                 // media
-                let k = ''
-                if (window.matchMedia('(min-width: 1920px)').matches) {
-                    k = './images/setka2.jpg'
-                }
-                if (window.matchMedia('(min-width: 1281px)').matches && window.matchMedia('(max-width: 1920px)').matches) {
-                    k = './images/setka22.jpg'
-                }
-                if (window.matchMedia('(max-width: 1281px)').matches) {
-                    k = './images/setka23.jpg'
-                }
+                let k = './images/setka2.jpg'
+                // if (window.matchMedia('(min-width: 1920px)').matches) {
+                //     k = './images/setka2.jpg'
+                // }
+                // if (window.matchMedia('(min-width: 1281px)').matches && window.matchMedia('(max-width: 1920px)').matches) {
+                //     k = './images/setka22.jpg'
+                // }
+                // if (window.matchMedia('(max-width: 1281px)').matches) {
+                //     k = './images/setka23.jpg'
+                // }
                 // media
                 rendererD3.data.widthMap = rendererD3.ui.getWidthD3(map);
                 rendererD3.data.heighthMap = rendererD3.ui.getHeightD3(map);
@@ -292,7 +292,11 @@ let rendererD3 = {
             rendererD3.ui.getElId('map').addEventListener('wheel', w => {
                 if (w.deltaY < 0) {
                     w.preventDefault()
-                    rendererD3.handlers.zoom.increasezoom()
+                    // rendererD3.handlers.zoom.increasezoom()
+                    rendererD3.ui.getElId('map').classList.add('zoom')
+                }
+                else{
+                    rendererD3.ui.getElId('map').classList.remove('zoom')
                 }
             })
 
