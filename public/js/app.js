@@ -259,14 +259,17 @@ let rendererD3 = {
                 if (w.deltaY < 0) {
                     w.preventDefault()
                     // rendererD3.handlers.zoom.increasezoom()
-                    rendererD3.ui.getElId('map').classList.add('zoom')
+                    document.body.classList.add('zoom')
                 }
                 else{
-                    rendererD3.ui.getElId('map').classList.remove('zoom')
+                    document.body.classList.remove('zoom')
                 }
             })
             // rendererD3.handlers.zoom.increasezoom()
             // rendererD3.ui.createPolygon(rendererD3.moca.objects);
+            const height = document.documentElement.clientHeight/2;
+            const width = document.documentElement.clientWidth/2;
+            window.scrollTo( (document.documentElement.scrollWidth/2)- width, (document.documentElement.scrollHeight/2)- height);
         },
         initActions: () => {
 
@@ -349,6 +352,9 @@ let rendererD3 = {
                 // TODO blur or loader
                 rendererD3.ui.removeSvg();
                 rendererD3.actions.init();
+                const height = document.documentElement.clientHeight/2;
+                const width = document.documentElement.clientWidth/2;
+                window.scrollTo( (document.documentElement.scrollWidth/2)- width, (document.documentElement.scrollHeight/2)- height);
             },
             debounce: (delay, fn) => {
                 let timerId;
