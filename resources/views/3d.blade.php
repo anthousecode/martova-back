@@ -59,7 +59,7 @@
             <a href="#">геодезическая съемка участка (pdf/ dwg)</a>
         </div>
     </div>
-    <iframe class="hide" id="tour" style="position:relative;" src="http://sweews.herokuapp.com/360" frameborder="0">
+    <iframe class="hide" id="tour" style="position:relative;" src="https://sweews.herokuapp.com/360" frameborder="0">
     </iframe>
     <a href="#" class="hide" id="closer1"><span style="font-size: 18px">×</span></a>
 </div>
