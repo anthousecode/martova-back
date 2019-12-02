@@ -11,7 +11,7 @@
         integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
   <link rel="stylesheet" href="/css/style.css">
 </head>
-<body>
+<body class="min-container">
 
 
 <div class="layout hide" id="layout">
@@ -71,8 +71,8 @@
 
 <!--New  -->
 
-<div class="wrapper">
-  <img class="big-img" id="bigImg" src="./images/big.jpg" alt="">
+<div class="wrapper min-container">
+  <img class="big-img min-container" id="bigImg" src="./images/big.jpg" alt="">
   <div class="item">
     <div class="wrapper-content-svg" >
       <img src="./images/current-img.jpg" id="mapImg" alt="">

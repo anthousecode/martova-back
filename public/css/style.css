@@ -2,8 +2,6 @@
 
 /* new */
 body{
-    min-width: 1320px;
-    min-height: 678px;
     overflow: auto;
 }
 .wrapper {
@@ -13,6 +11,10 @@ body{
     height: 100vh;
     overflow: hidden;
     position: relative;
+}
+.min-container{
+    min-width: 1320px;
+    min-height: 678px;
 }
 @media screen and (max-width: 1320px){
     .wrapper {
@@ -27,8 +29,6 @@ body{
 }
 
 .big-img {
-    width: 100vw;
-    height: 100vh;
     -o-object-fit: none;
     object-fit: none;
     display: block;
@@ -49,6 +49,7 @@ body{
 .wrapper-content-svg {
     display: -ms-grid;
     display: grid;
+    height: 100vh;
 }
 
 .item img {
@@ -200,21 +201,6 @@ a:hover{
     -ms-flex-align: center;
     align-items: center;
 }
-/*@media screen and (max-width: 1280px){*/
-/*    #map{*/
-/*        background: url("../images/setka23.jpg") center no-repeat;*/
-/*    }*/
-/*}*/
-/*@media screen and (min-width: 1280px) and (max-width: 1920px){*/
-/*    #map{*/
-/*        background: url("../images/setka22.jpg") center no-repeat;*/
-/*    }*/
-/*}*/
-/*@media screen and  (min-width: 1920px){*/
-/*    #map{*/
-/*        background: url("../images/setka2.jpg") center no-repeat;*/
-/*    }*/
-/*}*/
 
 .viewport-map{
     padding-top: 56%;
@@ -225,7 +211,7 @@ a:hover{
     object-fit: contain;
     max-width: 100%;
     max-height: 100%;
-    width: auto;
+    /*width: auto;*/
     height: auto;
     z-index: 999;
 }
