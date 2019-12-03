@@ -69,7 +69,7 @@
 
 
 
-<!--New  -->
+<!--New   -->
 
 <div class="wrapper min-container">
   <img class="big-img min-container" id="bigImg" src="./images/big.jpg" alt="">
