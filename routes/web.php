@@ -15,13 +15,13 @@ Route::get('/', function () {
     return view('foo');
 });
 
-Route::get('/3d', function(){
-    return view('3d');
-});
-
-Route::get('/360', function(){
-    return view('360');
-})->name('360p');
+//Route::get('/3d', function(){
+//    return view('3d');
+//});
+//
+//Route::get('/360', function(){
+//    return view('360');
+//})->name('360p');
 
 Route::get('/clear-cache', function(){
     \Artisan::call('cache:clear');
