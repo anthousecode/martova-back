@@ -13,18 +13,18 @@ body{
     position: relative;
 }
 .min-container{
-    min-width: 1320px;
-    min-height: 678px;
+    min-width: 1277px;
+    min-height: 660px;
 }
 @media screen and (max-width: 1320px){
     .wrapper {
-        min-width: 1320px;
-        min-height: 678px;
+        min-width: 1277px;
+        min-height: 660px;
     }
 
     .big-img {
-        min-width: 1320px;
-        min-height: 678px;
+        min-width: 1277px;
+        min-height: 660px;
     }
 }
 
@@ -59,10 +59,11 @@ body{
     -ms-grid-column-align: center;
     justify-self: center;
     display: block;
-    width: 1320px;
-    height: 678px;
+    width: 1277px;
+    height: 660px;
     position: relative;
     z-index: 10;
+    opacity: 0;
 }
 
 

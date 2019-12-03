@@ -69,13 +69,13 @@
 
 
 
-<!--New   -->
+<!--New  -->
 
 <div class="wrapper min-container">
-  <img class="big-img min-container" id="bigImg" src="./images/big.jpg" alt="">
+  <img class="big-img min-container" id="bigImg" src="./images/big new.jpg" alt="big">
   <div class="item">
     <div class="wrapper-content-svg" >
-      <img src="./images/current-img.jpg" id="mapImg" alt="">
+      <img src="./images/small_new.jpg" id="mapImg" alt="current">
       <div id="map"></div>
     </div>
   </div>
