@@ -23,9 +23,9 @@ use App\Admin\Extensions\Form\CKEditor;
 
 echo "
 <script>
-var checkboxes = document.getElementsByClassName('pull-right');
+var checkboxes = document.querySelectorAll('label.pull-right');
 for (var i=0; i<checkboxes.length; i++) {
-    checkboxes[i].style.cssText = "display:none !important";
+    checkboxes[i].style.cssText = 'display:none !important'
 }
 </script>
 ";
