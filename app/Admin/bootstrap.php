@@ -21,16 +21,5 @@
 use Encore\Admin\Form;
 use App\Admin\Extensions\Form\CKEditor;
 
-echo "
-<script>
-var checkboxes = document.querySelectorAll('label.pull-right');
-for (var i=0; i<checkboxes.length; i++) {
-    //if (checkboxes[i].children[0].getAttribute('class') == 'icheckbox_minimal-blue') {
-    checkboxes[i].style.cssText = 'display:none !important'
- //   }
-}
-</script>
-";
-
 Form::extend('ckeditor', CKEditor::class);
 Form::forget(['map', 'editor']);
