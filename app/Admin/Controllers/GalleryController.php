@@ -61,7 +61,7 @@ class GalleryController extends AdminController
     {
         $form = new Form(new Gallery);
 
-        $form->image('image', 'Изображение');
+        $form->image('image', 'Изображение')->readonly();
 
         return $form;
     }
