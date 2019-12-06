@@ -65,7 +65,7 @@ class NewsController extends AdminController
     {
             $form = new Form(new News);
 
-            $form->image('image', 'Изображение')->readonly();
+            $form->image('image', 'Изображение');
 
             $form->tab('RU', function (Form $form) {
                 $form->text('ru_name', 'Название (рус.)');
@@ -75,10 +75,6 @@ class NewsController extends AdminController
                 $form->ckeditor('ua_description', 'Описание (укр.)');
             });
 
-        try{
             return $form;
-        } catch (\Illuminate\Database\QueryException $ex) {
-            return $this->response()->error('Ошибка ввода данных');
-        }
     }
 }

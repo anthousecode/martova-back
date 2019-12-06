@@ -83,7 +83,7 @@ class AreasController extends AdminController
             $form->text('number', __('Number'));
             $form->decimal('square', 'Площадь');
             $form->decimal('price', 'Цена');
-            $form->image('image', 'Изображение')->readonly();
+            $form->image('image', 'Изображение');
             $form->file('plan', 'Кадастровый план')->rules('mimes:xml,txt');
             $form->file('survey', 'Геодезическая съемка')->rules('mimes:pdf,dwg');
             $form->color('color', 'Цвет');
