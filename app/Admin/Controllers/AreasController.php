@@ -35,10 +35,10 @@ class AreasController extends AdminController
         $grid->column('price', 'Цена');
         $grid->column('image', 'Изображение');
         $grid->column('plan', 'Кадастровый план');
-        $grid->column('survey','Геодезическая съемка');
+        $grid->column('survey', 'Геодезическая съемка');
         $grid->column('color', 'Цвет');
         $grid->column('created_at', 'Время создания');
-        $grid->column('updated_at','Время обновления');
+        $grid->column('updated_at', 'Время обновления');
 
         return $grid;
     }
@@ -77,8 +77,7 @@ class AreasController extends AdminController
      */
     protected function form()
     {
-        $form = new Form(new Area);
-        try {
+            $form = new Form(new Area);
             $form->select('status_id', 'Статус Участка')
                 ->options(AreaStatus::all()->pluck('ru_name', 'id'));
             $form->text('number', __('Number'));
@@ -88,10 +87,6 @@ class AreasController extends AdminController
             $form->file('plan', 'Кадастровый план')->rules('mimes:xml,txt');
             $form->file('survey', 'Геодезическая съемка')->rules('mimes:pdf,dwg');
             $form->color('color', 'Цвет');
-        } catch (QueryException $ex) {
-            echo "<script>alert('Пожалуйста введите данные во всех вариациях языков')</script>";
-        }
-
         return $form;
     }
 }

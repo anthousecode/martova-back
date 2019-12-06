@@ -63,17 +63,21 @@ class NewsController extends AdminController
      */
     protected function form()
     {
-        $form = new Form(new News);
+        try {
+            $form = new Form(new News);
 
-        $form->image('image', 'Изображение');
+            $form->image('image', 'Изображение');
 
-        $form->tab('RU', function(Form $form){
-            $form->text('ru_name', 'Название (рус.)');
-            $form->ckeditor('ru_description', 'Описание (рус.)');
-        })->tab('UA', function(Form $form){
-            $form->text('ua_name', 'Название (укр.)');
-            $form->ckeditor('ua_description', 'Описание (укр.)');
-        });
+            $form->tab('RU', function (Form $form) {
+                $form->text('ru_name', 'Название (рус.)');
+                $form->ckeditor('ru_description', 'Описание (рус.)');
+            })->tab('UA', function (Form $form) {
+                $form->text('ua_name', 'Название (укр.)');
+                $form->ckeditor('ua_description', 'Описание (укр.)');
+            });
+        } catch (/Illuminate/Database/QueryException $ex) {
+            return $this->response()->error('Ошибка ввода данных');
+        }
 
         return $form;
     }
