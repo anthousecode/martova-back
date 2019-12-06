@@ -15,102 +15,72 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register()
     {
-       // \DB::unprepared(file_get_contents(app_path() . '/dump.sql'));
 
-        // todo add fixes to migration and clear method, check rules in admin controllers
+        Schema::dropIfExists('infrastructures');
+        Schema::dropIfExists('news');
+        Schema::dropIfExists('category_infrastructures');
+        Schema::dropIfExists('galleries');
+        Schema::dropIfExists('menus');
+        Schema::dropIfExists('area_statuses');
+        Schema::dropIfExists('pages');
 
-      /*  if (Schema::hasColumn('pages', 'slug')) {
-            Schema::table('pages', function (Blueprint $table) {
-                $table->string('slug')->nullable()->unique();
-            });
-        }
-        if (Schema::hasColumn('pages', 'link')) {
-            Schema::table('pages', function (Blueprint $table) {
-                $table->dropColumn('link');
-            });
-        }
-        if (!Schema::hasColumn('menus', 'slug')) {
-            Schema::table('menus', function (Blueprint $table) {
-                $table->string('slug')->nullable()->unique();
-            });
-        }
-        if (Schema::hasColumn('menus', 'link')) {
-            Schema::table('menus', function (Blueprint $table) {
-                $table->dropColumn('link');
-            });
-        }
-*/
-        Schema::table('infrastructures', function(Blueprint $table){
-            /*$table->dropColumn([
-                'ru_name',
-                'ru_description',
-                'ua_name',
-                'ua_description'
-            ]);*/
+        Schema::create('infrastructures', function (Blueprint $table) {
+            $table->bigIncrements('id');
+            $table->integer('category_id');
             $table->string('ru_name')->default('-')->nullable();
             $table->text('ru_description')->default('-')->nullable();
             $table->string('ua_name')->default('-')->nullable();
             $table->text('ua_description')->default('-')->nullable();
+            $table->timestamps();
         });
 
-        Schema::table('news', function(Blueprint $table){
-            /*$table->dropColumn([
-                'ru_name',
-                'ru_description',
-                'ua_name',
-                'ua_description'
-            ]);*/
+        Schema::create('news', function (Blueprint $table) {
+            $table->bigIncrements('id');
             $table->string('ru_name')->default('-')->nullable();
             $table->text('ru_description')->default('-')->nullable();
             $table->string('ua_name')->default('-')->nullable();
             $table->text('ua_description')->default('-')->nullable();
+            $table->string('image');
+            $table->timestamps();
         });
 
-        Schema::table('category_infrastructures', function(Blueprint $table){
-            /*$table->dropColumn([
-                'ru_name',
-                'ua_name'
-            ]);*/
+        Schema::create('category_infrastructures', function (Blueprint $table) {
+            $table->bigIncrements('id');
             $table->string('ru_name')->default('-')->nullable();
             $table->string('ua_name')->default('-')->nullable();
+            $table->timestamps();
         });
 
-        Schema::table('menus', function(Blueprint $table){
-          /*  $table->dropColumn([
-                'ru_name',
-                'ua_name',
-                'link',
-                'order'
-            ]);*/
-           $table->string('ru_name')->default('-')->nullable();
+        Schema::create('menus', function (Blueprint $table) {
+            $table->bigIncrements('id');
+            $table->string('ru_name')->default('-')->nullable();
             $table->string('ua_name')->default('-')->nullable();
-            $table->string('link')->default('-')->nullable();
+            $table->string('slug')->nullable();
             $table->integer('order')->default(0);
+            $table->timestamps();
         });
 
-        Schema::table('area_statuses', function(Blueprint $table){
-            $table->dropColumn([
-                'ru_name',
-                'ua_name'
-            ]);
-//            $table->string('ru_name')->default('-')->nullable();
-//            $table->string('ua_name')->default('-')->nullable();
+        Schema::create('area_statuses', function (Blueprint $table) {
+            $table->bigIncrements('id');
+            $table->string('ru_name')->default('-')->nullable();
+            $table->string('ua_name')->default('-')->nullable();
+            $table->timestamps();
         });
 
-        Schema::table('pages', function(Blueprint $table){
-            $table->dropColumn([
-                'ru_title',
-                'ru_content',
-                'ua_title',
-                'ua_content'
-            ]);
-//            $table->string('ru_title')->default('-')->nullable();
-//            $table->longText('ru_content')->default('-')->nullable();
-//            $table->string('ua_title')->default('-')->nullable();
-//            $table->longText('ua_content')->default('-')->nullable();
+        Schema::create('pages', function (Blueprint $table) {
+            $table->bigIncrements('id');
+            $table->string('ru_title')->default('-')->nullable();
+            $table->longText('ru_content')->default('-')->nullable();
+            $table->string('ua_title')->default('-')->nullable();
+            $table->longText('ua_content')->default('-')->nullable();
+            $table->text('ru_meta_description')->default('-')->nullable();
+            $table->text('ua_meta_description')->default('-')->nullable();
+            $table->string('slug')->nullable();
+            $table->timestamps();
         });
 
         \URL::forceScheme('https');
+
         $this->app->register(\L5Swagger\L5SwaggerServiceProvider::class);
     }
 
