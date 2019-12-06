@@ -19,7 +19,7 @@ class AppServiceProvider extends ServiceProvider
 
         // todo add fixes to migration and clear method, check rules in admin controllers
 
-        if (Schema::hasColumn('pages', 'slug')) {
+      /*  if (Schema::hasColumn('pages', 'slug')) {
             Schema::table('pages', function (Blueprint $table) {
                 $table->string('slug')->nullable()->unique();
             });
@@ -39,7 +39,7 @@ class AppServiceProvider extends ServiceProvider
                 $table->dropColumn('link');
             });
         }
-
+*/
         Schema::table('infrastructures', function(Blueprint $table){
             $table->dropColumn([
                 'ru_name',
