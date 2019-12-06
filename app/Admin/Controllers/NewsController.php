@@ -75,7 +75,7 @@ class NewsController extends AdminController
                 $form->text('ua_name', 'Название (укр.)');
                 $form->ckeditor('ua_description', 'Описание (укр.)');
             });
-        } catch (/Illuminate/Database/QueryException $ex) {
+        } catch (\Illuminate\Database\QueryException $ex) {
             return $this->response()->error('Ошибка ввода данных');
         }
 
