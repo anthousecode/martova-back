@@ -87,6 +87,20 @@ class AreasController extends AdminController
             $form->file('plan', 'Кадастровый план')->rules('mimes:xml,txt');
             $form->file('survey', 'Геодезическая съемка')->rules('mimes:pdf,dwg');
             $form->color('color', 'Цвет');
+            $form->select('default_color', 'Цвета по умолчанию')
+            ->options([
+                "Red" => "<div style='width:10px; height:10px;color:red'> </div>",
+                "Green" => "<div style='width:10px; height:10px;color:green'> </div>",
+                "Brown" => "<div style='width:10px; height:10px;color:brown'> </div>",
+                "Blue" => "<div style='width:10px; height:10px;color:blue'> </div>",
+                "Yellow" => "<div style='width:10px; height:10px;color:yellow'> </div>",
+            ]);
+            $form->saving(function(Form $form){
+                if (!$form->color) {
+                    $form->color = $form->default_color;
+                }
+                dd($form);
+            });
         return $form;
     }
 }
