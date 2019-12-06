@@ -46,12 +46,12 @@ class AppServiceProvider extends ServiceProvider
                 'ru_description',
                 'ua_name',
                 'ua_description'
-            ]);
+            ]);/*
             $table->string('ru_name')->default('-')->nullable();
             $table->text('ru_description')->default('-')->nullable();
             $table->string('ua_name')->default('-')->nullable();
             $table->text('ua_description')->default('-')->nullable();
-        });
+        */});
 
         Schema::table('news', function(Blueprint $table){
             $table->dropColumn([
@@ -60,20 +60,20 @@ class AppServiceProvider extends ServiceProvider
                 'ua_name',
                 'ua_description'
             ]);
-            $table->string('ru_name')->default('-')->nullable();
+          /*  $table->string('ru_name')->default('-')->nullable();
             $table->text('ru_description')->default('-')->nullable();
             $table->string('ua_name')->default('-')->nullable();
             $table->text('ua_description')->default('-')->nullable();
-        });
+        */});
 
         Schema::table('category_infrastructures', function(Blueprint $table){
             $table->dropColumn([
                 'ru_name',
                 'ua_name'
             ]);
-            $table->string('ru_name')->default('-')->nullable();
+            /*$table->string('ru_name')->default('-')->nullable();
             $table->string('ua_name')->default('-')->nullable();
-        });
+        */});
 
         Schema::table('menus', function(Blueprint $table){
             $table->dropColumn([
@@ -82,19 +82,19 @@ class AppServiceProvider extends ServiceProvider
                 'link',
                 'order'
             ]);
-            $table->string('ru_name')->default('-')->nullable();
+           /* $table->string('ru_name')->default('-')->nullable();
             $table->string('ua_name')->default('-')->nullable();
             $table->string('link')->default('-')->nullable();
             $table->integer('order')->default(0);
-        });
+        */});
 
         Schema::table('area_statuses', function(Blueprint $table){
             $table->dropColumn([
                 'ru_name',
                 'ua_name'
             ]);
-            $table->string('ru_name')->default('-')->nullable();
-            $table->string('ua_name')->default('-')->nullable();
+//            $table->string('ru_name')->default('-')->nullable();
+//            $table->string('ua_name')->default('-')->nullable();
         });
 
         Schema::table('pages', function(Blueprint $table){
@@ -104,10 +104,10 @@ class AppServiceProvider extends ServiceProvider
                 'ua_title',
                 'ua_content'
             ]);
-            $table->string('ru_title')->default('-')->nullable();
-            $table->longText('ru_content')->default('-')->nullable();
-            $table->string('ua_title')->default('-')->nullable();
-            $table->longText('ua_content')->default('-')->nullable();
+//            $table->string('ru_title')->default('-')->nullable();
+//            $table->longText('ru_content')->default('-')->nullable();
+//            $table->string('ua_title')->default('-')->nullable();
+//            $table->longText('ua_content')->default('-')->nullable();
         });
 
         \URL::forceScheme('https');
