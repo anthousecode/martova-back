@@ -89,11 +89,11 @@ class AreasController extends AdminController
             $form->color('color', 'Цвет');
             $form->select('default_color', 'Цвета по умолчанию')
             ->options([
-                "Red" => "<div style='width:10px; height:10px;color:red'> </div>",
-                "Green" => "<div style='width:10px; height:10px;color:green'> </div>",
-                "Brown" => "<div style='width:10px; height:10px;color:brown'> </div>",
-                "Blue" => "<div style='width:10px; height:10px;color:blue'> </div>",
-                "Yellow" => "<div style='width:10px; height:10px;color:yellow'> </div>",
+                "red" => "Красный",
+                "green" => "Зеленый",
+                "brown" => "Коричневый",
+                "blue" => "Голубой",
+                "yellow" => "Желтый",
             ]);
             $form->saving(function(Form $form){
                 if (!$form->color) {
