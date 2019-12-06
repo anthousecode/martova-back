@@ -31,6 +31,9 @@ class AppServiceProvider extends ServiceProvider
             $table->text('ru_description')->default('-')->nullable();
             $table->string('ua_name')->default('-')->nullable();
             $table->text('ua_description')->default('-')->nullable();
+            $table->string('image')->nullable();
+            $table->integer('X');
+            $table->integer('Y');
             $table->timestamps();
         });
 
@@ -41,6 +44,7 @@ class AppServiceProvider extends ServiceProvider
             $table->string('ua_name')->default('-')->nullable();
             $table->text('ua_description')->default('-')->nullable();
             $table->string('image');
+            $table->boolean('is_published');
             $table->timestamps();
         });
 
