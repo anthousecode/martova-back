@@ -15,7 +15,7 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register()
     {
-
+/*
         Schema::dropIfExists('infrastructures');
         Schema::dropIfExists('news');
         Schema::dropIfExists('category_infrastructures');
@@ -82,7 +82,7 @@ class AppServiceProvider extends ServiceProvider
             $table->string('slug')->nullable();
             $table->timestamps();
         });
-
+*/
         \URL::forceScheme('https');
 
         $this->app->register(\L5Swagger\L5SwaggerServiceProvider::class);
