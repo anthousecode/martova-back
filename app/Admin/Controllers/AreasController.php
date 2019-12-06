@@ -80,12 +80,12 @@ class AreasController extends AdminController
             $form = new Form(new Area);
             $form->select('status_id', 'Статус Участка')
                 ->options(AreaStatus::all()->pluck('ru_name', 'id'));
-            $form->text('number', __('Number'));
+            $form->text('number', 'Номер');
             $form->decimal('square', 'Площадь');
             $form->decimal('price', 'Цена');
             $form->image('image', 'Изображение');
-            $form->file('plan', 'Кадастровый план')->rules('mimes:xml,txt');
-            $form->file('survey', 'Геодезическая съемка')->rules('mimes:pdf,dwg');
+            $form->file('plan', 'Кадастровый план (XML)')->rules('mimes:xml,txt');
+            $form->file('survey', 'Геодезическая съемка (PDF/DWG)')->rules('mimes:pdf,dwg');
             $form->color('color', 'Цвет');
             $form->select('default_color', 'Цвета по умолчанию')
             ->options([
@@ -99,7 +99,6 @@ class AreasController extends AdminController
                 if (!$form->color) {
                     $form->color = $form->default_color;
                 }
-                dd($form);
             });
         return $form;
     }
