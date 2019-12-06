@@ -8,6 +8,7 @@ use Encore\Admin\Form;
 use Encore\Admin\Grid;
 use Encore\Admin\Show;
 use App\Models\AreaStatus;
+use Illuminate\Database\QueryException;
 
 class AreasController extends AdminController
 {
@@ -77,16 +78,19 @@ class AreasController extends AdminController
     protected function form()
     {
         $form = new Form(new Area);
-
-        $form->select('status_id', 'Статус Участка')
-            ->options(AreaStatus::all()->pluck('ru_name', 'id'));
-        $form->text('number', __('Number'));
-        $form->decimal('square', 'Площадь');
-        $form->decimal('price', 'Цена');
-        $form->image('image', 'Изображение');
-        $form->file('plan', 'Кадастровый план')->rules('mimes:xml,txt');
-        $form->file('survey', 'Геодезическая съемка')->rules('mimes:pdf,dwg');
-        $form->color('color', 'Цвет');
+        try {
+            $form->select('status_id', 'Статус Участка')
+                ->options(AreaStatus::all()->pluck('ru_name', 'id'));
+            $form->text('number', __('Number'));
+            $form->decimal('square', 'Площадь');
+            $form->decimal('price', 'Цена');
+            $form->image('image', 'Изображение');
+            $form->file('plan', 'Кадастровый план')->rules('mimes:xml,txt');
+            $form->file('survey', 'Геодезическая съемка')->rules('mimes:pdf,dwg');
+            $form->color('color', 'Цвет');
+        } catch (QueryException $ex) {
+            echo "<script>alert('Пожалуйста введите данные во всех вариациях языков')</script>";
+        }
 
         return $form;
     }
