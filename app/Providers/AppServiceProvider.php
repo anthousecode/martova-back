@@ -15,7 +15,7 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register()
     {
-/*
+
         Schema::dropIfExists('infrastructures');
         Schema::dropIfExists('news');
         Schema::dropIfExists('category_infrastructures');
@@ -32,8 +32,8 @@ class AppServiceProvider extends ServiceProvider
             $table->string('ua_name')->default('-')->nullable();
             $table->text('ua_description')->default('-')->nullable();
             $table->string('image')->nullable();
-            $table->integer('X');
-            $table->integer('Y');
+            $table->integer('X')->nullable();
+            $table->integer('Y')->nullable();
             $table->timestamps();
         });
 
@@ -44,7 +44,7 @@ class AppServiceProvider extends ServiceProvider
             $table->string('ua_name')->default('-')->nullable();
             $table->text('ua_description')->default('-')->nullable();
             $table->string('image');
-            $table->boolean('is_published');
+            $table->boolean('is_published')->nullable();
             $table->timestamps();
         });
 
@@ -82,7 +82,7 @@ class AppServiceProvider extends ServiceProvider
             $table->string('slug')->nullable();
             $table->timestamps();
         });
-*/
+
         \URL::forceScheme('https');
 
         $this->app->register(\L5Swagger\L5SwaggerServiceProvider::class);
