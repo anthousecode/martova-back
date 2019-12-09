@@ -37,6 +37,7 @@ class AreasController extends AdminController
         $grid->column('plan', 'Кадастровый план');
         $grid->column('survey', 'Геодезическая съемка');
         $grid->column('color', 'Цвет');
+        $grid->column('default_color', 'Цвет по умолчанию');
         $grid->column('created_at', 'Время создания');
         $grid->column('updated_at', 'Время обновления');
 
@@ -64,6 +65,7 @@ class AreasController extends AdminController
         $show->field('plan', 'Кадастровый план');
         $show->field('survey', 'Геодезическая съемка');
         $show->field('color', 'Цвет');
+        $show->field('default_color', 'Цвет по умолчанию');
         $show->field('created_at', 'Время создания');
         $show->field('updated_at', 'Время обновления');
 
