@@ -23,3 +23,18 @@ use App\Admin\Extensions\Form\CKEditor;
 
 Form::extend('ckeditor', CKEditor::class);
 Form::forget(['map', 'editor']);
+
+Form::init(function (Form $form) {
+
+    $form->disableEditingCheck();
+
+    $form->disableCreatingCheck();
+
+    $form->disableViewCheck();
+
+    $form->tools(function (Form\Tools $tools) {
+        $tools->disableDelete();
+        $tools->disableView();
+        $tools->disableList();
+    });
+});

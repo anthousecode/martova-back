@@ -8,7 +8,6 @@ use Encore\Admin\Form;
 use Encore\Admin\Grid;
 use Encore\Admin\Show;
 use App\Models\AreaStatus;
-use Illuminate\Database\QueryException;
 
 class AreasController extends AdminController
 {
