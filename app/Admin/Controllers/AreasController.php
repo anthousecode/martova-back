@@ -95,11 +95,6 @@ class AreasController extends AdminController
                 "blue" => "Голубой",
                 "yellow" => "Желтый",
             ]);
-            $form->saving(function(Form $form){
-                if (!$form->color) {
-                    $form->color = $form->default_color;
-                }
-            });
         return $form;
     }
 }

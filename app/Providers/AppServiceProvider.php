@@ -16,6 +16,23 @@ class AppServiceProvider extends ServiceProvider
     public function register()
     {
 
+        Schema::dropIfExists('areas');
+
+
+        Schema::table('areas', function (Blueprint $table) {
+            $table->bigIncrements('id');
+            $table->integer('status_id')->nullable();
+            $table->string('number')->nullable();
+            $table->float('square')->nullable();
+            $table->float('price')->nullable();
+            $table->string('image')->nullable();
+            $table->string('plan')->nullable();
+            $table->string('survey')->nullable();
+            $table->string('color')->nullable();
+            $table->string('default_color')->nullable();
+            $table->timestamps();
+        });
+
         /*
         Schema::dropIfExists('infrastructures');
         Schema::dropIfExists('news');
