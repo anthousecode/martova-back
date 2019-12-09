@@ -89,7 +89,7 @@ class NewsController extends AdminController
                     'created_at'=>Carbon::now()->toDateTimeString(),
                     'updated_at' => Carbon::now()->toDateTimeString()
                 ]);
-            } else if ($form->isUpdating()) {
+            } else {
                 \App\Models\News::find($form->model()->id)->update([
                     'updated_at' => Carbon::now()->toDateTimeString()
                 ]);
