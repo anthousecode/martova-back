@@ -16,7 +16,7 @@ class AppServiceProvider extends ServiceProvider
     public function register()
     {
 
-        Schema::dropIfExists('areas');
+        //Schema::dropIfExists('areas');
 
 
         Schema::table('areas', function (Blueprint $table) {
