@@ -7,6 +7,7 @@ use Encore\Admin\Controllers\AdminController;
 use Encore\Admin\Form;
 use Encore\Admin\Grid;
 use Encore\Admin\Show;
+use Carbon\Carbon;
 
 class NewsController extends AdminController
 {
@@ -80,6 +81,19 @@ class NewsController extends AdminController
         })->tab('UA', function (Form $form) {
             $form->text('ua_name', 'Название (укр.)');
             $form->ckeditor('ua_description', 'Описание (укр.)');
+        });
+
+        $form->saved(function(Form $form){
+            if ($form->isCreating()){
+                \App\Models\News::find($form->id)->update([
+                    'created_at'=>Carbon::now()->toDateTimeString(),
+                    'updated_at' => Carbon::now()->toDateTimeString()
+                ]);
+            } else if ($form->isUpdating()) {
+                \App\Models\News::find($form->id)->update([
+                    'updated_at' => Carbon::now()->toDateTimeString()
+                ]);
+            }
         });
 
         return $form;
