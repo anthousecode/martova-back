@@ -15,7 +15,21 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register()
     {
-/*
+        Schema::dropIfExists('infrastructures');
+        Schema::create('infrastructures', function (Blueprint $table) {
+            $table->bigIncrements('id');
+            $table->integer('category_id')->nullable();
+            $table->string('ru_name')->default('-')->nullable();
+            $table->text('ru_description')->default('-')->nullable();
+            $table->string('ua_name')->default('-')->nullable();
+            $table->text('ua_description')->default('-')->nullable();
+            $table->string('image')->nullable();
+            $table->integer('X')->nullable();
+            $table->integer('Y')->nullable();
+            $table->timestamps();
+        });
+
+        /*
         Schema::dropIfExists('infrastructures');
         Schema::dropIfExists('news');
         Schema::dropIfExists('category_infrastructures');
@@ -26,7 +40,7 @@ class AppServiceProvider extends ServiceProvider
 
         Schema::create('infrastructures', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->integer('category_id');
+            $table->integer('category_id')->nullable();
             $table->string('ru_name')->default('-')->nullable();
             $table->text('ru_description')->default('-')->nullable();
             $table->string('ua_name')->default('-')->nullable();
