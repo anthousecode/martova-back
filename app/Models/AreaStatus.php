@@ -9,8 +9,8 @@ class AreaStatus extends Model
 {
     protected $table = 'area_statuses';
 
-    public function areas()
-    {
-        return $this->hasMany(Area::class, 'status_id');
-    }
+//    public function areas()
+//    {
+//        return $this->hasMany(Area::class, 'status_id');
+//    }
 }
