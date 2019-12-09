@@ -29,6 +29,9 @@ class InfrastructureController extends AdminController
 
         $grid->column('id', 'Идентификатор');
         $grid->column('category.ru_name', 'Категория');
+        $grid->column('image', '3D изображение');
+        $grid->column('X', 'Расположение по оси X');
+        $grid->column('Y', 'Расположение по оси Y');
         $grid->column('ru_name', 'Название');
         $grid->column('ru_description', 'Описание');
         $grid->column('created_at', 'Время создания');
@@ -50,7 +53,10 @@ class InfrastructureController extends AdminController
         $show->field('id', 'Идентификатор');
         $show->field('category', 'Категория')->as(function ($default) {
             return $default ? $default->ru_name : '-';
-        });;
+        });
+        $show->field('image', '3D изображение');
+        $show->field('X', 'Расположение по оси X');
+        $show->field('Y', 'Расположение по оси Y');
         $show->field('ru_name', 'Название');
         $show->field('ru_description', 'Описание');
         $show->field('created_at', 'Время создания');
@@ -70,7 +76,9 @@ class InfrastructureController extends AdminController
 
         $form->select('category_id', 'Категория объекта инфраструктуры')
             ->options(CategoryInfrastructure::all()->pluck('ru_name', 'id'));
-
+        $form->image('image', '3D изображение');
+        $form->number('X', 'Расположение по оси X');
+        $form->number('Y', 'Расположение по оси Y');
         $form->tab('RU', function(Form $form){
             $form->text('ru_name', 'Название');
             $form->ckeditor('ru_description', 'Описание');
