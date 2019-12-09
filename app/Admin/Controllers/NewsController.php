@@ -27,6 +27,7 @@ class NewsController extends AdminController
         $grid = new Grid(new News);
 
         $grid->column('id', 'Идентификатор');
+        $grid->column('is_published', 'Опубликовано');
         $grid->column('ru_name', 'Название');
         $grid->column('ru_description', 'Описание');
         $grid->column('image', 'Изображение');
@@ -47,6 +48,7 @@ class NewsController extends AdminController
         $show = new Show(News::findOrFail($id));
 
         $show->field('id', 'Идентификатор');
+        $show->field('is_published', 'Опубликовано');
         $show->field('ru_name', 'Название');
         $show->field('ru_description', 'Описание');
         $show->field('image', 'Изображение');
@@ -63,18 +65,23 @@ class NewsController extends AdminController
      */
     protected function form()
     {
-            $form = new Form(new News);
+        $form = new Form(new News);
 
-            $form->image('image', 'Изображение');
+        $form->image('image', 'Изображение');
 
-            $form->tab('RU', function (Form $form) {
-                $form->text('ru_name', 'Название (рус.)');
-                $form->ckeditor('ru_description', 'Описание (рус.)');
-            })->tab('UA', function (Form $form) {
-                $form->text('ua_name', 'Название (укр.)');
-                $form->ckeditor('ua_description', 'Описание (укр.)');
-            });
+        $form->radio('is_published', 'Опубликовано')->options([
+            0 => 'Нет',
+            1 => 'Да',
+        ]);
 
-            return $form;
+        $form->tab('RU', function (Form $form) {
+            $form->text('ru_name', 'Название (рус.)');
+            $form->ckeditor('ru_description', 'Описание (рус.)');
+        })->tab('UA', function (Form $form) {
+            $form->text('ua_name', 'Название (укр.)');
+            $form->ckeditor('ua_description', 'Описание (укр.)');
+        });
+
+        return $form;
     }
 }
