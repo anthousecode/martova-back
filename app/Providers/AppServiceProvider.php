@@ -32,7 +32,7 @@ class AppServiceProvider extends ServiceProvider
             $table->string('default_color')->nullable();
             $table->timestamps();
         });
-
+die();
         /*
         Schema::dropIfExists('infrastructures');
         Schema::dropIfExists('news');
