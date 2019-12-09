@@ -16,10 +16,10 @@ class AppServiceProvider extends ServiceProvider
     public function register()
     {
 
-        //Schema::dropIfExists('areas');
+        Schema::dropIfExists('areas');
 
 
-        Schema::table('areas', function (Blueprint $table) {
+        Schema::create('areas', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->integer('status_id')->nullable();
             $table->string('number')->nullable();
