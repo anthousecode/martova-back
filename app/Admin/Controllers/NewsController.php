@@ -83,18 +83,18 @@ class NewsController extends AdminController
             $form->ckeditor('ua_description', 'Описание (укр.)');
         });
 
-        $form->saved(function(Form $form){
-            if ($form->isCreating()){
-                \App\Models\News::find($form->model()->id)->update([
-                    'created_at'=>Carbon::now()->toDateTimeString(),
-                    'updated_at' => Carbon::now()->toDateTimeString()
-                ]);
-            } else {
-                \App\Models\News::find($form->model()->id)->update([
-                    'updated_at' => Carbon::now()->toDateTimeString()
-                ]);
-            }
-        });
+//        $form->saved(function(Form $form){
+//            if ($form->isCreating()){
+//                \App\Models\News::find($form->model()->id)->update([
+//                    'created_at'=>Carbon::now()->toDateTimeString(),
+//                    'updated_at' => Carbon::now()->toDateTimeString()
+//                ]);
+//            } else {
+//                \App\Models\News::find($form->model()->id)->update([
+//                    'updated_at' => Carbon::now()->toDateTimeString()
+//                ]);
+//            }
+//        });
 
         return $form;
     }
