@@ -83,7 +83,7 @@ class AppServiceProvider extends ServiceProvider
             $table->timestamps();
         });
 */
-        \URL::forceScheme('https');
+       // \URL::forceScheme('https');
 
         $this->app->register(\L5Swagger\L5SwaggerServiceProvider::class);
     }
