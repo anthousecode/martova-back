@@ -65,7 +65,7 @@ class MenusController extends AdminController
     {
         $form = new Form(new Menu);
 
-        $form->text('slug', 'Элемент URL');
+        $form->text('slug', 'Элемент URL')->placeholder('http://app.com/...');
         $form->number('order', 'Порядок')->default(0);
         $form->tab('RU', function(Form $form){
             $form->text('ru_name', 'Название (рус.)');

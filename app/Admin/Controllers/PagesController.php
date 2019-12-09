@@ -67,7 +67,7 @@ class PagesController extends AdminController
     {
         $form = new Form(new Page);
 
-        $form->text('slug', 'Элемент URL');
+        $form->text('slug', 'Элемент URL')->placeholder('http://app.com/page/...');
         $form->tab('RU', function(Form $form){
             $form->text('ru_title', 'Заголовок (рус.)');
             $form->text('ru_meta_description', 'Описание (рус.)');
