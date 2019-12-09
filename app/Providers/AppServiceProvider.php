@@ -15,9 +15,15 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register()
     {
-
+        /*
+        Schema::dropIfExists('infrastructures');
+        Schema::dropIfExists('news');
+        Schema::dropIfExists('category_infrastructures');
+        Schema::dropIfExists('galleries');
+        Schema::dropIfExists('menus');
+        Schema::dropIfExists('area_statuses');
+        Schema::dropIfExists('pages');
         Schema::dropIfExists('areas');
-
 
         Schema::create('areas', function (Blueprint $table) {
             $table->bigIncrements('id');
@@ -32,15 +38,6 @@ class AppServiceProvider extends ServiceProvider
             $table->string('default_color')->nullable();
             $table->timestamps();
         });
-
-        /*
-        Schema::dropIfExists('infrastructures');
-        Schema::dropIfExists('news');
-        Schema::dropIfExists('category_infrastructures');
-        Schema::dropIfExists('galleries');
-        Schema::dropIfExists('menus');
-        Schema::dropIfExists('area_statuses');
-        Schema::dropIfExists('pages');
 
         Schema::create('infrastructures', function (Blueprint $table) {
             $table->bigIncrements('id');
