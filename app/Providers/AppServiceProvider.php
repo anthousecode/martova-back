@@ -15,15 +15,6 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register()
     {
-
-        Schema::dropIfExists('galleries');
-        Schema::create('galleries', function (Blueprint $table) {
-            $table->bigIncrements('id');
-            $table->string('image')->nullable();
-            $table->timestamps();
-        });
-
-
         /*
         Schema::dropIfExists('infrastructures');
         Schema::dropIfExists('news');
@@ -33,6 +24,12 @@ class AppServiceProvider extends ServiceProvider
         Schema::dropIfExists('area_statuses');
         Schema::dropIfExists('pages');
         Schema::dropIfExists('areas');
+
+        Schema::create('galleries', function (Blueprint $table) {
+            $table->bigIncrements('id');
+            $table->string('image')->nullable();
+            $table->timestamps();
+        });
 
         Schema::create('areas', function (Blueprint $table) {
             $table->bigIncrements('id');
