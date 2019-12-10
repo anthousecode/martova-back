@@ -39,3 +39,15 @@ Form::init(function (Form $form) {
         $tools->disableList();
     });
 });
+
+Grid::init(function (Grid $grid) {
+
+    $grid->disableFilter();
+
+    $grid->disableRowSelector();
+
+    $grid->disableColumnSelector();
+
+    $grid->disableExport();
+
+});
