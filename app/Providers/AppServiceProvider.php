@@ -15,25 +15,13 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        Schema::dropIfExists('pages');
-        Schema::create('pages', function (Blueprint $table) {
-            $table->bigIncrements('id');
-            $table->string('ru_title')->default('-')->nullable();
-            $table->longText('ru_content')->default('-')->nullable();
-            $table->string('ua_title')->default('-')->nullable();
-            $table->longText('ua_content')->default('-')->nullable();
-            $table->text('ru_meta_description')->default('-')->nullable();
-            $table->text('ua_meta_description')->default('-')->nullable();
-            $table->integer('order')->default(0);
-            $table->string('slug')->nullable();
-            $table->timestamps();
-        });
+        Schema::dropIfExists('menus');
+
         /*
         Schema::dropIfExists('infrastructures');
         Schema::dropIfExists('news');
         Schema::dropIfExists('category_infrastructures');
         Schema::dropIfExists('galleries');
-        Schema::dropIfExists('menus');
         Schema::dropIfExists('area_statuses');
         Schema::dropIfExists('pages');
         Schema::dropIfExists('areas');
@@ -89,15 +77,6 @@ class AppServiceProvider extends ServiceProvider
             $table->timestamps();
         });
 
-        Schema::create('menus', function (Blueprint $table) {
-            $table->bigIncrements('id');
-            $table->string('ru_name')->default('-')->nullable();
-            $table->string('ua_name')->default('-')->nullable();
-            $table->string('slug')->nullable();
-            $table->integer('order')->default(0);
-            $table->timestamps();
-        });
-
         Schema::create('area_statuses', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('ru_name')->default('-')->nullable();
@@ -113,6 +92,7 @@ class AppServiceProvider extends ServiceProvider
             $table->longText('ua_content')->default('-')->nullable();
             $table->text('ru_meta_description')->default('-')->nullable();
             $table->text('ua_meta_description')->default('-')->nullable();
+            $table->integer('order')->default(0);
             $table->string('slug')->nullable();
             $table->timestamps();
         });

@@ -28,6 +28,7 @@ class PagesController extends AdminController
 
         $grid->column('id', 'Идентификатор');
         $grid->column('slug', 'Элемент URL');
+        $grid->column('order', 'Порядок');
         $grid->column('ru_title', 'Заголовок');
         $grid->column('ru_meta_description', 'Описание');
         $grid->column('ru_content', 'Контент');
@@ -49,6 +50,7 @@ class PagesController extends AdminController
 
         $show->field('id', 'Идентификатор');
         $show->field('slug', 'Элемент URL');
+        $show->field('order', 'Порядок');
         $show->field('ru_title', 'Заголовок');
         $show->field('ru_meta_description', 'Описание');
         $show->field('ru_content', 'Контент');
@@ -67,7 +69,8 @@ class PagesController extends AdminController
     {
         $form = new Form(new Page);
 
-        $form->text('slug', 'Элемент URL')->placeholder('http://app.com/page/...');
+        $form->text('slug', 'Элемент URL')->placeholder('http://app.com/...');
+        $form->number('order', 'Порядок');
         $form->tab('RU', function(Form $form){
             $form->text('ru_title', 'Заголовок (рус.)');
             $form->text('ru_meta_description', 'Описание (рус.)');

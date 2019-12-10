@@ -20,8 +20,6 @@ Route::group([
 
     $router->resource('galleries', GalleryController::class);
 
-    $router->resource('menus', MenusController::class);
-
     $router->resource('areas', AreasController::class);
 
     $router->resource('area-statuses', AreasStatusesController::class);
