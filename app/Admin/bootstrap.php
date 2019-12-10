@@ -38,5 +38,6 @@ Form::init(function (Form $form) {
         $tools->disableDelete();
         $tools->disableView();
         $tools->disableList();
+        $tools->disableExport();
     });
 });
