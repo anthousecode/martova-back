@@ -32,6 +32,8 @@ Form::init(function (Form $form) {
 
     $form->disableViewCheck();
 
+    $form->disableExport();
+
     $form->tools(function (Form\Tools $tools) {
         $tools->disableDelete();
         $tools->disableView();
