@@ -17,7 +17,7 @@ class AppServiceProvider extends ServiceProvider
     {
 
         Schema::dropIfExists('galleries');
-        Schema::table('galleries', function (Blueprint $table) {
+        Schema::create('galleries', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('image')->nullable();
             $table->timestamps();
