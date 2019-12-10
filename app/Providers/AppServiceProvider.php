@@ -15,8 +15,6 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        Schema::dropIfExists('menus');
-
         /*
         Schema::dropIfExists('infrastructures');
         Schema::dropIfExists('news');
