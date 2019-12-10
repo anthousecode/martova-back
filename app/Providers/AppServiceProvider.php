@@ -15,6 +15,19 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register()
     {
+        Schema::dropIfExists('pages');
+        Schema::create('pages', function (Blueprint $table) {
+            $table->bigIncrements('id');
+            $table->string('ru_title')->default('-')->nullable();
+            $table->longText('ru_content')->default('-')->nullable();
+            $table->string('ua_title')->default('-')->nullable();
+            $table->longText('ua_content')->default('-')->nullable();
+            $table->text('ru_meta_description')->default('-')->nullable();
+            $table->text('ua_meta_description')->default('-')->nullable();
+            $table->integer('order')->default(0);
+            $table->string('slug')->nullable();
+            $table->timestamps();
+        });
         /*
         Schema::dropIfExists('infrastructures');
         Schema::dropIfExists('news');
