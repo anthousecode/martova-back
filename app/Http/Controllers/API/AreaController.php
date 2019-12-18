@@ -151,10 +151,15 @@ class AreaController extends Controller
     {
         $filePath = Area::select('plan')->where('id', $id)->get()->pluck('plan')->toArray()[0];
         $filePath = public_path() . '/upload/' . $filePath;
+//        $headers = [
+//            'Content-type' => 'application/xml'
+//        ];
         $headers = [
-            'Content-type' => 'application/xml'
+          'Accept' => 'application/xml',
+            'Accept' => 'application/pdf',
+            'Accept' => 'application/txt',
         ];
-        return response()->download('/' . $filePath, 'plan.xml', $headers);
+        return response()->download('/' . $filePath, 'plan', $headers);
     }
 
     /**
