@@ -159,7 +159,7 @@ class AreaController extends Controller
             'Accept' => 'application/pdf',
             'Accept' => 'application/txt',
         ];
-        return response()->download('/' . $filePath, 'plan', $headers);
+        return response()->download('/' . $filePath, 'plan.txt', $headers);
     }
 
     /**
