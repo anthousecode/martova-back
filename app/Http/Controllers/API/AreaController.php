@@ -155,9 +155,9 @@ class AreaController extends Controller
 //            'Content-type' => 'application/xml'
 //        ];
         $headers = [
-          'Accept' => 'application/xml',
+       /*   'Accept' => 'application/xml',
             'Accept' => 'application/pdf',
-            'Accept' => 'application/txt',
+            'Accept' => 'application/txt',*/
         ];
         return response()->download($filePath, 'plan.txt', $headers);
     }
