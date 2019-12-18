@@ -154,7 +154,7 @@ class AreaController extends Controller
         /*$headers = [
             'Content-type' => 'application/pdf'
         ];*/
-
+$headers = [];
         return response()->download($filePath, 'plan', $headers);
     }
 
