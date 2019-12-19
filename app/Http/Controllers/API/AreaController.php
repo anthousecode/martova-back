@@ -121,9 +121,8 @@ class AreaController extends Controller
      *  )
      * )
      */
-    public function fetchAreas(\App\Services\UtilService $s)
+    public function fetchAreas()
     {
-        dd($s->foo());
         return json_encode(['areas' => Area::all()->toArray()]);
     }
 
