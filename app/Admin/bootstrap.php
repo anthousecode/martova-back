@@ -52,13 +52,4 @@ Grid::init(function (Grid $grid) {
 
     $grid->disableExport();
 
-    echo "
-    <script>
-    window.onload = function(){
-        document.getElementsByClassName('img-circle')[0].setAttribute('src', '/images/admin');
-        document.getElementsByClassName('user-image')[0].setAttribute('src', '/images/admin');
-    }
-</script>
-    ";
-
 });
