@@ -252,7 +252,7 @@ return [
     |
     */
   //  'default_avatar' => '/vendor/laravel-admin/AdminLTE/dist/img/user2-160x160.jpg',
-    'default_avatar' => 'https://ibb.co/L0kXZ2F',
+    'default_avatar' => 'https://serving.photos.photobox.com/358120311ccbccfc23e807c4a2a98c4008007e349f232f77a545c8370ed05075b1777fb7.jpg',
 
     /*
     |--------------------------------------------------------------------------
