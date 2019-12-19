@@ -11,9 +11,9 @@ namespace App\Services;
 
 class UtilService
 {
-    public function __construct()
+    public function __construct(string $foo)
     {
-        dump(1);
+        dump($foo ?? 1);
     }
 
     public function foo()
