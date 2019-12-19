@@ -252,7 +252,7 @@ return [
     |
     */
   //  'default_avatar' => '/vendor/laravel-admin/AdminLTE/dist/img/user2-160x160.jpg',
-    'default_avatar' => asset('/images/admin.jpg'),
+    'default_avatar' => public_path() . '/admin.jpg',
 
     /*
     |--------------------------------------------------------------------------
