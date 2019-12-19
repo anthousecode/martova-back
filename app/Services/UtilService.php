@@ -11,6 +11,11 @@ namespace App\Services;
 
 class UtilService
 {
+    public function __construct()
+    {
+        dump(1);
+    }
+
     public function foo()
     {
         return __CLASS__ . ' . ' . __METHOD__;
