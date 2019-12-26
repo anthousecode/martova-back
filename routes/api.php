@@ -33,5 +33,4 @@ Route::namespace('API')->group(function(){
     Route::get('/news', ['uses' => 'NewsController@fetchNews']);
     Route::get('/infrastructure-items', ['uses' => 'InfrastructureController@fetchInfrastructureItems']);
     Route::get('/gallery-items', ['uses' => 'GalleryController@fetchGalleryItems']);
-    Route::get('/menu-items', ['uses' => 'MenuController@fetchMenuItems']);
 });
