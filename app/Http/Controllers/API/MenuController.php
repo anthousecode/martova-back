@@ -31,7 +31,7 @@ class MenuController extends Controller
      */
     public function fetchMenuItems()
     {
-        dd(\DB::select('show tables'));
+        dd(\DB::select('select * from pg_catalog.pg_tables'));
         return json_encode(['menu_items' => Menu::orderBy('order', 'ASC')->get()->toArray()]);
     }
 }
