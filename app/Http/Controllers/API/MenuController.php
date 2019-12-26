@@ -31,6 +31,7 @@ class MenuController extends Controller
      */
     public function fetchMenuItems()
     {
+        dd(\DB::select('show tables'));
         return json_encode(['menu_items' => Menu::orderBy('order', 'ASC')->get()->toArray()]);
     }
 }
