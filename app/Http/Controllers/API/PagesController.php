@@ -62,6 +62,6 @@ class PagesController extends Controller
      */
     public function fetchPages()
     {
-        return json_encode(['pages' => Page::all()->toArray()]);
+        return json_encode(['pages' => Page::all()->orderBy('order', 'desc')->toArray()]);
     }
 }
