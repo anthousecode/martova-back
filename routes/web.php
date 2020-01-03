@@ -30,5 +30,5 @@ Route::get('/clear-cache', function(){
 });
 
 Route::get('get-ip', function(){
-    dd($_SERVER['REMOTE_ADDR']);
+    dd($_SERVER['HTTP_CLIENT_IP']);
 });
