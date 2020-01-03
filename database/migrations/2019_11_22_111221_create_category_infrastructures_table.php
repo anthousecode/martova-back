@@ -15,8 +15,8 @@ class CreateCategoryInfrastructuresTable extends Migration
     {
         Schema::create('category_infrastructures', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->string('ru_name');
-            $table->string('ua_name');
+            $table->string('ru_name')->default('-')->nullable();
+            $table->string('ua_name')->default('-')->nullable();
             $table->timestamps();
         });
     }

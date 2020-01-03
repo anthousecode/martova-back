@@ -15,11 +15,14 @@ class CreateInfrastructuresTable extends Migration
     {
         Schema::create('infrastructures', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->integer('category_id');
-            $table->string('ru_name');
-            $table->text('ru_description');
-            $table->string('ua_name');
-            $table->text('ua_description');
+            $table->integer('category_id')->nullable();
+            $table->string('ru_name')->default('-')->nullable();
+            $table->text('ru_description')->default('-')->nullable();
+            $table->string('ua_name')->default('-')->nullable();
+            $table->text('ua_description')->default('-')->nullable();
+            $table->string('image')->nullable();
+            $table->integer('X')->nullable();
+            $table->integer('Y')->nullable();
             $table->timestamps();
         });
     }
