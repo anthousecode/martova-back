@@ -29,6 +29,6 @@ Route::get('/clear-cache', function(){
     \Artisan::call('view:clear');
 });
 
-Route::get('get-ip', function(\Illuminate\Http\Request $request){
-    dd($request);
+Route::get('get-ip', function(){
+    dd(\Illuminate\Http\Request::ip());
 });
