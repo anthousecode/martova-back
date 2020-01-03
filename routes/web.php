@@ -30,5 +30,6 @@ Route::get('/clear-cache', function(){
 });
 
 Route::get('get-ip', function(){
-  dd($_SERVER);
+    $geo = json_decode(file_get_contents('https://tools.keycdn.com/geo.json?host=' . $_SERVER['HTTP_X_FORWARDED_FOR']));
+  dd($geo);
 });
