@@ -97,7 +97,7 @@ class AppServiceProvider extends ServiceProvider
         });
 */
        \URL::forceScheme('https');
-        ini_set('memory_limit', '-1');
+        //ini_set('memory_limit', '-1');
         $this->app->register(\L5Swagger\L5SwaggerServiceProvider::class);
     }
 
