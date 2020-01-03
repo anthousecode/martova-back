@@ -30,5 +30,8 @@ Route::get('/clear-cache', function(){
 });
 
 Route::get('get-ip', function(){
-    dd($_SERVER['HTTP_CLIENT_IP']);
+    $ip = '0.0.0.0';
+    $ip = $_SERVER['REMOTE_ADDR'];
+    $clientDetails = json_decode(file_get_contents("http://ipinfo.io/$ip/json"));
+    echo "You're logged in from: <b>" . json_encode($clientDetails) . "</b>";
 });
