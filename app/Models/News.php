@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Carbon\Carbon;
 
 class News extends Model
 {
@@ -12,6 +13,6 @@ class News extends Model
 
     public function getUpdatedAtAttribute($date)
     {
-        return \Carbon\Carbon::createFromFormat('Y-m-d H:i:s', $date)->format('d-m-Y');
+        return Carbon::createFromFormat('Y-m-d H:i:s', $date)->format('d-m-Y');
     }
 }
