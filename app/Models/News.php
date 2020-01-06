@@ -13,6 +13,6 @@ class News extends Model
 
     public function getUpdatedAtAttribute($date)
     {
-        return Carbon::createFromFormat('Y-m-d H:i:s', $date)->format('d-m-Y');
+        return Carbon::createFromFormat('Y-m-d H:i:s', $date)->format('d.m.y');
     }
 }
