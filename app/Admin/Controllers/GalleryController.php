@@ -61,11 +61,10 @@ class GalleryController extends AdminController
     {
         $form = new Form(new Gallery);
 
-        $form->image('image', 'Изображение')->name(function ($file) {
-            return md5(date('ymdhis') . $file->getClientOriginalName()) . '.' . $file->getClientOriginalExtension();
-            });
+        $form->image('image', 'Изображение');
 
         $form->saved(function(Form $form){
+            $form->image->originalName = 'fof.jpg';
             dd($form->image);
             $id = $form->model()->id;
             \App\Models\Gallery::find($id)
