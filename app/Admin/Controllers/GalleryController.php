@@ -75,7 +75,7 @@ class GalleryController extends AdminController
             );
 
             \App\Models\Gallery::find($id)
-                                ->update(['image' => 'image/' . $imageName]);
+                                ->update(['image' => 'image/' . $storedImageName]);
         });
 
         return $form;
