@@ -63,7 +63,8 @@ class GalleryController extends AdminController
 
         $form->image('image', 'Изображение');
 
-        $form->saving(function(Form $form){
+        $form->saved(function(Form $form){
+            dump(\App\Models\Gallery::find($form->model()->id));
             dd($form->image->getClientOriginalName());
         });
 
