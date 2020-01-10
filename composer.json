@@ -9,6 +9,7 @@
     "license": "MIT",
     "require": {
         "php": "^7.2",
+        "ext-gd": "^7.3",
         "darkaonline/l5-swagger": "^6.0",
         "encore/laravel-admin": "^1.7",
         "fideloper/proxy": "^4.0",
