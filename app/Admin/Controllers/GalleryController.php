@@ -64,8 +64,7 @@ class GalleryController extends AdminController
         $form->image('image', 'Изображение');
 
         $form->saving(function(Form $form){
-            $img = $form->model()->image;
-            dd($img);
+            dd($form->image);
         });
 
         return $form;
