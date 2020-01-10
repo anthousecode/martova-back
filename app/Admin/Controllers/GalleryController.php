@@ -7,6 +7,7 @@ use Encore\Admin\Controllers\AdminController;
 use Encore\Admin\Form;
 use Encore\Admin\Grid;
 use Encore\Admin\Show;
+use File;
 
 class GalleryController extends AdminController
 {
@@ -65,8 +66,16 @@ class GalleryController extends AdminController
 
         $form->saved(function(Form $form){
             $id = $form->model()->id;
+            $imageName = $form->image->getClientOriginalName();
+            $storedImageName = uniqid() . '_' . $id . '_' . $imageName;
+
+            File::move(
+                public_path('upload/image/' . $imageName), 
+                public_path('upload/image/' . $storedImageName)
+            );
+
             \App\Models\Gallery::find($id)
-                                ->update(['image' => 'image/' . $form->image->getClientOriginalName()]);
+                                ->update(['image' => 'image/' . $imageName]);
         });
 
         return $form;
