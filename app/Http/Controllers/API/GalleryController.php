@@ -31,6 +31,10 @@ class GalleryController extends Controller
      */
     public function fetchGalleryItems()
     {
-        return json_encode(['gallery_items' => Gallery::all()->toArray()]);
+        $items = Gallery::all()->map(function($item){ 
+                 $item['image'] = env('APP_URL') . '/upload/' . $item['image'];
+        })->toArray();
+
+        return json_encode(['gallery_items' => $items]);
     }
 }
