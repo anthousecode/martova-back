@@ -32,7 +32,7 @@ class GalleryController extends Controller
     public function fetchGalleryItems()
     {
         $items = Gallery::all()->map(function($item){ 
-                 $item['image'] = env('APP_URL') . '/upload/' . $item['image'];
+                 $item['image'] = \URL::to('/') . '/upload/' . $item['image'];
                  return $item;
         })->toArray();
 
