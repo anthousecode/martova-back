@@ -14,11 +14,10 @@ use Illuminate\Routing\Router;
 |
 */
 
-Route::middleware('auth:api')->get('/user', function (Request $request) {
-    return $request->user();
-});
+Route::post('login', ['uses'=>'API\AuthController@login','as'=>'login']);
+Route::post('register', 'API\AuthController@register');
 
-Route::namespace('API')->group(function(){
+Route::namespace('API')->group(['middleware' => 'auth:api'], function(){
 
     Route::get('/search-area/{num}', ['uses' => 'AreaController@searchArea', 'as' => 'search_area']);
     Route::get('/fetch-areas', ['uses' => 'AreaController@fetchAreas', 'as' => 'fetch_areas']);
@@ -33,4 +32,7 @@ Route::namespace('API')->group(function(){
     Route::get('/news', ['uses' => 'NewsController@fetchNews']);
     Route::get('/infrastructure-items', ['uses' => 'InfrastructureController@fetchInfrastructureItems']);
     Route::get('/gallery-items', ['uses' => 'GalleryController@fetchGalleryItems']);
+
+    Route::post('logout', 'API\AuthController@logout');
+    Route::post('check', 'API\AuthController@check');
 });
