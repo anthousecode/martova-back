@@ -17,7 +17,7 @@ use Illuminate\Routing\Router;
 Route::post('login', ['uses'=>'API\AuthController@login','as'=>'login']);
 Route::post('register', 'API\AuthController@register');
 
-Route::namespace('API')->group(function(){
+Route::namespace('API')->group(['middleware' => 'auth:api'], function(){
 
     Route::get('/search-area/{num}', ['uses' => 'AreaController@searchArea', 'as' => 'search_area']);
     Route::get('/fetch-areas', ['uses' => 'AreaController@fetchAreas', 'as' => 'fetch_areas']);
@@ -35,4 +35,4 @@ Route::namespace('API')->group(function(){
 
     Route::post('logout', 'API\AuthController@logout');
     Route::post('check', 'API\AuthController@check');
-})->middleware('auth:api');
+});
