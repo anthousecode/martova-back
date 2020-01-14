@@ -34,6 +34,9 @@ class InfrastructureController extends AdminController
         $grid->column('Y', 'Расположение по оси Y');
         $grid->column('ru_name', 'Название');
         $grid->column('ru_description', 'Описание');
+        $grid->column('icon', 'Иконка');
+        $grid->column('timing', 'Время');
+        $grid->column('video', 'Видео');
         $grid->column('created_at', 'Время создания');
         $grid->column('updated_at', 'Время обновления');
 
@@ -59,6 +62,9 @@ class InfrastructureController extends AdminController
         $show->field('Y', 'Расположение по оси Y');
         $show->field('ru_name', 'Название');
         $show->field('ru_description', 'Описание');
+        $show->field('icon', 'Иконка');
+        $show->field('timing', 'Время');
+        $show->field('video', 'Видео');
         $show->field('created_at', 'Время создания');
         $show->field('updated_at', 'Время обновления');
 
@@ -79,6 +85,9 @@ class InfrastructureController extends AdminController
         $form->image('image', '3D изображение');
         $form->number('X', 'Расположение по оси X');
         $form->number('Y', 'Расположение по оси Y');
+        $form->icon('icon', 'Иконка');
+        $form->time('time', 'Время');
+        $form->file('video', 'Видео');
         $form->tab('RU', function(Form $form){
             $form->text('ru_name', 'Название');
             $form->ckeditor('ru_description', 'Описание');

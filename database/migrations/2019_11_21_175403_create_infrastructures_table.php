@@ -23,6 +23,9 @@ class CreateInfrastructuresTable extends Migration
             $table->string('image')->nullable();
             $table->integer('X')->nullable();
             $table->integer('Y')->nullable();
+            $table->string('icon')->nullable();
+            $table->time('timing')->nullable();
+            $table->string('video')->nullable();
             $table->timestamps();
         });
     }
