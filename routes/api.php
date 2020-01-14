@@ -34,7 +34,7 @@ Route::namespace('API')->name('api.')->group(function () {
         Route::get('/infrastructure-items', ['uses' => 'InfrastructureController@fetchInfrastructureItems']);
         Route::get('/gallery-items', ['uses' => 'GalleryController@fetchGalleryItems']);
 
-        Route::post('logout', 'API\AuthController@logout');
-        Route::post('check', 'API\AuthController@check');
+        Route::post('logout', 'AuthController@logout');
+        Route::post('check', 'AuthController@check');
     });
 });
