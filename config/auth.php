@@ -42,7 +42,7 @@ return [
         ],
 
         'api' => [
-            'driver' => 'passport',
+            'driver' => 'token',
             'provider' => 'users',
             'hash' => false,
         ],
@@ -112,9 +112,6 @@ return [
     |
     */
 
-    'password_timeout' => 10800,
-
-
-    'app_user_token' => 'areas_user'
+    'password_timeout' => 10800
 
 ];

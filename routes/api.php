@@ -14,12 +14,32 @@ use Illuminate\Routing\Router;
 |
 */
 
-Route::namespace('API')->name('api.')->group(function () {
+Route::namespace('API')->group(function () {
 
     Route::post('login', ['uses' => 'AuthController@login', 'as' => 'login']);
     Route::post('register', 'AuthController@register');
 
-    Route::group(['middleware' => ['auth:api']], function() {
+    // 3-rd auth parties...
+//    Route::prefix('oauth')->group(function(){
+//        Route::prefix('google')->group(function() {
+//            Route::get('authenticate', ['uses' => '', 'as' => '']);
+//            Route::get('callback', ['uses' => '', 'as' => '']);
+//        });
+//        Route::prefix('youtube')->group(function() {
+//            Route::get('authenticate', ['uses' => '', 'as' => '']);
+//            Route::get('callback', ['uses' => '', 'as' => '']);
+//        });
+//        Route::prefix('facebook')->group(function() {
+//            Route::get('authenticate', ['uses' => '', 'as' => '']);
+//            Route::get('callback', ['uses' => '', 'as' => '']);
+//        });
+//        Route::prefix('instagram')->group(function() {
+//            Route::get('authenticate', ['uses' => '', 'as' => '']);
+//            Route::get('callback', ['uses' => '', 'as' => '']);
+//        });
+//    });
+
+   // Route::group(['middleware' => ['uuid']], function() {
         Route::get('/search-area/{num}', ['uses' => 'AreaController@searchArea', 'as' => 'search_area']);
         Route::get('/fetch-areas', ['uses' => 'AreaController@fetchAreas', 'as' => 'fetch_areas']);
         Route::get('/filter-by-status/{status}', ['uses' => 'AreaController@filterByStatus', 'as' => 'filter_by_status']);
@@ -36,5 +56,5 @@ Route::namespace('API')->name('api.')->group(function () {
 
         Route::post('logout', 'AuthController@logout');
         Route::post('check', 'AuthController@check');
-    });
+   // });
 });

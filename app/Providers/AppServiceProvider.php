@@ -17,6 +17,12 @@ class AppServiceProvider extends ServiceProvider
     {
        \URL::forceScheme('https');
         $this->app->register(\L5Swagger\L5SwaggerServiceProvider::class);
+
+        if (!Schema::hasColumn('users', 'api_token')) {
+             Schema::table('users', function(Blueprint $table){
+                 $table->string('api_token', 36)->nullable();
+             });
+        }
     }
 
     /**
