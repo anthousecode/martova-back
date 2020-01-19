@@ -28,4 +28,3 @@ Route::get('/clear-cache', function(){
     \Artisan::call('config:clear');
     \Artisan::call('view:clear');
 });
-
