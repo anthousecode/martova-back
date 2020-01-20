@@ -21,6 +21,7 @@ class AuthController extends Controller
 
     public function login(Request $request)
     {
+        dd(User::all()->toArray());
         $rules = [
             'email' => 'required|email',
             'password' => 'required|min:6',
