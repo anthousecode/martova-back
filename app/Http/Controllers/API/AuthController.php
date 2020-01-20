@@ -34,8 +34,9 @@ class AuthController extends Controller
             ->where('password', bcrypt($request->password))
             ->get();
 
+        $request->password = bcrypt($request->password);
         dump($request->all());
-        dd($user);
+        dd(User::all()->toArray()[0]);
 
         if (!$user) {
             return response()->json(['message' => 'User with such credentials not found'], 404);
