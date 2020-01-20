@@ -38,7 +38,7 @@ class AuthController extends Controller
 
         $newToken = $this->tokenizer->generateUUID();
 
-        $user->token = $newToken;
+        $user->api_token = $newToken;
         $user->save();
 
         return response()->json(['key' => base64_encode($newToken)], 200);
