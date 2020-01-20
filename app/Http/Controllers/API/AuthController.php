@@ -30,14 +30,10 @@ class AuthController extends Controller
             return response()->json(['message' => 'Invalid input'], 401);
         }
 
+        $password = bcrypt($request->password);
         $user = User::where('email', $request->email)
-            ->where('password', bcrypt($request->password))
-            ->get();
-
-        $foo = bcrypt($request->password);
-        dump($foo);
-        dump($request->all());
-        dd(User::all()->toArray()[0]);
+            ->where('password', $password)
+            ->first();
 
         if (!$user) {
             return response()->json(['message' => 'User with such credentials not found'], 404);
