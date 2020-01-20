@@ -23,16 +23,13 @@ class AuthController extends Controller
     {
         $rules = [
             'email' => 'required|email',
-            'password' => 'required|min:6',
         ];
 
         if ((Validator::make($request->all(), $rules))->fails()) {
             return response()->json(['message' => 'Invalid input'], 401);
         }
 
-        $password = bcrypt($request->password);
         $user = User::where('email', $request->email)
-            ->where('password', $password)
             ->first();
 
         if (!$user) {
