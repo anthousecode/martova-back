@@ -15,8 +15,7 @@ use Illuminate\Routing\Router;
 */
 
 // 3-rd auth parties...
-Route::middleware('web')->group(function () {
-    Route::namespace('OAuth')->prefix('oauth')->group(function () {
+    Route::namespace('OAuth')->prefix('oauth')->middleware('web')->group(function () {
         Route::prefix('google')->group(function () {
             Route::get('authenticate', ['uses' => 'GoogleController@authenticate']);
             Route::get('callback', ['uses' => 'GoogleController@callback']);
@@ -59,4 +58,3 @@ Route::middleware('web')->group(function () {
             Route::post('check', 'AuthController@check');
         });
     });
-});
