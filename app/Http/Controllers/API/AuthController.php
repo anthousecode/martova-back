@@ -34,7 +34,8 @@ class AuthController extends Controller
             ->where('password', bcrypt($request->password))
             ->get();
 
-        $request->password = bcrypt($request->password);
+        $foo = bcrypt($request->password);
+        dump($foo);
         dump($request->all());
         dd(User::all()->toArray()[0]);
 
