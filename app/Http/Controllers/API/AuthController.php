@@ -65,9 +65,9 @@ class AuthController extends Controller
     {
         $token = base64_decode(Cookie::get('token'));
 
-        $user = User::where('api_token', $token)->first();
-        $user->api_token = null;
-        $user->save();
+        User::where('api_token', $token)->update([
+            'api_token' => null,
+        ]);
 
         return response()->json([
             'message' => 'Successfully logged out',
