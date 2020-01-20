@@ -21,7 +21,6 @@ class AuthController extends Controller
 
     public function login(Request $request)
     {
-        dd(User::all()->toArray());
         $rules = [
             'email' => 'required|email',
             'password' => 'required|min:6',
@@ -33,7 +32,10 @@ class AuthController extends Controller
 
         $user = User::where('email', $request->email)
             ->where('password', bcrypt($request->password))
-            ->first();
+            ->get();
+
+        dump($request->all());
+        dd($user);
 
         if (!$user) {
             return response()->json(['message' => 'User with such credentials not found'], 404);
