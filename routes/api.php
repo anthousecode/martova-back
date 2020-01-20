@@ -28,10 +28,10 @@ use Illuminate\Routing\Router;
             Route::get('authenticate', ['uses' => 'FacebookController@authenticate']);
             Route::get('callback', ['uses' => 'FacebookController@callback']);
         });
-//        Route::prefix('instagram')->group(function() {
-//            Route::get('authenticate', ['uses' => '', 'as' => '']);
-//            Route::get('callback', ['uses' => '', 'as' => '']);
-//        });
+        Route::prefix('instagram')->group(function() {
+            Route::get('authenticate', ['uses' => 'InstagramController@authenticate']);
+            Route::get('callback', ['uses' => 'InstagramController@callback']);
+        });
     });
 
     Route::namespace('API')->group(function () {
