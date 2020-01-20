@@ -9,6 +9,8 @@
 namespace App\Services\Util;
 
 use Socialite;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Str;
 
 class Authentifier
 {
@@ -33,12 +35,12 @@ class Authentifier
             $findUser->api_token = $newToken;
             $findUser->save();
         } else {
-            \App\User::create([
-                'name' => $user->name,
-                'email' => $user->email,
-                'password' => bcrypt($user->password),
-                'api_token' => $newToken,
-            ]);
+            $newUser = new \App\User;
+            $newUser->name = $user->name;
+            $newUser->email = $user->email;
+            $newUser->password = Hash::make(Str::random(8) . $user->email);
+            $newUser->api_token = $newToken;
+            $newUser->save();
         }
         return base64_encode($newToken);
     }
