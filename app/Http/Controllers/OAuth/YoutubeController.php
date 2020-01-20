@@ -13,7 +13,7 @@ class YoutubeController extends Controller
 
     public function __construct(Authentifier $authentifier)
     {
-        $this->driver = 'youtube';
+        $this->driver = 'google';
         $this->authentifier = $authentifier;
     }
 
