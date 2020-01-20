@@ -20,27 +20,27 @@ class Authentifier
         $this->tokenizer = $tokenizer;
     }
 
-       public function socialiteRedirect(string $driver)
-       {
-           return Socialite::driver($driver)->redirect();
-       }
+    public function socialiteRedirect(string $driver)
+    {
+        return Socialite::driver($driver)->redirect();
+    }
 
-       public function authenticatedCallbackHandler(string $driver): string
-       {
-           $user = Socialite::driver($driver)->stateless()->user();
-           $findUser = User::where('email', $user->email)->first();
-           $newToken = $this->tokenizer->generateUUID();
-           if ($findUser) {
-               $findUser->api_token = $newToken;
-               $findUser->save();
-           } else {
-               $newUser = new User;
-               $newUser->name = $user->name;
-               $newUser->email = $user->email;
-               $newUser->password = bcrypt($user->password);
-               $newUser->api_token = $newToken;
-               $newUser->save();
-           }
-           return base64_encode($newToken);
-       }
+    public function authenticatedCallbackHandler(string $driver): string
+    {
+        $user = Socialite::driver($driver)->stateless()->user();
+        $findUser = User::where('email', $user->email)->first();
+        $newToken = $this->tokenizer->generateUUID();
+        if ($findUser) {
+            $findUser->api_token = $newToken;
+            $findUser->save();
+        } else {
+            \App\User::create([
+                'name' => $user->name,
+                'email' => $user->email,
+                'password' => bcrypt($user->password),
+                'api_token' => $newToken,
+            ]);
+        }
+        return base64_encode($newToken);
+    }
 }
