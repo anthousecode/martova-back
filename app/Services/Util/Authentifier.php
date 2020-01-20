@@ -9,7 +9,6 @@
 namespace App\Services\Util;
 
 use Socialite;
-use App\User;
 
 class Authentifier
 {
@@ -28,7 +27,7 @@ class Authentifier
     public function authenticatedCallbackHandler(string $driver): string
     {
         $user = Socialite::driver($driver)->stateless()->user();
-        $findUser = User::where('email', $user->email)->first();
+        $findUser = \App\User::where('email', $user->email)->first();
         $newToken = $this->tokenizer->generateUUID();
         if ($findUser) {
             $findUser->api_token = $newToken;
