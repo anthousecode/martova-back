@@ -65,7 +65,7 @@ class AuthController extends Controller
     {
         $token = base64_decode(Cookie::get('token'));
 
-        $user = User::where('token', $token)->first();
+        $user = User::where('api_token', $token)->first();
         $user->token = null;
         $user->save();
 

@@ -3,19 +3,11 @@
 namespace App\Http\Middleware;
 
 use Closure;
-use App\Services\Util\Tokenizer;
 use Illuminate\Support\Facades\Cookie;
 use App\User;
 
 class CustomApiTokenAuthMiddleware
 {
-//    protected $uuid;
-//
-//    public function __construct(Tokenizer $tokenizer)
-//    {
-//        $this->uuid = $tokenizer->generateUUID();
-//    }
-
     /**
      * Handle an incoming request.
      *
