@@ -5,7 +5,7 @@ namespace App\Http\Controllers\OAuth;
 use App\Http\Controllers\Controller;
 use App\Services\Util\Authentifier;
 
-class GoogleController extends Controller
+class YoutubeController extends Controller
 {
     protected $authentifier;
 
@@ -13,7 +13,7 @@ class GoogleController extends Controller
 
     public function __construct(Authentifier $authentifier)
     {
-        $this->driver = 'google';
+        $this->driver = 'youtube';
         $this->authentifier = $authentifier;
     }
 

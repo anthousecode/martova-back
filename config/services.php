@@ -34,7 +34,16 @@ return [
         //'key' => 'AIzaSyBGXOW5Ko1SLQ2UELr0CEElWgvQ3BwkyQ0',
         'client_id' => '1084938803888-kh942qstrbka2chdpj57612n2pjldphu.apps.googleusercontent.com',
         'secret' => 'OteA_LFxYEd8BT6k7qnwAW2E',
+        'redirect' => 'http://sweews.herokuapp.com/api/oauth/google/callback',
+    ],
+
+    'youtube' => [
+        //'key' => 'AIzaSyBGXOW5Ko1SLQ2UELr0CEElWgvQ3BwkyQ0',
+        'client_id' => '1084938803888-kh942qstrbka2chdpj57612n2pjldphu.apps.googleusercontent.com',
+        'secret' => 'OteA_LFxYEd8BT6k7qnwAW2E',
         'redirect' => 'http://sweews.herokuapp.com/api/oauth/youtube/callback',
     ],
+
+
 
 ];

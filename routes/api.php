@@ -15,19 +15,19 @@ use Illuminate\Routing\Router;
 */
 
 // 3-rd auth parties...
-Route::namespace('OAuth')->prefix('oauth')->group(function(){
-    Route::prefix('google')->group(function() {
+Route::namespace('OAuth')->prefix('oauth')->group(function () {
+    Route::prefix('google')->group(function () {
         Route::get('authenticate', ['uses' => 'GoogleController@authenticate']);
         Route::get('callback', ['uses' => 'GoogleController@callback']);
     });
-    Route::prefix('youtube')->group(function() {
-        Route::get('authenticate', ['uses' => 'GoogleController@authenticate']);
-        Route::get('callback', ['uses' => 'GoogleController@callback']);
+    Route::prefix('youtube')->group(function () {
+        Route::get('authenticate', ['uses' => 'YoutubeController@authenticate']);
+        Route::get('callback', ['uses' => 'YoutubeController@callback']);
     });
-//        Route::prefix('facebook')->group(function() {
-//            Route::get('authenticate', ['uses' => '', 'as' => '']);
-//            Route::get('callback', ['uses' => '', 'as' => '']);
-//        });
+    Route::prefix('facebook')->group(function () {
+        Route::get('authenticate', ['uses' => 'FacebookController@authenticate']);
+        Route::get('callback', ['uses' => 'FacebookController@callback']);
+    });
 //        Route::prefix('instagram')->group(function() {
 //            Route::get('authenticate', ['uses' => '', 'as' => '']);
 //            Route::get('callback', ['uses' => '', 'as' => '']);
@@ -39,7 +39,7 @@ Route::namespace('API')->group(function () {
     Route::post('login', ['uses' => 'AuthController@login', 'as' => 'login']);
     Route::post('register', 'AuthController@register');
 
-    Route::group(['middleware' => ['uuid']], function() {
+    Route::group(['middleware' => ['uuid']], function () {
         Route::get('/search-area/{num}', ['uses' => 'AreaController@searchArea', 'as' => 'search_area']);
         Route::get('/fetch-areas', ['uses' => 'AreaController@fetchAreas', 'as' => 'fetch_areas']);
         Route::get('/filter-by-status/{status}', ['uses' => 'AreaController@filterByStatus', 'as' => 'filter_by_status']);
