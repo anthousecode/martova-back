@@ -51,10 +51,13 @@ use Illuminate\Routing\Router;
             Route::get('/page/{slug}', ['uses' => 'PagesController@getByUniqueSlug']);
 
             Route::get('/news', ['uses' => 'NewsController@fetchNews']);
+            Route::put('/news_like/{news_id}', ['uses' => 'NewsController@setLike']);
+
+           // Route::psot('/add_comment/{news_id}', ['uses' => 'CommentController@']);
+
             Route::get('/infrastructure-items', ['uses' => 'InfrastructureController@fetchInfrastructureItems']);
             Route::get('/gallery-items', ['uses' => 'GalleryController@fetchGalleryItems']);
 
             Route::post('logout', 'AuthController@logout');
-            Route::post('check', 'AuthController@check');
         });
     });

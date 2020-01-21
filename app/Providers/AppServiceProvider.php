@@ -15,7 +15,7 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register()
     {
-       \URL::forceScheme('https');
+       //\URL::forceScheme('https');
         $this->app->register(\L5Swagger\L5SwaggerServiceProvider::class);
 
         if (!Schema::hasColumn('users', 'api_token')) {
@@ -29,6 +29,16 @@ class AppServiceProvider extends ServiceProvider
                 $table->increments('id');
                 $table->integer('user_id');
                 $table->integer('news_id');
+                $table->timestamps();
+            });
+        }
+
+        if (!Schema::hasTable('comments')) {
+            Schema::create('comments', function(Blueprint $table) {
+                $table->increments('id');
+                $table->integer('news_id');
+                $table->integer('user_id');
+                $table->mediumText('text');
                 $table->timestamps();
             });
         }
