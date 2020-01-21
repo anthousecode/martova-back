@@ -217,36 +217,12 @@
                 }
             }
         },
-        "/menu-items": {
-            "get": {
-                "tags": [
-                    "All"
-                ],
-                "summary": "Get all menu items",
-                "operationId": "fetchMenuItems",
-                "responses": {
-                    "200": {
-                        "description": "OK",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "property": "menu_items",
-                                    "description": "All menu items",
-                                    "type": "array",
-                                    "items": {}
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-        },
         "/news": {
             "get": {
                 "tags": [
                     "All"
                 ],
-                "summary": "Get all news items",
+                "summary": "Get all news items with likes",
                 "operationId": "FetchAllNews",
                 "responses": {
                     "200": {
@@ -256,6 +232,37 @@
                                 "schema": {
                                     "property": "news",
                                     "description": "All news",
+                                    "type": "array",
+                                    "items": {}
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/news_like/{news_id}": {
+            "put": {
+                "tags": [
+                    "All"
+                ],
+                "summary": "Authenticated user can set only 1 like for each news",
+                "operationId": "LikeSpecificNews",
+                "parameters": [
+                    {
+                        "name": "news_id",
+                        "in": "path",
+                        "description": "news unique id"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application\\json": {
+                                "schema": {
+                                    "property": "message",
+                                    "description": "response message with http status code provided",
                                     "type": "array",
                                     "items": {}
                                 }

@@ -23,6 +23,16 @@ class AppServiceProvider extends ServiceProvider
                  $table->string('api_token', 36)->nullable();
              });
         }
+
+        if (!Schema::hasTable('news_likes')) {
+            Schema::create('news_likes', function (Blueprint $table) {
+                $table->increments('id');
+                $table->integer('user_id');
+                $table->integer('news_id');
+                $table->timestamps();
+            });
+        }
+
     }
 
     /**
