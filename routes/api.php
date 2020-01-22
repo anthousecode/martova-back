@@ -53,11 +53,15 @@ use Illuminate\Routing\Router;
             Route::get('/news', ['uses' => 'NewsController@fetchNews']);
             Route::put('/news_like/{news_id}', ['uses' => 'NewsController@setLike']);
 
-           // Route::psot('/add_comment/{news_id}', ['uses' => 'CommentController@']);
+            Route::post('/add_comment/{news_id}', ['uses' => 'CommentController@addComment']);
 
             Route::get('/infrastructure-items', ['uses' => 'InfrastructureController@fetchInfrastructureItems']);
             Route::get('/gallery-items', ['uses' => 'GalleryController@fetchGalleryItems']);
 
             Route::post('logout', 'AuthController@logout');
         });
+
+        Route::get('/news_comments/{news_id}', ['uses' => 'CommentController@getComments']);
+
+        Route::delete('/delete_comment/{comment_id}', ['uses' => 'CommentController@deleteComment']);
     });
