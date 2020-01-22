@@ -17,6 +17,10 @@ use OpenApi\Annotations as OA;
  *  name="All",
  *  description="All api endpoints"
  * )
+ * @OA\Tag(
+ *  name="Secured"
+ *  description="API endpoints, secured with token key"
+ * )
  * @OA\Server(
  *  description="Areas Open API server",
  *  url="http://sweews.herokuapp.com/api"

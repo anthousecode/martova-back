@@ -58,7 +58,7 @@ use Illuminate\Routing\Router;
             Route::get('/infrastructure-items', ['uses' => 'InfrastructureController@fetchInfrastructureItems']);
             Route::get('/gallery-items', ['uses' => 'GalleryController@fetchGalleryItems']);
 
-            Route::post('logout', 'AuthController@logout');
+            Route::put('logout', 'AuthController@logout');
         });
 
         Route::get('/news_comments/{news_id}', ['uses' => 'CommentController@getComments']);

@@ -19,6 +19,35 @@ class AuthController extends Controller
         $this->tokenizer = $tokenizer;
     }
 
+    /**
+     * @OA\Post(
+     *     path="/login",
+     *     operationId="signinForUser",
+     *     summary="Basic sign in operation for user",
+     *     tags={"All"},
+     *     @OA\MediaType(
+     *         mediaType="application/json",
+     *         @OA\Parameter(
+     *             name="email",
+     *             in="query",
+     *             description="User email for verification"
+     *         )
+     *     ),
+     *     @OA\Response(
+     *      @OA\MediaType(
+     *          mediaType="application/json",
+     *           @OA\Property(
+     *               property="key",
+     *               type="string",
+     *               description="Access key for performing secured operations and identify its owner",
+     *               @OA\Items(
+     *                   type="string"
+     *               )
+     *           )
+     *      )
+     *     )
+     * )
+     */
     public function login(Request $request)
     {
         $rules = [
@@ -44,6 +73,54 @@ class AuthController extends Controller
         return response()->json(['key' => base64_encode($newToken)], 200);
     }
 
+    /**
+     * @OA\Post(
+     *     path="/register",
+     *     operationId="RegisterUserAction",
+     *     summary="Default registration for user",
+     *     tags={"All"},
+     *     @OA\MediaType(
+     *         mediaType="application/json",
+     *         @OA\Parameter(
+     *             required=true,
+     *             name="name",
+     *             in="query",
+     *             description="Username as a string"
+     *         ),
+     *         @OA\Parameter(
+     *             required="true",
+     *             name="email",
+     *             in="query",
+     *             description="User email"
+     *         ),
+     *         @OA\Parameter(
+     *             required="true",
+     *             name="password",
+     *             in="query",
+     *             description="User password"
+     *         ),
+     *         @OA\Parameter(
+     *             required="true",
+     *             name="c_password",
+     *             in="query",
+     *             description="Repeat user password"
+     *         )
+     *     ),
+     *     @OA\Response(
+     *         @OA\MediaType(
+     *             mediaType="application/json",
+     *             @OA\Property(
+     *                 property="message",
+     *                 type="string",
+     *                 description="Success message",
+     *                 @OA\Items(
+     *                   type="string"
+     *                 )
+     *             )
+     *         )
+     *     )
+     * )
+     */
     public function register(Request $request)
     {
         $validator = Validator::make($request->all(), [
@@ -58,8 +135,9 @@ class AuthController extends Controller
         $input = $request->all();
         $input['password'] = bcrypt($input['password']);
         User::create($input);
-        return response()->json(['message' => 'success'], 200);
+        return response()->json(['message' => 'OK'], 200);
     }
+
 
     public function logout(Request $request)
     {
@@ -70,7 +148,7 @@ class AuthController extends Controller
         ]);
 
         return response()->json([
-            'message' => 'Successfully logged out',
+            'message' => 'OK',
         ], 200);
     }
 
