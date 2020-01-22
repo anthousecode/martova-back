@@ -169,6 +169,101 @@
                 }
             }
         },
+        "/add_comment/{news_id}": {
+            "post": {
+                "tags": [
+                    "All"
+                ],
+                "summary": "Add comment to specific news entity",
+                "operationId": "addCommentToNewsEntity",
+                "parameters": [
+                    {
+                        "name": "news_id",
+                        "in": "path",
+                        "description": "News id, to which comment will be attached"
+                    },
+                    {
+                        "name": "text",
+                        "in": "query",
+                        "description": "Comment contents"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "property": "message",
+                                    "description": "response message with status code provided",
+                                    "type": "array",
+                                    "items": {
+                                        "type": "string"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/news_comments/{news_id}": {
+            "get": {
+                "tags": [
+                    "All"
+                ],
+                "summary": "Get comments for specific news entity by news id",
+                "operationId": "GetCommentsByNews",
+                "parameters": [
+                    {
+                        "name": "news_id",
+                        "in": "path",
+                        "description": "news id, by which comments will be fetched"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "property": "comments",
+                                    "description": "Fetched comments",
+                                    "type": "array",
+                                    "items": {}
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/delete_comment/{comment_id}": {
+            "delete": {
+                "tags": [
+                    "All"
+                ],
+                "summary": "Delete comment entity by its id",
+                "operationId": "DeleteComment",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "property": "message",
+                                    "description": "response message with status code provided",
+                                    "type": "array",
+                                    "items": {
+                                        "type": "string"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
         "/gallery-items": {
             "get": {
                 "tags": [
