@@ -43,6 +43,13 @@ class AppServiceProvider extends ServiceProvider
             });
         }
 
+        if (!Schema::hasColumn('users', 'isAdmin')) {
+            Schema::table('users', function(Blueprint $table) {
+                $table->boolean('isAdmin')->default(false);
+            });
+            \App\User::where('email', 'admin')->update(['isAdmin' => true]);
+        }
+
     }
 
     /**

@@ -6,6 +6,5 @@
 </head>
 <body>
 Foo
-{{ dd(Auth::user()) }}
 </body>
 </html>

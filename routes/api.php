@@ -63,5 +63,5 @@ use Illuminate\Routing\Router;
 
         Route::get('/news_comments/{news_id}', ['uses' => 'CommentController@getComments']);
 
-        Route::delete('/delete_comment/{comment_id}', ['uses' => 'CommentController@deleteComment']);
+        Route::delete('/delete_comment/{comment_id}', ['uses' => 'CommentController@deleteComment'])->middleware('uuid_admin');
     });
