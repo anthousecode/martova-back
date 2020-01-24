@@ -20,27 +20,27 @@ class AuthController extends Controller
     }
 
     /**
-     * @OA\Post(
+     * OA\Post(
      *     path="/login",
      *     operationId="signinForUser",
      *     summary="Basic sign in operation for user",
      *     tags={"All"},
-     *     @OA\MediaType(
+     *     OA\MediaType(
      *         mediaType="application/json",
-     *         @OA\Parameter(
+     *         OA\Parameter(
      *             name="email",
      *             in="query",
      *             description="User email for verification"
      *         )
      *     ),
-     *     @OA\Response(
-     *      @OA\MediaType(
+     *     OA\Response(
+     *      OA\MediaType(
      *          mediaType="application/json",
-     *           @OA\Property(
+     *           OA\Property(
      *               property="key",
      *               type="string",
      *               description="Access key for performing secured operations and identify its owner",
-     *               @OA\Items(
+     *               OA\Items(
      *                   type="string"
      *               )
      *           )
@@ -74,46 +74,46 @@ class AuthController extends Controller
     }
 
     /**
-     * @OA\Post(
+     * OA\Post(
      *     path="/register",
      *     operationId="RegisterUserAction",
      *     summary="Default registration for user",
      *     tags={"All"},
-     *     @OA\MediaType(
+     *     OA\MediaType(
      *         mediaType="application/json",
-     *         @OA\Parameter(
+     *         OA\Parameter(
      *             required=true,
      *             name="name",
      *             in="query",
      *             description="Username as a string"
      *         ),
-     *         @OA\Parameter(
+     *         OA\Parameter(
      *             required="true",
      *             name="email",
      *             in="query",
      *             description="User email"
      *         ),
-     *         @OA\Parameter(
+     *         OA\Parameter(
      *             required="true",
      *             name="password",
      *             in="query",
      *             description="User password"
      *         ),
-     *         @OA\Parameter(
+     *         OA\Parameter(
      *             required="true",
      *             name="c_password",
      *             in="query",
      *             description="Repeat user password"
      *         )
      *     ),
-     *     @OA\Response(
-     *         @OA\MediaType(
+     *     OA\Response(
+     *         OA\MediaType(
      *             mediaType="application/json",
-     *             @OA\Property(
+     *             OA\Property(
      *                 property="message",
      *                 type="string",
      *                 description="Success message",
-     *                 @OA\Items(
+     *                 OA\Items(
      *                   type="string"
      *                 )
      *             )
