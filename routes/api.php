@@ -39,7 +39,7 @@ use Illuminate\Routing\Router;
         Route::post('login', ['uses' => 'AuthController@login', 'as' => 'login']);
         Route::post('register', 'AuthController@register');
 
-        Route::group(['middleware' => ['uuid']], function () {
+       // Route::group(['middleware' => ['uuid']], function () {
             Route::get('/search-area/{num}', ['uses' => 'AreaController@searchArea', 'as' => 'search_area']);
             Route::get('/fetch-areas', ['uses' => 'AreaController@fetchAreas', 'as' => 'fetch_areas']);
             Route::get('/filter-by-status/{status}', ['uses' => 'AreaController@filterByStatus', 'as' => 'filter_by_status']);
@@ -59,7 +59,7 @@ use Illuminate\Routing\Router;
             Route::get('/gallery-items', ['uses' => 'GalleryController@fetchGalleryItems']);
 
             Route::put('logout', 'AuthController@logout');
-        });
+      //  });
 
         Route::get('/news_comments/{news_id}', ['uses' => 'CommentController@getComments']);
 
