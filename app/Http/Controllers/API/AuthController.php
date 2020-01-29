@@ -138,7 +138,35 @@ class AuthController extends Controller
         return response()->json(['message' => 'OK'], 200);
     }
 
-
+    /**
+     * OA\Put(
+     *     path="/logout",
+     *     operationId="signoutForUser",
+     *     summary="Basic sign out operation for user",
+     *     tags={"All"},
+     *     OA\MediaType(
+     *         mediaType="application/json",
+     *         OA\Parameter(
+     *             name="token",
+     *             in="cookie",
+     *             description="User key for verification"
+     *         )
+     *     ),
+     *     OA\Response(
+     *      OA\MediaType(
+     *          mediaType="application/json",
+     *           OA\Property(
+     *               property="message",
+     *               type="array",
+     *               description="Success message",
+     *               OA\Items(
+     *                   type="string"
+     *               )
+     *           )
+     *      )
+     *     )
+     * )
+     */
     public function logout(Request $request)
     {
         $token = base64_decode(Cookie::get('token'));
