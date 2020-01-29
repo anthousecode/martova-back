@@ -169,6 +169,84 @@
                 }
             }
         },
+        "/login": {
+            "post": {
+                "tags": [
+                    "All"
+                ],
+                "summary": "Basic sign in operation for user",
+                "operationId": "signinForUser",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "property": "key",
+                                    "description": "Access key for performing secured operations and identify its owner",
+                                    "type": "string",
+                                    "items": {
+                                        "type": "string"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/register": {
+            "post": {
+                "tags": [
+                    "All"
+                ],
+                "summary": "Default registration for user",
+                "operationId": "RegisterUserAction",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "property": "message",
+                                    "description": "Success message",
+                                    "type": "string",
+                                    "items": {
+                                        "type": "string"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/logout": {
+            "put": {
+                "tags": [
+                    "All"
+                ],
+                "summary": "Basic sign out operation for user",
+                "operationId": "signoutForUser",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "property": "message",
+                                    "description": "Success message",
+                                    "type": "array",
+                                    "items": {
+                                        "type": "string"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
         "/add_comment/{news_id}": {
             "post": {
                 "tags": [
