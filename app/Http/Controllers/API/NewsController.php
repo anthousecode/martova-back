@@ -36,6 +36,7 @@ class NewsController extends Controller
              $item['likes_count'] = NewsLike::where('news_id', $item['id'])->get()->count();
              return $item;
         })->toArray();
+        //$news = News::withCount('newsLikes')->get();
 
         return json_encode(['news' => $news]);
     }
