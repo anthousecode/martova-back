@@ -43,6 +43,10 @@ return [
          'redirect' => 'https://sweews.herokuapp.com/api/oauth/facebook/callback'
     ],
 
-
+    'instagram' => [
+        'client_id' => '142856870067904',
+        'client_secret' => 'b31021d9d2055eb6afbaf8469c9fb252',
+        'redirect' => 'https://sweews.herokuapp.com/api/oauth/instagram/callback',
+    ],
 
 ];
