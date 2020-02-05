@@ -15,7 +15,7 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register()
     {
-       //\URL::forceScheme('https');
+       \URL::forceScheme('https');
         $this->app->register(\L5Swagger\L5SwaggerServiceProvider::class);
 
         if (!Schema::hasColumn('users', 'api_token')) {
