@@ -23,7 +23,8 @@ class Authentifier
 
     public function socialiteRedirect(string $driver)
     {
-        return Socialite::driver($driver)->redirect();
+        $method = ($driver == 'instagram') ? 'with' : 'driver';
+        return Socialite::$method($driver)->redirect();
     }
 
     public function authenticatedCallbackHandler(string $driver): string
