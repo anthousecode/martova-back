@@ -14,7 +14,6 @@ class InstagramController extends Controller
 
     public function __construct(Authentifier $authentifier)
     {
-        $this->driver = 'instagram';
         $this->authentifier = $authentifier;
     }
 

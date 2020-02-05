@@ -16,23 +16,27 @@ use Illuminate\Routing\Router;
 
 // 3-rd auth parties...
 Route::namespace('OAuth')->prefix('oauth')->middleware('web')->group(function () {
-    Route::prefix('google')->group(function () {
-        Route::get('authenticate', ['uses' => 'GoogleController@authenticate']);
-        Route::get('callback', ['uses' => 'GoogleController@callback']);
-    });
-    Route::prefix('youtube')->group(function () {
-        Route::get('authenticate', ['uses' => 'YoutubeController@authenticate']);
-        Route::get('callback', ['uses' => 'YoutubeController@callback']);
-    });
-    Route::prefix('facebook')->group(function () {
-        Route::get('authenticate', ['uses' => 'FacebookController@authenticate']);
-        Route::get('callback', ['uses' => 'FacebookController@callback']);
-    });
-    Route::prefix('instagram')->group(function () {
-        Route::get('authenticate', ['uses' => 'InstagramController@authenticate']);
-        Route::get('callback', ['uses' => 'InstagramController@callback']);
-    });
+//    Route::prefix('google')->group(function () {
+//        Route::get('authenticate', ['uses' => 'GoogleController@authenticate']);
+//        Route::get('callback', ['uses' => 'GoogleController@callback']);
+//    });
+//    Route::prefix('youtube')->group(function () {
+//        Route::get('authenticate', ['uses' => 'YoutubeController@authenticate']);
+//        Route::get('callback', ['uses' => 'YoutubeController@callback']);
+//    });
+//    Route::prefix('facebook')->group(function () {
+//        Route::get('authenticate', ['uses' => 'FacebookController@authenticate']);
+//        Route::get('callback', ['uses' => 'FacebookController@callback']);
+//    });
+//    Route::prefix('instagram')->group(function () {
+//        Route::get('authenticate', ['uses' => 'InstagramController@authenticate']);
+//        Route::get('callback', ['uses' => 'InstagramController@callback']);
+//    });
+    Route::get('{driver}/authenticate', 'SocialiteController@authenticate');
+    Route::get('{driver}/callback', 'SocialiteController@callback');
 });
+
+
 
 Route::namespace('API')->group(function () {
 
