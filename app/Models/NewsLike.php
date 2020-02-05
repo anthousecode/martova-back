@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use App\Models\News;
 
 class NewsLike extends Model
 {
@@ -10,5 +11,8 @@ class NewsLike extends Model
 
     protected $fillable = ['user_id', 'news_id'];
 
-
+    public function newsSpecific()
+    {
+        return $this->belongsTo(News::class);
+    }
 }
