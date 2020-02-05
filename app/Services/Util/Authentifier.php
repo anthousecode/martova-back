@@ -29,7 +29,8 @@ class Authentifier
 
     public function authenticatedCallbackHandler(string $driver): string
     {
-        $user = Socialite::driver($driver)->stateless()->user();
+        $method = ($driver == 'instagram') ? 'with' : 'driver';
+        $user = Socialite::$method($driver)->stateless()->user();
         $findUser = \App\User::where('email', $user->email)->first();
         $newToken = $this->tokenizer->generateUUID();
         if ($findUser) {
