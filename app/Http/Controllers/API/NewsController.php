@@ -32,14 +32,6 @@ class NewsController extends Controller
      */
     public function fetchNews()
     {
-//        $news = News::all()->map(function($item){
-//             $item['likes_count'] = NewsLike::where('news_id', $item['id'])->get()->count();
-//             return $item;
-//        })->toArray();
-        NewsLike::create([
-            'news_id' => 7,
-            'user_id' => 1,
-        ]);
         $news = News::withCount('likes')->get();
 
         return json_encode(['news' => $news]);
