@@ -34,13 +34,13 @@ return [
         //'key' => 'AIzaSyBGXOW5Ko1SLQ2UELr0CEElWgvQ3BwkyQ0',
         'client_id' => '1084938803888-kh942qstrbka2chdpj57612n2pjldphu.apps.googleusercontent.com',
         'client_secret' => 'OteA_LFxYEd8BT6k7qnwAW2E',
-        'redirect' => 'http://sweews.herokuapp.com/api/oauth/google/callback',
+        'redirect' => 'https://sweews.herokuapp.com/api/oauth/google/callback',
     ],
 
     'facebook' => [
          'client_id' => '467278400623639',
          'client_secret' => '2da0c5dd230f7deaf173dabbe6c62f30',
-         'redirect' => 'http://sweews.herokuapp.com/api/oauth/facebook/callback'
+         'redirect' => 'https://sweews.herokuapp.com/api/oauth/facebook/callback'
     ],
 
 
