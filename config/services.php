@@ -38,7 +38,7 @@ return [
     ],
 
     'facebook' => [
-         'client_id' => '46727840062363',
+         'client_id' => '467278400623639',
          'client_secret' => '2da0c5dd230f7deaf173dabbe6c62f30',
          'redirect' => 'http://sweews.herokuapp.com/api/oauth/facebook/callback'
     ],
