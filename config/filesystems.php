@@ -80,10 +80,10 @@ return [
 //            'visibility' => 'public',
 //        ],
          'google' => [
-             'driver' => 'google',
-             'domains' => [
-                 'https'     => 'sweews.herokuapp.com',
-             ],
+            // 'driver' => 'google',
+//             'domains' => [
+//                 'https'     => 'sweews.herokuapp.com',
+//             ],
              'access_key'=> config('services.google.client_id'),  //AccessKey
              'secret_key'=> config('services.google.client_secret'),  //SecretKey
            //  'bucket'    => '',  //Bucket
