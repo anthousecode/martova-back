@@ -55,24 +55,24 @@ class AppServiceProvider extends ServiceProvider
             $client = new Google_Client;
             $client->authenticate('4/wQHKBalufoaM5renZ1j9sj5ygELnJ0yfdIMzD8anajo7JPtyZKhYbHkZpymFB4TxJJxn5mffigRg3Tn8ur01KYY');
 
-              $auth_url = $client->createAuthUrl();
-//            $token = $client->getAccessToken();
-//            $plus = new \Google_Service_Plus($client);
-//            $google_user = $plus->people->get('me');
-//            $id = $google_user['id'];
-//
-//            $email = $google_user['emails'][0]['value'];
-//            $first_name = $google_user['name']['givenName'];
-//            $last_name = $google_user['name']['familyName'];
-//
-//            session([
-//                'user' => [
-//                    'email' => $email,
-//                    'first_name' => $first_name,
-//                    'last_name' => $last_name,
-//                    'token' => $token
-//                ]
-//            ]);
+         //     $auth_url = $client->createAuthUrl();
+            $token = $client->getAccessToken();
+            $plus = new \Google_Service_Plus($client);
+            $google_user = $plus->people->get('me');
+            $id = $google_user['id'];
+
+            $email = $google_user['emails'][0]['value'];
+            $first_name = $google_user['name']['givenName'];
+            $last_name = $google_user['name']['familyName'];
+
+            session([
+                'user' => [
+                    'email' => $email,
+                    'first_name' => $first_name,
+                    'last_name' => $last_name,
+                    'token' => $token
+                ]
+            ]);
 
             $client->setClientId(config('services.google.client_id'));
             $client->setClientSecret(config('services.google.client_secret'));
