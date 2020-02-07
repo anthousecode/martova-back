@@ -159,15 +159,10 @@ return [
         'disk' => 'google',
 
         // Image and file upload path under the disk above.
-//        'directory' => [
-//            'image' => 'images',
-//            'file'  => 'files',
-//        ],
-        'clientId' => config('services.google.client_id'),
-        'clientSecret' => config('services.google.client_secret'),
-        'refreshToken' => config('services.google.refresh_token'),
-        'folderId' => config('services.google.folder_id'),
-        'visibility' => 'public',
+        'directory' => [
+            'image' => 'images',
+            'file'  => 'files',
+        ],
     ],
 
     /*

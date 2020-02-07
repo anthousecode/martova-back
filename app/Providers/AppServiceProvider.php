@@ -57,8 +57,6 @@ class AppServiceProvider extends ServiceProvider
             $client->setClientId(config('services.google.client_id'));
             $client->setClientSecret(config('services.google.client_secret'));
             $client->setRedirectUri(config('services.google.redirect'));
-            $client->setAccessType('offline');
-            $client->setApprovalPrompt('force');
             $client->refreshToken(config('services.google.refresh_token'));
             $client->setScopes(explode(',', "email,profile,https://www.googleapis.com/auth/drive"));
             $client->setApprovalPrompt("force");
