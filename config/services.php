@@ -35,6 +35,8 @@ return [
         'client_id' => '1084938803888-kh942qstrbka2chdpj57612n2pjldphu.apps.googleusercontent.com',
         'client_secret' => 'OteA_LFxYEd8BT6k7qnwAW2E',
         'redirect' => 'https://sweews.herokuapp.com/api/oauth/google/callback',
+        'refresh_token' => '1//04nIMtgdj4dfCCgYIARAAGAQSNwF-L9IrNz7yGjcsVBOivLJ_ib41TOulEScWwup3lKDCv-fw9vdJlLLpu1hIEWPOfVzCcT8zUt4',
+        'folder_id' => '1fBdTt0SVghIUzD3Qcc3nh1uYZjxv4dwd',
     ],
 
     'youtube' => [

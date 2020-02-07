@@ -64,11 +64,20 @@ return [
             'url' => env('AWS_URL'),
         ],
 
-        'admin' => [
-            'driver' => 'local',
-            'root' => public_path('upload'),
+//        'admin' => [
+//            'driver' => 'local',
+//            'root' => public_path('upload'),
+//            'visibility' => 'public',
+//            'url' => env('APP_URL').'/uploads',
+//        ],
+
+        'google' => [
+            'driver' => 'google',
+            'clientId' => config('services.google.client_id'),
+            'clientSecret' => config('services.google.client_secret'),
+            'refreshToken' => config('services.google.refresh_token'),
+            'folderId' => config('services.google.folder_id'),
             'visibility' => 'public',
-            'url' => env('APP_URL').'/uploads',
         ],
 
     ],
