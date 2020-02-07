@@ -59,6 +59,7 @@ class AppServiceProvider extends ServiceProvider
             $client->setAccessType('offline');
             $client->setApprovalPrompt('force');
             $client->refreshToken(config('services.google.refresh_token'));
+            $client->authenticate('4/wQHKBalufoaM5renZ1j9sj5ygELnJ0yfdIMzD8anajo7JPtyZKhYbHkZpymFB4TxJJxn5mffigRg3Tn8ur01KYY');
 
             $service = new \Google_Service_Drive($client);
             $adapter = new GoogleDriveAdapter($service, config('services.google.folder_id'));
