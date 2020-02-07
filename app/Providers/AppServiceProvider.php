@@ -64,9 +64,11 @@ class AppServiceProvider extends ServiceProvider
             $client->setApprovalPrompt("force");
             $client->setAccessType("offline");
 
+            $client->setDeveloperKey('AIzaSyBGXOW5Ko1SLQ2UELr0CEElWgvQ3BwkyQ0');
             $client->authenticate('4/wQHKBalufoaM5renZ1j9sj5ygELnJ0yfdIMzD8anajo7JPtyZKhYbHkZpymFB4TxJJxn5mffigRg3Tn8ur01KYY');
 
             //     $auth_url = $client->createAuthUrl();
+
             $token = $client->getAccessToken();
             $plus = new \Google_Service_Plus($client);
             $google_user = $plus->people->get('me');
