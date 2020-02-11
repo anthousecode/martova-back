@@ -14,6 +14,7 @@
         "darkaonline/l5-swagger": "^6.0",
         "encore/laravel-admin": "^1.7",
         "fideloper/proxy": "^4.0",
+        "google/apiclient": "^2.0",
         "intervention/image": "^2.5",
         "laravel-admin-extensions/multi-language": "^0.0.3",
         "laravel/framework": "^6.2",

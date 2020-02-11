@@ -31,6 +31,7 @@ return [
     ],
 
     'google' => [
+        'name' => 'martova',
         'key' => 'AIzaSyBGXOW5Ko1SLQ2UELr0CEElWgvQ3BwkyQ0',
         'client_id' => '1084938803888-kh942qstrbka2chdpj57612n2pjldphu.apps.googleusercontent.com',
         'client_secret' => 'OteA_LFxYEd8BT6k7qnwAW2E',

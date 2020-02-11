@@ -76,6 +76,25 @@ class GalleryController extends AdminController
 
             \App\Models\Gallery::find($id)
                                 ->update(['image' => 'image/' . $storedImageName]);
+
+            $client = new Google_Client();
+            $client->setApplicationName(config('services.google.name'));
+            $client->addScope(Google_Service_Drive::DRIVE);
+            putenv('GOOGLE_APPLICATION_CREDENTIALS=martova-5f65bbf30170.json')
+            $client->useApplicationDefaultCredentials();
+            $service = new Google_Service_Drive($client);
+
+            // q => filder id, in parent folders
+            $result = $service->files->listFiles([
+                'q' => "'1fBdTt0SVghIUzD3Qcc3nh1uYZjxv4dwd' in parents",
+                'fields' => 'files(id, name)',
+            ]);
+
+            $files = $result->getFiles();
+            foreach ($files as $file) {
+                    dump($file);
+            }
+            dd('...');
         });
 
         return $form;
