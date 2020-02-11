@@ -13,6 +13,7 @@ use Google_Service_Drive;
 use Illuminate\Http\Response;
 use Google_Service_Drive_DriveFile;
 use Illuminate\Http\UploadedFile;
+use Google_Service_Drive_ParentReference;
 
 class GoogleDrive
 {
@@ -64,17 +65,31 @@ class GoogleDrive
 
    public function uploadFile(UploadedFile $file, string $folderID): string
    {
-       $fileMetaData = new Google_Service_Drive_DriveFile([
-           'name' => $file->getClientOriginalName() . '.' . $file->getClientOriginalExtension(),
-           'parents' => [$folderID],
-       ]);
-       $newFile = $this->googleService->files->create($fileMetaData, [
-           'data' => $file->get(),
-           'mimeType' => $file->getMimeType(),
-           'uploadType' => 'media',
+//       $fileMetaData = new Google_Service_Drive_DriveFile([
+//           'name' => $file->getClientOriginalName() . '.' . $file->getClientOriginalExtension(),
+//           'parents' => [$folderID],
+//       ]);
+//       $newFile = $this->googleService->files->create($fileMetaData, [
+//           'data' => $file->get(),
+//           'mimeType' => $file->getMimeType(),
+//           'uploadType' => 'media',
+//       ]);
+       $file = new Google_Service_Drive_DriveFile();
+       $file->setTitle($file->getClientOriginalName() . '.' . $file->getClientOriginalExtension());
+       $file->setDescription(null);
+       $file->setMimeType($file->getMimeType());
+
+       $folder = new Google_Service_Drive_ParentReference();
+       $folder->setId($folderID);
+
+       $file->setParents([$folder]);
+
+       $createdFile = $this->googleService->files->insert($file, [
+          'data' => $file->get(),
+          'mimeType' => $file->getMimeType(),
        ]);
 
-       return $newFile->id;
+       return $createdFile->id;
    }
 
 }
