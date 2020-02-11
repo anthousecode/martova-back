@@ -90,7 +90,6 @@ class GalleryController extends AdminController
 //                                ->update(['image' => 'image/' . $storedImageName]);
 
          $folderID = $this->googleDrive->getFolderId('gallery_images');
-         dd($this->googleDrive->getFilesByFolderId($folderID));
          $id = $this->googleDrive->uploadFile($this->request->file('image'), $folderID);
          $this->googleDrive->downloadFile($id);
          dd('...');
