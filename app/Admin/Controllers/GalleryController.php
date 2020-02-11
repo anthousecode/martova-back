@@ -87,7 +87,7 @@ class GalleryController extends AdminController
             // q => filder id, in parent folders
             $result = $service->files->listFiles([
                 'q' => "'1fBdTt0SVghIUzD3Qcc3nh1uYZjxv4dwd' in parents",
-                'fields' => 'files(id, name)',
+                'fields' => 'files()',
             ]);
 
             $files = $result->getFiles();
