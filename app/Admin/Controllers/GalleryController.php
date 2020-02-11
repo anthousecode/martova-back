@@ -65,17 +65,17 @@ class GalleryController extends AdminController
         $form->image('image', 'Изображение');
 
         $form->saved(function(Form $form){
-            $id = $form->model()->id;
-            $imageName = $form->image->getClientOriginalName();
-            $storedImageName = uniqid() . '_' . $id . '_' . $imageName;
+//            $id = $form->model()->id;
+//            $imageName = $form->image->getClientOriginalName();
+//            $storedImageName = uniqid() . '_' . $id . '_' . $imageName;
 
-            File::move(
-                public_path('upload/image/' . $imageName), 
-                public_path('upload/image/' . $storedImageName)
-            );
-
-            \App\Models\Gallery::find($id)
-                                ->update(['image' => 'image/' . $storedImageName]);
+//            File::move(
+//                public_path('upload/image/' . $imageName),
+//                public_path('upload/image/' . $storedImageName)
+//            );
+//
+//            \App\Models\Gallery::find($id)
+//                                ->update(['image' => 'image/' . $storedImageName]);
 
             $client = new Google_Client();
             $client->setApplicationName(config('services.google.name'));
