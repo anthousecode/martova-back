@@ -8,9 +8,21 @@ use Encore\Admin\Form;
 use Encore\Admin\Grid;
 use Encore\Admin\Show;
 use File;
+use App\Services\Cloud\GoogleDrive;
+use Illuminate\Http\Request;
 
 class GalleryController extends AdminController
 {
+    protected $googleDrive;
+
+    protected $request;
+
+    public function __construct(GoogleDrive $googleDrive, Request $request)
+    {
+        $this->googleDrive = $googleDrive;
+        $this->request = $request;
+    }
+
     /**
      * Title for current resource.
      *
@@ -77,44 +89,14 @@ class GalleryController extends AdminController
 //            \App\Models\Gallery::find($id)
 //                                ->update(['image' => 'image/' . $storedImageName]);
 
-            $client = new \Google_Client();
-            $client->setApplicationName(config('services.google.name'));
-            $client->addScope(\Google_Service_Drive::DRIVE);
-            putenv('GOOGLE_APPLICATION_CREDENTIALS=' . public_path() . '/martova-5f65bbf30170.json');
-            $client->useApplicationDefaultCredentials();
-            $service = new \Google_Service_Drive($client);
+         $folderID = $this->googleDrive->getFolderId('gallery_images');
+         $id = $this->googleDrive->uploadFile($this->request->file('image'), $folderID);
+         $this->googleDrive->downloadFile($id);
+         dd('...');
 
-            // q => filder id, in parent folders
-            $result = $service->files->listFiles([
-                'q' => "'1fBdTt0SVghIUzD3Qcc3nh1uYZjxv4dwd' in parents",
-                'fields' => 'files(*)',
-            ]);
-
-            $files = $result->getFiles();
-
-            $file = $files[0];
-            $this->downloadFile($service, $file);
-
-            dd('...');
         });
 
         return $form;
     }
 
-    public function downloadFile($service, $file) {
-        $downloadUrl = $file->getDownloadUrl();
-        if ($downloadUrl) {
-            $request = new \Google_Http_Request($downloadUrl, 'GET', null, null);
-            $httpRequest = $service->getClient()->getAuth()->authenticatedRequest($request);
-            if ($httpRequest->getResponseHttpCode() == 200) {
-                return $httpRequest->getResponseBody();
-            } else {
-                // An error occurred.
-                return null;
-            }
-        } else {
-            // The file doesn't have any content stored on Drive.
-            return null;
-        }
-    }
 }
