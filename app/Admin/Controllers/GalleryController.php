@@ -80,7 +80,7 @@ class GalleryController extends AdminController
             $client = new \Google_Client();
             $client->setApplicationName(config('services.google.name'));
             $client->addScope(\Google_Service_Drive::DRIVE);
-            putenv('GOOGLE_APPLICATION_CREDENTIALS=martova-5f65bbf30170.json');
+            putenv('GOOGLE_APPLICATION_CREDENTIALS=' . public_path() . '/martova-5f65bbf30170.json');
             $client->useApplicationDefaultCredentials();
             $service = new \Google_Service_Drive($client);
 
