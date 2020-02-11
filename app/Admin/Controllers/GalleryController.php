@@ -104,7 +104,7 @@ class GalleryController extends AdminController
     public function downloadFile($service, $file) {
         $downloadUrl = $file->getDownloadUrl();
         if ($downloadUrl) {
-            $request = new Google_Http_Request($downloadUrl, 'GET', null, null);
+            $request = new \Google_Http_Request($downloadUrl, 'GET', null, null);
             $httpRequest = $service->getClient()->getAuth()->authenticatedRequest($request);
             if ($httpRequest->getResponseHttpCode() == 200) {
                 return $httpRequest->getResponseBody();
