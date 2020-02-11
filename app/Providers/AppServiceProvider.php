@@ -52,8 +52,8 @@ class AppServiceProvider extends ServiceProvider
         }
         if ((!Schema::hasColumn('areas', 'cad_number')) || (!Schema::hasColumn('areas', 'stroke'))) {
             Schema::table('areas', function (Blueprint $table) {
-                $table->string('cad_number');
-                $table->string('stroke');
+                $table->string('cad_number')->nullable();
+                $table->string('stroke')->nullable();
             });
         }
 
