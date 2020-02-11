@@ -50,6 +50,12 @@ class AppServiceProvider extends ServiceProvider
                 $table->boolean('isAdmin')->default(false);
             });
         }
+        if ((!Schema::hasColumn('areas', 'cad_number')) || (!Schema::hasColumn('areas', 'stroke'))) {
+            Schema::table('areas', function (Blueprint $table) {
+                $table->string('cad_number');
+                $table->string('stroke');
+            });
+        }
 
     }
 
