@@ -55,7 +55,7 @@ class GoogleDrive
 
    public function downloadFile(string $fileID)
    {
-       $file = $this->googleService->get($fileID, []);
+       $file = $this->googleService->files->get($fileID, []);
 
        return Response::download($file, 'test', [
            'Content-Type: application/json',
@@ -68,7 +68,7 @@ class GoogleDrive
            'name' => $file->getClientOriginalName() . '.' . $file->getClientOriginalExtension(),
            'parents' => [$folderID],
        ]);
-       $newFile = $this->googleService->create($fileMetaData, [
+       $newFile = $this->googleService->files->create($fileMetaData, [
            'data' => $file->get(),
            'mimeType' => $file->getMimeType(),
            'uploadType' => 'media',
