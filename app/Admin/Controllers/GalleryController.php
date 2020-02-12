@@ -76,12 +76,16 @@ class GalleryController extends AdminController
 
         $form->image('image', 'Изображение');
 
+        $form->ignore('image');
+
         $form->saved(function(Form $form){
 
-         $folderID = $this->googleDrive->getFolderId('gallery_images');
-         $id = $this->googleDrive->uploadFile($this->request->file('image'), $folderID);
-         $this->googleDrive->downloadFile($id);
-         dd('...');
+             $folderID = $this->googleDrive->getFolderId('gallery_images');
+             $id = $this->googleDrive->uploadFile($this->request->file('image'), $folderID);
+
+             Gallery::where('id', $form->model()->id)->update([
+                 'image' => $id,
+             ]);
 
         });
 
