@@ -112,7 +112,7 @@ class AreasController extends AdminController
                 "yellow" => "Желтый",
             ]);
 
-            $form->ignore(['image', 'plan', 'survey']);
+           // $form->ignore(['image', 'plan', 'survey']);
 
             $form->saved(function($form){
                 dd($form);
