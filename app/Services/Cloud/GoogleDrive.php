@@ -70,7 +70,6 @@ class GoogleDrive
         ]);
         $content = $file->get();
 
-        dd($this->googleService, $this->googleService->files);
         $newFILE = $this->googleService->files->create($fileMetadata, [
                 'data' => $content,
                 'mimeType' => $file->getClientMimeType(),
