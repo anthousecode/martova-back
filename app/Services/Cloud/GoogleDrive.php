@@ -64,6 +64,7 @@ class GoogleDrive
 
     public function uploadFile(UploadedFile $file, string $folderID): string
     {
+        dd($file);
         $fileMetadata = new Google_Service_Drive_DriveFile([
             'name' => $file->getClientOriginalName() . '.' . $file->getClientOriginalExtension(),
             'parents' => [$folderID],
