@@ -77,17 +77,6 @@ class GalleryController extends AdminController
         $form->image('image', 'Изображение');
 
         $form->saved(function(Form $form){
-//            $id = $form->model()->id;
-//            $imageName = $form->image->getClientOriginalName();
-//            $storedImageName = uniqid() . '_' . $id . '_' . $imageName;
-//
-//            File::move(
-//                public_path('upload/image/' . $imageName),
-//                public_path('upload/image/' . $storedImageName)
-//            );
-//
-//            \App\Models\Gallery::find($id)
-//                                ->update(['image' => 'image/' . $storedImageName]);
 
          $folderID = $this->googleDrive->getFolderId('gallery_images');
          $id = $this->googleDrive->uploadFile($this->request->file('image'), $folderID);

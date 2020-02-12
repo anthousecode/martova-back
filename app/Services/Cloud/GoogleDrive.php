@@ -8,9 +8,10 @@
 
 namespace App\Services\Cloud;
 
+use Carbon\Factory;
 use Google_Client;
 use Google_Service_Drive;
-use Illuminate\Http\Response;
+use Illuminate\Support\Facades\Response as FacadeResponse;
 use Google_Service_Drive_DriveFile;
 use Illuminate\Http\UploadedFile;
 
@@ -58,7 +59,7 @@ class GoogleDrive
     {
         $file = $this->googleService->files->get($fileID, []);
 
-        return Response::download($file, 'test', [
+        return FacadeResponse::download($file, 'test', [
             'Content-Type: application/json',
         ]);
     }
@@ -66,7 +67,7 @@ class GoogleDrive
     public function uploadFile(UploadedFile $file, string $folderID): string
     {
         $fileMetadata = new Google_Service_Drive_DriveFile([
-            'name' => $file->getClientOriginalName() . '.' . $file->getClientOriginalExtension(),
+            'name' => $file->getClientOriginalName(),
             'parents' => [$folderID],
         ]);
         $content = $file->get();
