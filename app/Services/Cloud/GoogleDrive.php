@@ -64,7 +64,7 @@ class GoogleDrive
         return \Illuminate\Support\Facades\Response::download($path, 'file', []);
     }
 
-    protected function uploadFile(UploadedFile $file, string $folderID): string
+    protected function uploadFile(/*UploadedFile*/ $file, string $folderID): string
     {
         $fileMetadata = new Google_Service_Drive_DriveFile([
             'name' => $file->getClientOriginalName(),
