@@ -78,7 +78,6 @@ class GoogleDrive
                 'fields' => 'id',
             ]
         );
-        dd($newFILE);
         return $newFILE->id;
     }
 }
