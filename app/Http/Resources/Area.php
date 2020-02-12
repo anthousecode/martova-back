@@ -15,18 +15,18 @@ class Area extends JsonResource
     public function toArray($request)
     {
         return [
-            'id' => $request->id,
-            'status' => $request->status,
+            'id' => $this->id,
+            'status' => $this->status,
             'otherInfo' => [
-                'number' => $request->number,
-                'cad_number' => $request->cad_number,
-                'square' => $request->square,
-                'price' => $request->price,
+                'number' => $this->number,
+                'cad_number' => $this->cad_number,
+                'square' => $this->square,
+                'price' => $this->price,
             ],
             'modelView' => [
-                'polygon' => $request->polygon,
-                'fill' => $request->color ?? $request->default_color,
-                'stroke' => $request->stroke,
+                'polygon' => $this->polygon,
+                'fill' => $this->color ?? $this->default_color,
+                'stroke' => $this->stroke,
             ],
         ];
     }
