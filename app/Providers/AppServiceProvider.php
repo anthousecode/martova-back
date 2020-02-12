@@ -56,6 +56,11 @@ class AppServiceProvider extends ServiceProvider
                 $table->string('stroke')->nullable();
             });
         }
+        if (!Schema::hasColumn('areas', 'polygon')) {
+            Schema::table('areas', function(Blueprint $table){
+               $table->text('polygon')->nullable();
+            });
+        }
 
     }
 

@@ -85,6 +85,7 @@ class AreasController extends AdminController
             $form->decimal('square', 'Площадь');
             $form->decimal('price', 'Цена');
             $form->text('cad_number', 'Кадастровый номер');
+            $form->text('polygon', 'Координаты');
             $form->color('stroke', 'Цвет границы');
             $form->image('image', 'Изображение');
             $form->file('plan', 'Кадастровый план (XML/TXT/PDF)')->rules('mimes:xml,txt,pdf');

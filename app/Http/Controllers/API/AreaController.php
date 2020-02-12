@@ -5,6 +5,7 @@ namespace App\Http\Controllers\API;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Area;
+use App\Http\Resources\Area as AreaResource;
 
 class AreaController extends Controller
 {
@@ -36,7 +37,7 @@ class AreaController extends Controller
      */
     public function searchArea($num = null)
     {
-        return json_encode(['areas_ids' => Area::where('number', $num)->get()->pluck('id')->toArray()]);
+        return AreaResource::collection(Area::where('number', $num)->get()->pluck('id'));
     }
 
     /**
@@ -67,7 +68,7 @@ class AreaController extends Controller
      */
     public function filterByStatus($status = null)
     {
-        return json_encode(['areas_ids' => Area::where('status', $status)->get()->pluck('id')->toArray()]);
+        return AreaResource::collection(Area::where('status', $status)->get()->pluck('id'));
     }
 
     /**
@@ -97,7 +98,7 @@ class AreaController extends Controller
      */
     public function show($id = null)
     {
-        return json_encode(['area' => Area::where('id', $id)->get()->toArray()]);
+        return AreaResource::collection(Area::where('id', $id)->get());
     }
 
     /**
@@ -123,7 +124,7 @@ class AreaController extends Controller
      */
     public function fetchAreas()
     {
-        return json_encode(['areas' => Area::all()->toArray()]);
+        return AreaResource::collection(Area::all());
     }
 
     /**
