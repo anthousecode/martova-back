@@ -13,6 +13,7 @@ use Google_Client;
 use Google_Service_Drive;
 use Google_Service_Drive_DriveFile;
 use Illuminate\Http\UploadedFile;
+use Illuminate\Support\Facades\File;
 
 class GoogleDrive
 {
@@ -61,6 +62,7 @@ class GoogleDrive
         // create placeholder file
         // download it
         // delete placeholder
+        //File::put(public_path() . '');
 
         dd($file);
     }
