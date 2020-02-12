@@ -57,7 +57,7 @@ class GoogleDrive
     {
         $file = $this->googleService->files->get($fileID, ['alt' => 'media']);
 
-        dd(get_object_vars($file), get_class_methods($file));
+        dd(get_class_methods($file->getBody()));
     }
 
     public function uploadFile(UploadedFile $file, string $folderID): string
