@@ -9,6 +9,8 @@ class Area extends Model
 {
     protected $table = "areas";
 
+    protected $guarded = ['id'];
+
     public function status()
     {
         return $this->belongsTo(AreaStatus::class);
