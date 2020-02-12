@@ -8,12 +8,10 @@
 
 namespace App\Services\Cloud;
 
-use Carbon\Factory;
 use Google_Client;
 use Google_Service_Drive;
 use Google_Service_Drive_DriveFile;
 use Illuminate\Http\UploadedFile;
-use Illuminate\Support\Facades\File;
 
 class GoogleDrive
 {
@@ -59,12 +57,7 @@ class GoogleDrive
     {
         $file = $this->googleService->files->get($fileID, ['alt' => 'media']);
 
-        // create placeholder file
-        // download it
-        // delete placeholder
-        //File::put(public_path() . '');
-
-        return $file;
+        dd(get_object_vars($file), get_class_methods($file));
     }
 
     public function uploadFile(UploadedFile $file, string $folderID): string
