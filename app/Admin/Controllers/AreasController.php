@@ -115,7 +115,7 @@ class AreasController extends AdminController
            // $form->ignore(['image', 'plan', 'survey']);
 
             $form->saved(function($form){
-                dd($form-image);
+                dd($form->image);
                 $this->googleDrive->storeFileOnAdminSaving('areas_images',
                     $form->image,
                     Area::class,
