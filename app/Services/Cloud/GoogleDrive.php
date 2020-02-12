@@ -33,7 +33,7 @@ class GoogleDrive
     {
         $client = new Google_Client();
         $client->setApplicationName(config('services.google.name'));
-        $client->addScope(\Google_Service_Drive::DRIVE);
+        $client->addScope(\Google_Service_Drive::DRIVE, \Google_Service_Drive::DRIVE_FILE, \Google_Service_Drive::DRIVE_APPDATA);
         $client->setDeveloperKey(config('services.google.key'));
         putenv('GOOGLE_APPLICATION_CREDENTIALS=' . public_path() . '/martova-5f65bbf30170.json');
         $client->useApplicationDefaultCredentials();
