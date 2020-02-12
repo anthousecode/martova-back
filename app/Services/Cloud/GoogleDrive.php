@@ -64,7 +64,7 @@ class GoogleDrive
         // delete placeholder
         //File::put(public_path() . '');
 
-        dd($file);
+        return $file;
     }
 
     public function uploadFile(UploadedFile $file, string $folderID): string
