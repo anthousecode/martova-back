@@ -29,57 +29,53 @@ class GoogleDrive
         'news_images' => '17dhKe5BCxGyJORpE9InTwiiSAm5uumXB',
     ];
 
-   public function __construct()
-   {
-       $client = new Google_Client();
-       $client->setApplicationName(config('services.google.name'));
-       $client->addScope(\Google_Service_Drive::DRIVE);
-       putenv('GOOGLE_APPLICATION_CREDENTIALS=' . public_path() . '/martova-5f65bbf30170.json');
-       $client->useApplicationDefaultCredentials();
-       $this->googleService = new Google_Service_Drive($client);
-   }
+    public function __construct()
+    {
+        $client = new Google_Client();
+        $client->setApplicationName(config('services.google.name'));
+        $client->addScope(\Google_Service_Drive::DRIVE);
+        putenv('GOOGLE_APPLICATION_CREDENTIALS=' . public_path() . '/martova-5f65bbf30170.json');
+        $client->useApplicationDefaultCredentials();
+        $this->googleService = new Google_Service_Drive($client);
+    }
 
-   public function getFolderId(string $name): string
-   {
-       return $this->folders[$name];
-   }
+    public function getFolderId(string $name): string
+    {
+        return $this->folders[$name];
+    }
 
-   public function getFilesByFolderId(string $folderID)
-   {
-       $result = $this->googleService->files->listFiles([
-           'q' => sprintf("'%s' in parents", $folderID),
-           'fields' => 'files(*)',
-       ]);
-       return $result->getFiles();
-   }
+    public function getFilesByFolderId(string $folderID)
+    {
+        $result = $this->googleService->files->listFiles([
+            'q' => sprintf("'%s' in parents", $folderID),
+            'fields' => 'files(*)',
+        ]);
+        return $result->getFiles();
+    }
 
-   public function downloadFile(string $fileID)
-   {
-       $file = $this->googleService->files->get($fileID, []);
+    public function downloadFile(string $fileID)
+    {
+        $file = $this->googleService->files->get($fileID, []);
 
-       return Response::download($file, 'test', [
-           'Content-Type: application/json',
-       ]);
-   }
+        return Response::download($file, 'test', [
+            'Content-Type: application/json',
+        ]);
+    }
 
-   public function uploadFile(UploadedFile $file, string $folderID): string
-   {
-
-       // TODO ...
-
-       $folder = new Google_Service_Drive_DriveFile([
-           'name' => $file->getClientOriginalName() . '.' . $file->getClientOriginalExtension(),
-           'mimeType' => $file->getMimeType(),
-           'parents' => [$folderID],
-       ]);
-
-
-       $createdFile = $this->googleService->files->create($fileDrive, [
-          'data' => $file->get(),
-          'mimeType' => $file->getMimeType(),
-       ]);
-
-       return $createdFile->id;
-   }
-
+    public function uploadFile(UploadedFile $file, string $folderID): string
+    {
+        $fileMetadata = new Google_Service_Drive_DriveFile([
+            'name' => $file->getClientOriginalName() . '.' . $file->getClientOriginalExtension(),
+            'parents' => [$folderID],
+        ]);
+        $content = $file->get();
+        $newFILE = $this->googleService->files->create($fileMetadata, [
+                'data' => $content,
+                'mimeType' => $file->getClientMimeType(),
+                'uploadType' => 'multipart',
+                'fields' => '*',
+            ]
+        );
+        return $newFILE->id;
+    }
 }
