@@ -11,7 +11,6 @@ namespace App\Services\Cloud;
 use Carbon\Factory;
 use Google_Client;
 use Google_Service_Drive;
-use Illuminate\Support\Facades\Response as FacadeResponse;
 use Google_Service_Drive_DriveFile;
 use Illuminate\Http\UploadedFile;
 
@@ -57,11 +56,13 @@ class GoogleDrive
 
     public function downloadFile(string $fileID)
     {
-        $file = $this->googleService->files->get($fileID, []);
+        $file = $this->googleService->files->get($fileID, ['alt' => 'media']);
 
-        return FacadeResponse::download($file, 'test', [
-            'Content-Type: application/json',
-        ]);
+        // create placeholder file
+        // download it
+        // delete placeholder
+
+        dd($file);
     }
 
     public function uploadFile(UploadedFile $file, string $folderID): string
