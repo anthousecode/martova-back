@@ -69,14 +69,15 @@ class GoogleDrive
             'parents' => [$folderID],
         ]);
         $content = $file->get();
-        dd($fileMetadata, $content);
+
         $newFILE = $this->googleService->files->create($fileMetadata, [
                 'data' => $content,
                 'mimeType' => $file->getClientMimeType(),
                 'uploadType' => 'multipart',
-                'fields' => '*',
+                'fields' => 'id',
             ]
         );
+        dd($newFILE);
         return $newFILE->id;
     }
 }
