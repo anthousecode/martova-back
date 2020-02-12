@@ -116,7 +116,7 @@ class AreasController extends AdminController
 
             $form->saved(function($form){
                 $this->googleDrive->storeFileOnAdminSaving('areas_images',
-                    $this->request->file('image'),
+                    $form->image,
                     Area::class,
                     $form->model()->id,
                     'image'
