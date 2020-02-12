@@ -12,6 +12,7 @@ use Google_Client;
 use Google_Service_Drive;
 use Google_Service_Drive_DriveFile;
 use Illuminate\Http\UploadedFile;
+use Illuminate\Support\Facades\File;
 
 class GoogleDrive
 {
@@ -57,7 +58,10 @@ class GoogleDrive
     {
         $file = $this->googleService->files->get($fileID, ['alt' => 'media']);
 
-        dd($file->getBody());
+        $path = public_path() . '/placeholder';
+        File::put($path, $file->getBody()->getContents());
+
+        return \Illuminate\Support\Facades\Response::download($path, 'file', []);
     }
 
     public function uploadFile(UploadedFile $file, string $folderID): string
