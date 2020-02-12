@@ -14,6 +14,17 @@ class Area extends JsonResource
      */
     public function toArray($request)
     {
+        $foo = explode(',', $this->polygon);
+        $bar = [];
+        $fooCount = count($foo);
+        for ($i=0; $i<$fooCount; $i++) {
+            if ($i%2==0) {
+                $bar[] = [
+                    'x' => $foo[$i], 'y' => $foo[$i+1]
+                ];
+            }
+        }
+        $this->polygon = json_encode($bar);
         return [
             'id' => $this->id,
             'status' => $this->status,
