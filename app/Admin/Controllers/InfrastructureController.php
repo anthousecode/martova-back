@@ -8,9 +8,21 @@ use Encore\Admin\Form;
 use Encore\Admin\Grid;
 use Encore\Admin\Show;
 use App\Models\CategoryInfrastructure;
+use Illuminate\Http\Request;
+use App\Services\Cloud\GoogleDrive;
 
 class InfrastructureController extends AdminController
 {
+    protected $googleDrive;
+
+    protected $request;
+
+    public function __construct(GoogleDrive $googleDrive, Request $request)
+    {
+        $this->googleDrive = $googleDrive;
+        $this->request = $request;
+    }
+
     /**
      * Title for current resource.
      *
@@ -95,6 +107,24 @@ class InfrastructureController extends AdminController
             $form->text('ua_name', 'Название');
             $form->ckeditor('ua_description', 'Описание');
         });
+
+        $form->ignore(['image', 'video']);
+
+        $form->saved(function($form){
+            $this->googleDrive->storeFileOnAdminSaving('infrastructure_3d_images',
+                $this->request->file('image'),
+                Infrastructure::class,
+                $form->model()->id,
+                'image'
+            );
+            $this->googleDrive->storeFileOnAdminSaving('infrastructure_videos',
+                $this->request->file('video'),
+                Infrastructure::class,
+                $form->model()->id,
+                'video'
+            );
+        });
+
         return $form;
     }
 }

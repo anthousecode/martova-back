@@ -3,14 +3,27 @@
 namespace App\Admin\Controllers;
 
 use App\Models\News;
+use App\Models\NewsLike;
 use Encore\Admin\Controllers\AdminController;
 use Encore\Admin\Form;
 use Encore\Admin\Grid;
 use Encore\Admin\Show;
 use Carbon\Carbon;
+use Illuminate\Http\Request;
+use App\Services\Cloud\GoogleDrive;
 
 class NewsController extends AdminController
 {
+    protected $googleDrive;
+
+    protected $request;
+
+    public function __construct(GoogleDrive $googleDrive, Request $request)
+    {
+        $this->googleDrive = $googleDrive;
+        $this->request = $request;
+    }
+
     /**
      * Title for current resource.
      *
@@ -83,18 +96,24 @@ class NewsController extends AdminController
             $form->ckeditor('ua_description', 'Описание (укр.)');
         });
 
-//        $form->saved(function(Form $form){
-//            if ($form->isCreating()){
-//                \App\Models\News::find($form->model()->id)->update([
-//                    'created_at'=>Carbon::now()->toDateTimeString(),
-//                    'updated_at' => Carbon::now()->toDateTimeString()
-//                ]);
-//            } else {
-//                \App\Models\News::find($form->model()->id)->update([
-//                    'updated_at' => Carbon::now()->toDateTimeString()
-//                ]);
-//            }
-//        });
+        $form->saved(function(Form $form){
+            if ($form->isCreating()){
+                \App\Models\News::find($form->model()->id)->update([
+                    'created_at'=>Carbon::now()->toDateTimeString(),
+                    'updated_at' => Carbon::now()->toDateTimeString()
+                ]);
+            } else {
+                \App\Models\News::find($form->model()->id)->update([
+                    'updated_at' => Carbon::now()->toDateTimeString()
+                ]);
+            }
+            $this->googleDrive->storeFileOnAdminSaving('news_images',
+                $this->request->file('image'),
+                News::class,
+                $form->model()->id,
+                'image'
+            );
+        });
 
         return $form;
     }

@@ -6,9 +6,17 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Area;
 use App\Http\Resources\Area as AreaResource;
+use App\Services\Cloud\GoogleDrive;
 
 class AreaController extends Controller
 {
+    protected $googleDrive;
+
+    public function __construct(GoogleDrive $googleDrive)
+    {
+        $this->googleDrive = $googleDrive;
+    }
+
     /**
      * @OA\Get(
      *  path="/search-area/{num}",
@@ -151,11 +159,12 @@ class AreaController extends Controller
     public function downloadPlan($id = null)
     {
         $filePath = Area::select('plan')->where('id', $id)->get()->pluck('plan')->toArray()[0];
-        $filePath = public_path() . '/upload/' . $filePath;
-        $headers = [
-           // 'Content-type' => 'application/xml'
-        ];
-        return response()->download($filePath, 'plan', $headers);
+//        $filePath = public_path() . '/upload/' . $filePath;
+//        $headers = [
+//           // 'Content-type' => 'application/xml'
+//        ];
+//        return response()->download($filePath, 'plan', $headers);
+       return $this->googleDrive->downloadFile($filePath);
     }
 
     /**
@@ -181,12 +190,13 @@ class AreaController extends Controller
      */
     public function downloadSurvey($id = null)
     {
-        $filePath = Area::select('survey')->where('id', $id)->get()->pluck('survey')->toArray()[0];
-        $filePath = public_path() . '/upload/' . $filePath;
-        $headers = [
-            'Accept' => 'application/dwg',
-            'Accept' => 'application/pdf',
-        ];
-        return response()->download('/' . $filePath, 'survey', $headers);
+          $filePath = Area::select('survey')->where('id', $id)->get()->pluck('survey')->toArray()[0];
+//        $filePath = public_path() . '/upload/' . $filePath;
+//        $headers = [
+//            'Accept' => 'application/dwg',
+//            'Accept' => 'application/pdf',
+//        ];
+//        return response()->download('/' . $filePath, 'survey', $headers);
+          return $this->googleDrive->downloadFile($filePath);
     }
 }

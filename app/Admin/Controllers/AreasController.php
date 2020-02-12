@@ -8,9 +8,21 @@ use Encore\Admin\Form;
 use Encore\Admin\Grid;
 use Encore\Admin\Show;
 use App\Models\AreaStatus;
+use App\Services\Cloud\GoogleDrive;
+use Illuminate\Http\Request;
 
 class AreasController extends AdminController
 {
+    protected $googleDrive;
+
+    protected $request;
+
+    public function __construct(GoogleDrive $googleDrive, Request $request)
+    {
+        $this->googleDrive = $googleDrive;
+        $this->request = $request;
+    }
+
     /**
      * Title for current resource.
      *
@@ -99,6 +111,30 @@ class AreasController extends AdminController
                 "blue" => "Голубой",
                 "yellow" => "Желтый",
             ]);
+
+            $form->ignore(['image', 'plan', 'survey']);
+
+            $form->saved(function($form){
+                $this->googleDrive->storeFileOnAdminSaving('areas_images',
+                    $this->request->file('image'),
+                    Area::class,
+                    $form->model()->id,
+                    'image'
+                );
+                $this->googleDrive->storeFileOnAdminSaving('areas_cad_plans',
+                    $this->request->file('plan'),
+                    Area::class,
+                    $form->model()->id,
+                    'plan'
+                );
+                $this->googleDrive->storeFileOnAdminSaving('areas_geo_record',
+                    $this->request->file('survey'),
+                    Area::class,
+                    $form->model()->id,
+                    'survey'
+                );
+            });
+
         return $form;
     }
 }

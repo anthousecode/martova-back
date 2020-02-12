@@ -31,6 +31,9 @@ class InfrastructureController extends Controller
      */
     public function fetchInfrastructureItems()
     {
-        return json_encode(['infrastructure_items' => Infrastructure::with('category')->get()->toArray()]);
+        return json_encode(['infrastructure_items' => Infrastructure::with('category')
+            ->get()
+            ->toArray()
+        ]);
     }
 }

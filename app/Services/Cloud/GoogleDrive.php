@@ -45,7 +45,7 @@ class GoogleDrive
         return $this->folders[$name];
     }
 
-    public function getFilesByFolderId(string $folderID)
+    protected function getFilesByFolderId(string $folderID)
     {
         $result = $this->googleService->files->listFiles([
             'q' => sprintf("'%s' in parents", $folderID),
@@ -64,7 +64,7 @@ class GoogleDrive
         return \Illuminate\Support\Facades\Response::download($path, 'file', []);
     }
 
-    public function uploadFile(UploadedFile $file, string $folderID): string
+    protected function uploadFile(UploadedFile $file, string $folderID): string
     {
         $fileMetadata = new Google_Service_Drive_DriveFile([
             'name' => $file->getClientOriginalName(),
@@ -80,5 +80,15 @@ class GoogleDrive
             ]
         );
         return $newFILE->id;
+    }
+
+    public function storeFileOnAdminSaving($folderName, $file, $model, $entityID, $field)
+    {
+        $folderID = $this->getFolderId($folderName);
+        $id = $this->uploadFile($file, $folderID);
+
+        $model::where('id', $entityID)->update([
+            $field => $id,
+        ]);
     }
 }
