@@ -108,8 +108,8 @@ class GoogleDrive
         }
     }
 
-    public function getFileLink(string $fileId): string
+    public function getFileLink(string $fileId)
     {
-        return $this->googleService->files->get($fileId)->webContentLink;
+        return $this->googleService->files->get($fileId);
     }
 }
