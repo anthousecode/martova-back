@@ -132,7 +132,7 @@ class AreaController extends Controller
      */
     public function fetchAreas()
     {
-        return AreaResource::collection(Area::all()->sortBy('id'));
+        return AreaResource::collection(Area::all()->sortByDesc('id'));
     }
 
     /**
