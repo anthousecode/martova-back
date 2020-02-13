@@ -20,7 +20,7 @@ class Area extends JsonResource
         for ($i=0; $i<$fooCount; $i++) {
             if ($i%2==0) {
                 $bar[] = [
-                    'x' => $foo[$i], 'y' => $foo[$i+1]
+                    'x' => $foo[$i], 'y' => (array_key_exists(($i+1), $foo)) ? $foo[$i+1] : 0,
                 ];
             }
         }
