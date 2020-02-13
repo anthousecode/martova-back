@@ -106,4 +106,9 @@ class GoogleDrive
             dd($e->getMessage());
         }
     }
+
+    public function getFileLink(string $fileId): string
+    {
+        return $this->googleService->files->get($fileId)->webContentLink;
+    }
 }

@@ -30,6 +30,7 @@ Route::get('/clear-cache', function(){
 });
 
 Route::get('/fillDataNeeded', function(){
+    dd(1);
     $numbers = [1,
         2,
         3,
