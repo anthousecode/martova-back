@@ -76,11 +76,9 @@ class GalleryController extends AdminController
 
         $form->image('image', 'Изображение');
 
-        $form->ignore('image');
-
         $form->saved(function (Form $form) {
             $this->googleDrive->storeFileOnAdminSaving('gallery_images',
-                $this->request->file('image'),
+                $form->image,
                 Gallery::class,
                 $form->model()->id,
                 'image'

@@ -112,8 +112,6 @@ class AreasController extends AdminController
                 "yellow" => "Желтый",
             ]);
 
-           // $form->ignore(['image', 'plan', 'survey']);
-
             $form->saved(function($form){
                 $this->googleDrive->storeFileOnAdminSaving('areas_images',
                     $form->image,

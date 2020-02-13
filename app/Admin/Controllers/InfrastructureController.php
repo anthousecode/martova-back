@@ -108,17 +108,15 @@ class InfrastructureController extends AdminController
             $form->ckeditor('ua_description', 'Описание');
         });
 
-        $form->ignore(['image', 'video']);
-
         $form->saved(function($form){
             $this->googleDrive->storeFileOnAdminSaving('infrastructure_3d_images',
-                $this->request->file('image'),
+                $form->image,
                 Infrastructure::class,
                 $form->model()->id,
                 'image'
             );
             $this->googleDrive->storeFileOnAdminSaving('infrastructure_videos',
-                $this->request->file('video'),
+                $form->video,
                 Infrastructure::class,
                 $form->model()->id,
                 'video'

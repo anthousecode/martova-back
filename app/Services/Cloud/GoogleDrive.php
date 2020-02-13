@@ -87,12 +87,14 @@ class GoogleDrive
     {
         if (!is_null($file)) {
             if (get_class($file) == UploadedFile::class) {
+                $entity = $model::find($entityID);
+                try {
+                    $this->googleService->files->delete($entity->$field);
+                } catch (\Exception $e) {}
                 $folderID = $this->getFolderId($folderName);
                 $id = $this->uploadFile($file, $folderID);
-
-                $model::where('id', $entityID)->update([
-                    $field => $id,
-                ]);
+                $entity->$field = $id;
+                $entity->save();
             }
         }
         return;

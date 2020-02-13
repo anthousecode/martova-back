@@ -108,7 +108,7 @@ class NewsController extends AdminController
                 ]);
             }
             $this->googleDrive->storeFileOnAdminSaving('news_images',
-                $this->request->file('image'),
+                $form->image,
                 News::class,
                 $form->model()->id,
                 'image'
