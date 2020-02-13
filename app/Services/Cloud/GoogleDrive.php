@@ -104,7 +104,7 @@ class GoogleDrive
         try {
             $this->googleService->files->delete($fileId);
         } catch (\Exception $e) {
-            dd($e->getMessage());
+         //   dd($e->getMessage());
         }
     }
 
