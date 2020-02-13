@@ -54,7 +54,7 @@ class CommentController extends Controller
             return response()->json(['message' => $validator->errors()], 422);
         }
 
-        $clientToken = base64_decode(Cookie::get('token'));
+        $clientToken = Cookie::get('token');
         $userId = User::where('api_token', $clientToken)->first()->id;
 
         Comment::create([

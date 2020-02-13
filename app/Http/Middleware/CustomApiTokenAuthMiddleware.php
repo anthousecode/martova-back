@@ -22,7 +22,7 @@ class CustomApiTokenAuthMiddleware
             return response()->json(['message' => 'Access Denied'], 401);
         }
 
-        $clientToken = base64_decode($clientToken);
+        $clientToken = $clientToken;
 
         $user = User::where('api_token', $clientToken)->first();
         if (!$user) {

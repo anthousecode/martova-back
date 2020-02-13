@@ -72,7 +72,7 @@ class AuthController extends Controller
         $user->api_token = $newToken;
         $user->save();
 
-        return response()->json(['key' => base64_encode($newToken)], 200);
+        return response()->json(['key' => $newToken], 200);
     }
 
     /**
@@ -175,7 +175,7 @@ class AuthController extends Controller
      */
     public function logout(Request $request)
     {
-        $token = base64_decode(Cookie::get('token'));
+        $token = Cookie::get('token');
 
         User::where('api_token', $token)->update([
             'api_token' => null,

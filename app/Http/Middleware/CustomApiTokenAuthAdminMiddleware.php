@@ -22,8 +22,6 @@ class CustomApiTokenAuthAdminMiddleware
             return response()->json(['message' => 'Access Denied'], 401);
         }
 
-        $clientToken = base64_decode($clientToken);
-
         $user = User::where('api_token', $clientToken)->first();
         if (!$user) {
             return response()->json(['message' => 'Unauthorized'], 401);

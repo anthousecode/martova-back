@@ -51,6 +51,6 @@ class Authentifier
             $newUser->api_token = $newToken;
             $newUser->save();
         }
-        return base64_encode($newToken);
+        return $newToken;
     }
 }
