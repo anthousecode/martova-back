@@ -86,13 +86,14 @@ class GoogleDrive
     public function storeFileOnAdminSaving($folderName, $file, $model, $entityID, $field)
     {
         if (!is_null($file)) {
-            if (get_class($file) == UploadedFile::class) {
+            if (UploadedFile::class == get_class($file)) {
                 $entity = $model::find($entityID);
                 $this->deleteById($entity->$field);
                 $folderID = $this->getFolderId($folderName);
                 $id = $this->uploadFile($file, $folderID);
                 $entity->$field = $id;
                 $entity->save();
+                dd($this->getFileLink($id));
             }
         }
         return;
