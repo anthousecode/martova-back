@@ -106,7 +106,7 @@ class AreaController extends Controller
      */
     public function show($id = null)
     {
-        return AreaResource::collection(Area::where('id', $id)->orderBy('id', 'ASC')->get());
+        return AreaResource::collection(Area::find($id));
     }
 
     /**
@@ -132,7 +132,7 @@ class AreaController extends Controller
      */
     public function fetchAreas()
     {
-        return AreaResource::collection(Area::all());
+        return AreaResource::collection(Area::all()->sortBy('id'));
     }
 
     /**
