@@ -32,7 +32,7 @@ class NewsController extends Controller
      */
     public function fetchNews()
     {
-        $news = News::withCount('likes')->get();
+        $news = News::withCount(['likes', 'comments'])->get();
 
         return json_encode(['news' => $news]);
     }

@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 use Carbon\Carbon;
 use App\Models\NewsLike;
+use App\Models\Comment;
 
 class News extends Model
 {
@@ -20,5 +21,10 @@ class News extends Model
     public function likes()
     {
         return $this->hasMany(NewsLike::class, 'news_id', 'id');
+    }
+
+    public function comments()
+    {
+        return $this->hasMany(Comment::class, 'news_id', 'id');
     }
 }
