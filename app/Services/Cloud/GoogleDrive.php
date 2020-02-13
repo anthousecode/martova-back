@@ -64,7 +64,8 @@ class GoogleDrive
         return \Illuminate\Support\Facades\Response::download($path, 'file', []);
     }
 
-    protected function uploadFile(/*UploadedFile*/ $file, string $folderID): string
+    protected function uploadFile(/*UploadedFile*/
+        $file, string $folderID): string
     {
         $fileMetadata = new Google_Service_Drive_DriveFile([
             'name' => $file->getClientOriginalName(),
@@ -84,13 +85,15 @@ class GoogleDrive
 
     public function storeFileOnAdminSaving($folderName, $file, $model, $entityID, $field)
     {
-        if (get_class($file) == UploadedFile::class) {
-            $folderID = $this->getFolderId($folderName);
-            $id = $this->uploadFile($file, $folderID);
+        if (!is_null($file)) {
+            if (get_class($file) == UploadedFile::class) {
+                $folderID = $this->getFolderId($folderName);
+                $id = $this->uploadFile($file, $folderID);
 
-            $model::where('id', $entityID)->update([
-                $field => $id,
-            ]);
+                $model::where('id', $entityID)->update([
+                    $field => $id,
+                ]);
+            }
         }
         return;
     }
