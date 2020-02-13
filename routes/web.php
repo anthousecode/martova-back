@@ -183,7 +183,7 @@ Route::get('/fillDataNeeded', function(){
       $areas = \App\Models\Area::all();
       $areasCount = count($areas);
       for ($i=0; $i<$areasCount; $i++) {
-          $areas[$i]->polygon = $polygons[$i];
+          $areas[$i]->polygon = implode(',', $polygons[$i]);
           $areas[$i]->number = $numbers[$i];
           $areas[$i]->save();
       }
