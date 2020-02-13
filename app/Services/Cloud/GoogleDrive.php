@@ -84,11 +84,14 @@ class GoogleDrive
 
     public function storeFileOnAdminSaving($folderName, $file, $model, $entityID, $field)
     {
-        $folderID = $this->getFolderId($folderName);
-        $id = $this->uploadFile($file, $folderID);
+        if (get_class($file) == UploadedFile::class) {
+            $folderID = $this->getFolderId($folderName);
+            $id = $this->uploadFile($file, $folderID);
 
-        $model::where('id', $entityID)->update([
-            $field => $id,
-        ]);
+            $model::where('id', $entityID)->update([
+                $field => $id,
+            ]);
+        }
+        return;
     }
 }
