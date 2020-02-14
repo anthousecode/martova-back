@@ -26,9 +26,9 @@ Route::namespace('API')->group(function () {
 
     Route::group(['middleware' => ['uuid']], function () {
         Route::post('/add_comment/{news_id}', ['uses' => 'CommentController@addComment']);
-        Route::put('logout', 'AuthController@logout');
+        Route::post('logout', 'AuthController@logout');
         Route::delete('/delete_comment/{comment_id}', ['uses' => 'CommentController@deleteComment'])->middleware('admin');
-        Route::put('/news_like/{news_id}', ['uses' => 'NewsController@setLike']);
+        Route::post('/news_like/{news_id}', ['uses' => 'NewsController@setLike']);
     });
 
     Route::post('login', ['uses' => 'AuthController@login', 'as' => 'login']);
