@@ -29,6 +29,10 @@ Route::get('/clear-cache', function(){
     \Artisan::call('view:clear');
 });
 
+Route::get('get-link', function(){
+    dd(\App\Models\Gallery::all()->toArray());
+});
+
 Route::get('/fillDataNeeded', function(){
     dd(1);
     $numbers = [1,
