@@ -110,7 +110,6 @@ class GoogleDrive
 
     public function getFileLink(string $fileId)
     {
-        dd($this->googleService->files->listFiles());
         return $this->googleService->files->get($fileId);
     }
 }
