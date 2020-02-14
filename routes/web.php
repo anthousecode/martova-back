@@ -30,7 +30,13 @@ Route::get('/clear-cache', function(){
 });
 
 Route::get('get-link', function(){
-    dd(\App\Models\Gallery::all()->toArray());
+    $google = new \App\Services\Cloud\GoogleDrive();
+    $image = \App\Models\Gallery::all()->pluck('image')->toArray();
+    $res = [];
+    foreach ($image as $i) {
+          $res[] = $google->getFileLink($i);
+    }
+    dd($res);
 });
 
 Route::get('/fillDataNeeded', function(){
