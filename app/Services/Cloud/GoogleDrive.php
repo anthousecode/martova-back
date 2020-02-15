@@ -84,7 +84,7 @@ class GoogleDrive
         $newPermission->setType('anyone');
         $newPermission->setRole('reader');
         $this->googleService->permissions->create($newFILE->id, $newPermission);
-        return sprintf("https://docs.google.com/document/d/%s", $newFILE->id);
+        return $newFILE->id;
     }
 
     public function storeFileOnAdminSaving($folderName, $file, $model, $entityID, $field)
