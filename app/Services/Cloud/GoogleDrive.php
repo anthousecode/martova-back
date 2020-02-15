@@ -110,6 +110,6 @@ class GoogleDrive
 
     public function getFileLink(string $fileId)
     {
-        return $this->googleService->files->get($fileId);
+        return $this->googleService->files->get($fileId,array("fields"=>"webViewLink"));
     }
 }
