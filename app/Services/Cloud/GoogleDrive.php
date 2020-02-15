@@ -97,6 +97,7 @@ class GoogleDrive
                 $id = $this->uploadFile($file, $folderID);
                 $entity->$field = $this->getFileLink($id);
                 $entity->save();
+                dd($id);
                 dd($this->getFileLink($id));
             }
         }
