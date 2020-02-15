@@ -39,7 +39,7 @@ class Area extends JsonResource
                 'fill' => $this->color ?? $this->default_color,
                 'stroke' => $this->stroke,
             ],
-//            'image' => ,
+            'image' => sprintf("https://drive.google.com/uc?id=%s&export=download", $this->image),
 //            'plan' => ,
 //            'survey' => ,
         ];
