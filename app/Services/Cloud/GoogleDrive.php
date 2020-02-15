@@ -83,7 +83,7 @@ class GoogleDrive
         $newPermission = new \Google_Service_Drive_Permission();
         $newPermission->setType('anyone');
         $newPermission->setRole('reader');
-        $this->googleService->permissions->insert($newFILE->id, $newPermission);
+        $this->googleService->permissions->create($newFILE->id, $newPermission);
         return sprintf("https://docs.google.com/document/d/%s", $newFILE->id);
     }
 
