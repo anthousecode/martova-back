@@ -23,21 +23,6 @@ Route::get('/360', function(){
     return view('360');
 })->name('360p');
 
-Route::get('/clear-cache', function(){
-    \Artisan::call('cache:clear');
-    \Artisan::call('config:clear');
-    \Artisan::call('view:clear');
-});
-
-Route::get('get-link', function(){
-    $google = new \App\Services\Cloud\GoogleDrive();
-    $image = \App\Models\Gallery::all()->pluck('image')->toArray();
-    $res = [];
-    foreach ($image as $i) {
-          $res[] = $google->getFileLink($i);
-    }
-    dd($res);
-});
 
 Route::get('/fillDataNeeded', function(){
     dd(1);

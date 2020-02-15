@@ -39,6 +39,9 @@ class Area extends JsonResource
                 'fill' => $this->color ?? $this->default_color,
                 'stroke' => $this->stroke,
             ],
+//            'image' => ,
+//            'plan' => ,
+//            'survey' => ,
         ];
     }
 }
