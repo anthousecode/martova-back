@@ -106,7 +106,7 @@ class AreaController extends Controller
      */
     public function show($id = null)
     {
-        return AreaResource::collection(Area::where('id', $id)->first());
+        return new AreaResource(Area::where('id', $id)->first());
     }
 
     /**
