@@ -80,7 +80,11 @@ class GoogleDrive
                 'fields' => 'id',
             ]
         );
-        return $newFILE->id;
+        $newPermission = new \Google_Service_Drive_Permission();
+        $newPermission->setType('anyone');
+        $newPermission->setRole('reader');
+        $this->googleService->permissions->insert($newFILE->id, $newPermission);
+        return sprintf("https://docs.google.com/document/d/%s", $newFILE->id);
     }
 
     public function storeFileOnAdminSaving($folderName, $file, $model, $entityID, $field)
@@ -110,6 +114,6 @@ class GoogleDrive
 
     public function getFileLink(string $fileId)
     {
-        return $this->googleService->files->get($fileId,array("fields"=>"aleternateLink"));
+        return $this->googleService->files->get($fileId,array("fields"=>"webViewLink"));
     }
 }
