@@ -95,9 +95,9 @@ class GoogleDrive
                 $this->deleteById($entity->$field);
                 $folderID = $this->getFolderId($folderName);
                 $id = $this->uploadFile($file, $folderID);
+                dd($id);
                 $entity->$field = $this->getFileLink($id);
                 $entity->save();
-                dd($id);
                 dd($this->getFileLink($id));
             }
         }
@@ -115,6 +115,6 @@ class GoogleDrive
 
     protected function getFileLink(string $fileId)
     {
-        return $this->googleService->files->get($fileId, ["fields"=>/*"webViewLink"*/"webContentLink"]);
+        return $this->googleService->files->get($fileId, ["fields"=>"webViewLink"]);
     }
 }
