@@ -90,7 +90,7 @@ class GalleryController extends AdminController
 
     public function destroy($id)
     {
-        dd(Gallery::find($id)->image);
+        Gallery::where('id', '>', 0)->delete();
     }
 
 }
