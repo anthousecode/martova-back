@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\News;
 use App\Models\NewsLike;
+use App\Http\Resources\News as NewsResource;
 
 class NewsController extends Controller
 {
@@ -32,9 +33,9 @@ class NewsController extends Controller
      */
     public function fetchNews()
     {
-        $news = News::withCount(['likes', 'comments'])->get();
+        $news = News::where('is_published', 1)->withCount(['likes', 'comments'])->get();
 
-        return json_encode(['news' => $news]);
+        return NewsResource::collection($news);
     }
 
     /**

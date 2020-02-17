@@ -4,7 +4,7 @@ namespace App\Http\Resources;
 
 use Illuminate\Http\Resources\Json\JsonResource;
 
-class News extends JsonResource
+class Gallery extends JsonResource
 {
     /**
      * Transform the resource into an array.
@@ -16,14 +16,7 @@ class News extends JsonResource
     {
         return [
             'id' => $this->id,
-            'is_published' => $this->is_published,
-            'ru_name' => $this->ru_name,
-            'ua_name' => $this->ua_name,
-            'ru_description' => $this->ru_description,
-            'ua_description' => $this->ua_description,
             'image' => sprintf("https://drive.google.com/uc?id=%s&export=download", $this->image),
-            'likes_count' => $this->likes_count ?? 0,
-            'comments_count' => $this->comments_count ?? 0,
             'created_at' => $this->created_at,
             'updated_at' => $this->updated_at,
         ];

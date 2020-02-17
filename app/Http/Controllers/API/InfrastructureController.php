@@ -5,6 +5,7 @@ namespace App\Http\Controllers\API;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Infrastructure;
+use App\Http\Resources\Infrastructure as InfrastructureResource;
 
 class InfrastructureController extends Controller
 {
@@ -31,9 +32,6 @@ class InfrastructureController extends Controller
      */
     public function fetchInfrastructureItems()
     {
-        return json_encode(['infrastructure_items' => Infrastructure::with('category')
-            ->get()
-            ->toArray()
-        ]);
+        return InfrastructureResource::collection(Infrastructure::with('category')->get());
     }
 }

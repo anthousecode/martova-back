@@ -5,6 +5,7 @@ namespace App\Http\Controllers\API;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Gallery;
+use App\Http\Resources\Gallery as GalleryResource;
 
 class GalleryController extends Controller
 {
@@ -31,12 +32,12 @@ class GalleryController extends Controller
      */
     public function fetchGalleryItems()
     {
-        $indexURL = \URL::to('/');
-        $items = Gallery::all()->map(function($item) use ($indexURL) {
+        // $indexURL = \URL::to('/');
+        $items = Gallery::all()/*->map(function($item) use ($indexURL) {
                  $item['image'] = $indexURL . '/upload/' . $item['image'];
                  return $item;
-        })->toArray();
+        })->toArray()*/;
 
-        return json_encode(['gallery_items' => $items]);
+        return GalleryResource::collection($items);
     }
 }
