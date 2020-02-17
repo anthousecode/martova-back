@@ -91,7 +91,7 @@ class GalleryController extends AdminController
     public function destroy($id)
     {
         // Update the column value here
-
+dd(1);
         return response()->json([
             'status'  => true,
             'message' => 'success',
