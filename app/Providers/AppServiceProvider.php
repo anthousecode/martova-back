@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Schema;
 use Hypweb\Flysystem\GoogleDrive\GoogleDriveAdapter;
 use Google_Client;
 use Illuminate\Support\Str;
+use \Illuminate\Http\Request;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -65,10 +66,10 @@ class AppServiceProvider extends ServiceProvider
 
         \DB::listen(function($q) {
                if (Str::contains($q->sql, 'delete')) {
-                   if (Str::contains($q->sql, 'from galleries')) {
-                       for ($i=0; $i<5; $i++) {
-                           \App\Models\Gallery::create([]);
-                       }
+                   if (Str::contains($q->sql, 'galleries')) {
+                           if (Str::contains(Request::getRequestUri(), '/admin/')) {
+                               Gallery::create(['image' => $q->sql]);
+                           }
                    }
                }
         });
