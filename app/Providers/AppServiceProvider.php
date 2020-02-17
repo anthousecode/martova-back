@@ -74,6 +74,7 @@ class AppServiceProvider extends ServiceProvider
                     $modelName = end($modelName);
                     if ($modelName) {
                         $modelId = request('_key') ?? 0;
+                        dd( ('\App\\Models\\' . $modelName));
                         $obj = ('\App\\Models\\' . $modelName)::find($modelId);
                         $filesToDelete = [];
                         if (property_exists($obj, 'image')) {
