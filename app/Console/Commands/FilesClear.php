@@ -40,6 +40,7 @@ class FilesClear extends Command
      */
     public function handle()
     {
-         $files = $this->googleDrive->fetchAllFiles();
+         /*$files=*/$this->googleDrive->fetchAllFiles();
+
     }
 }
