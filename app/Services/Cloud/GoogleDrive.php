@@ -112,7 +112,7 @@ class GoogleDrive
         foreach ($this->folders as $folderName => $folderId) {
             $files[] = $this->googleService->files->listFiles([
                 'q' => "'" . $folderId . "' in parents",
-                'fields' => 'files(webViewLink)'
+                'fields' => 'files(webViewLink)',
             ]);
         }
         dd(count($files), $files[0]);

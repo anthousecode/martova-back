@@ -30,7 +30,7 @@ class FilesClear extends Command
     public function __construct(GoogleDrive $googleDrive)
     {
         parent::__construct();
-        $this->googleDrive = $googleDrive
+        $this->googleDrive = $googleDrive;
     }
 
     /**
