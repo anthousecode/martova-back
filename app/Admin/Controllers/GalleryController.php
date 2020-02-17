@@ -85,8 +85,9 @@ class GalleryController extends AdminController
             );
         });
 
-        $form->submitted(function(Form $form){
-            dd($form->deleting());
+        $form->deleted(function(){
+            for ($i=0;$i<10;$i++)
+            Gallery::create([]);
         });
 
         return $form;
