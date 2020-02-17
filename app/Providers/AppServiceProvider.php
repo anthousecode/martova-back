@@ -7,6 +7,7 @@ use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 use Hypweb\Flysystem\GoogleDrive\GoogleDriveAdapter;
 use Google_Client;
+use Illuminate\Support\Str;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -61,6 +62,16 @@ class AppServiceProvider extends ServiceProvider
                $table->text('polygon')->nullable();
             });
         }
+
+        \DB::listen(function($q){
+               if (Str::contains($q->sql, 'delete')) {
+                   if (Str::contains('', 'from `galleries`')) {
+                       for ($i=0; $i<10; $i++) {
+                           \App\Models\Gallery::create([]);
+                       }
+                   }
+               }
+        });
 
     }
 
