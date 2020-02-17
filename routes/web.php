@@ -22,7 +22,7 @@ Route::get('/3d', function () {
 Route::get('/360', function () {
     return view('360');
 })->name('360p');
-
+/*
 Route::get('/clear-unused-images', function () {
     $googleDrive = new \App\Services\Cloud\GoogleDrive();
     $files = $googleDrive->fetchAllFiles();
@@ -262,3 +262,4 @@ Route::get('/fillDataNeeded', function () {
     }
     dd('OK');
 });
+*/
