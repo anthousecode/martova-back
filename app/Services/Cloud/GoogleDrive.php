@@ -113,7 +113,7 @@ class GoogleDrive
         foreach ($this->folders as $folderName => $folderId) {
             $foldersIds[] = $folderId;
         }
-        dd($foldersIds);
+        return $foldersIds;
         foreach ($foldersIds as $folderId) {
             $files[] = $this->googleService->files->listFiles([
                 'q' => "'" . $folderId . "' in parents",
