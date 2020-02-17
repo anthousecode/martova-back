@@ -90,6 +90,7 @@ class GalleryController extends AdminController
 
     public function destroy($id)
     {
+        dd(1);
         $imageId = Gallery::find($id)->image;
         $this->googleDrive->deleteById($imageId);
     }
