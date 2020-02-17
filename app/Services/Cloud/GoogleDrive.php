@@ -130,4 +130,14 @@ class GoogleDrive
         }
         return $urls;
     }
+
+    public function deleteFileById($fileId)
+    {
+        try {
+            $this->googleService->files->delete($fileId);
+        } catch (Exception $e) {
+            return $e->getMessage();
+        }
+        return true;
+    }
 }

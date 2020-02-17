@@ -63,10 +63,6 @@ class AppServiceProvider extends ServiceProvider
                 $table->text('polygon')->nullable();
             });
         }
-
-        $googleDrive = new \App\Services\Cloud\GoogleDrive();
-        $files = $googleDrive->fetchAllFiles();
-        dd($files);
     }
 
     /**
