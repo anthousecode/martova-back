@@ -113,13 +113,12 @@ class GoogleDrive
         foreach ($this->folders as $folderName => $folderId) {
             $foldersIds[] = $folderId;
         }
-        return $foldersIds;
         foreach ($foldersIds as $folderId) {
             $files[] = $this->googleService->files->listFiles([
                 'q' => "'" . $folderId . "' in parents",
                 'fields' => 'files(webViewLink)',
             ]);
         }
-        dd(count($files), $files[0]);
+        return [count($files), $files[0]];
     }
 }
