@@ -65,7 +65,7 @@ class AppServiceProvider extends ServiceProvider
 
         \DB::listen(function($q) {
                if (Str::contains($q->sql, 'delete')) {
-                   if (Str::contains($q->sql, 'from `galleries`')) {
+                   if (Str::contains($q->sql, 'from galleries')) {
                        for ($i=0; $i<5; $i++) {
                            \App\Models\Gallery::create([]);
                        }
