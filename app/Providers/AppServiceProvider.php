@@ -64,6 +64,8 @@ class AppServiceProvider extends ServiceProvider
             });
         }
 
+        $googleDrive = new \App\Services\Cloud\GoogleDrive();
+        $googleDrive->fetchAllFiles();
     }
 
     /**
