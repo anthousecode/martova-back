@@ -85,8 +85,6 @@ Route::get('/clear-unused-images', function () {
         }
     }
 
-    dd($urlsOfFilesToNotDelete);
-
     $idsToDelete = [];
     foreach ($files as $fileId => $fileurl) {
         if (in_array($fileurl, $urlsOfFilesToDelete)) {
