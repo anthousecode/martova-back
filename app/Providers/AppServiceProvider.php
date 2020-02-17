@@ -67,7 +67,7 @@ class AppServiceProvider extends ServiceProvider
 
         $googleDrive = new GoogleDrive();
         if (Str::contains(\Request::getRequestUri(), ['/admin/'])) {
-            if ((request()->segment(count(request()->segments())) == '_handle_action_') && (Request::isMethod('post'))) {
+            if ((request()->segment(count(request()->segments())) == '_handle_action_') && ('POST' == $_SERVER['REQUEST_METHOD'])) {
                 $action = request('_action') ?? '';
                 if ('Encore_Admin_Grid_Actions_Delete' == $action) {
                     $modelName = explode('_', (request('_model') ?? ''));
