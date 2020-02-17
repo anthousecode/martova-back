@@ -88,11 +88,11 @@ class GalleryController extends AdminController
         return $form;
     }
 
-    public function destroy($id)
-    {
-        dd(1);
-        $imageId = Gallery::find($id)->image;
-        $this->googleDrive->deleteById($imageId);
-    }
+//    public function destroy($id)
+//    {
+//        dd(1);
+//        $imageId = Gallery::find($id)->image;
+//        $this->googleDrive->deleteById($imageId);
+//    }
 
 }
