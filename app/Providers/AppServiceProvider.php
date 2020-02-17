@@ -75,7 +75,7 @@ class AppServiceProvider extends ServiceProvider
             });
         }
 
-        $googleDrive = new GoogleDrive();
+        /*$googleDrive = new GoogleDrive();
         if (Str::contains(\Request::getRequestUri(), ['/admin/'])) {
             if ((request()->segment(count(request()->segments())) == '_handle_action_') && ('POST' == $_SERVER['REQUEST_METHOD'])) {
                 $action = request('_action') ?? '';
@@ -105,7 +105,7 @@ class AppServiceProvider extends ServiceProvider
                     }
                 }
             }
-        }
+        }*/
     }
 
     /**
