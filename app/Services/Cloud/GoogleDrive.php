@@ -119,10 +119,14 @@ class GoogleDrive
                 'fields' => 'files(id,webViewLink)',
             ]);
         }
-return $files;
+
         $urls = [];
-        foreach ($files as $file->files) {
-            $urls[$file->id] = $file->webViewLink;
+        foreach ($files as $file) {
+            if (count($file->files) > 0) {
+                foreach ($file->files as $f) {
+                    $urls[$f->id] = $f->webViewLink;
+                }
+            }
         }
         return $urls;
     }
