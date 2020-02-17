@@ -85,13 +85,11 @@ class GalleryController extends AdminController
             );
         });
 
+        $form->deleting(function(Form $form){
+            dd(1);
+        });
+
         return $form;
     }
-
-    public function destroy($id)
-    {
-        Gallery::where('id', '>', 0)->delete();
-    }
-
 
 }
