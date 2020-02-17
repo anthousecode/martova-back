@@ -93,4 +93,5 @@ class GalleryController extends AdminController
         Gallery::where('id', '>', 0)->delete();
     }
 
+
 }

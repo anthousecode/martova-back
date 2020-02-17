@@ -19,13 +19,13 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register()
     {
-       \URL::forceScheme('https');
+        \URL::forceScheme('https');
         $this->app->register(\L5Swagger\L5SwaggerServiceProvider::class);
 
         if (!Schema::hasColumn('users', 'api_token')) {
-             Schema::table('users', function(Blueprint $table){
-                 $table->string('api_token', 36)->nullable();
-             });
+            Schema::table('users', function (Blueprint $table) {
+                $table->string('api_token', 36)->nullable();
+            });
         }
 
         if (!Schema::hasTable('news_likes')) {
@@ -38,7 +38,7 @@ class AppServiceProvider extends ServiceProvider
         }
 
         if (!Schema::hasTable('comments')) {
-            Schema::create('comments', function(Blueprint $table) {
+            Schema::create('comments', function (Blueprint $table) {
                 $table->increments('id');
                 $table->integer('news_id');
                 $table->integer('user_id');
@@ -48,7 +48,7 @@ class AppServiceProvider extends ServiceProvider
         }
 
         if (!Schema::hasColumn('users', 'isAdmin')) {
-            Schema::table('users', function(Blueprint $table) {
+            Schema::table('users', function (Blueprint $table) {
                 $table->boolean('isAdmin')->default(false);
             });
         }
@@ -59,20 +59,10 @@ class AppServiceProvider extends ServiceProvider
             });
         }
         if (!Schema::hasColumn('areas', 'polygon')) {
-            Schema::table('areas', function(Blueprint $table){
-               $table->text('polygon')->nullable();
+            Schema::table('areas', function (Blueprint $table) {
+                $table->text('polygon')->nullable();
             });
         }
-
-        \DB::listen(function($q) {
-               if (Str::contains($q->sql, 'delete')) {
-                   if (Str::contains($q->sql, 'galleries')) {
-                           if (Str::contains(Request::getRequestUri(), '/admin/')) {
-                               Gallery::create(['image' => $q->sql]);
-                           }
-                   }
-               }
-        });
 
     }
 

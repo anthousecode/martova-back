@@ -92,7 +92,6 @@ class GoogleDrive
         if (!is_null($file)) {
             if (UploadedFile::class == get_class($file)) {
                 $entity = $model::find($entityID);
-                $this->deleteById($entity->$field);
                 $folderID = $this->getFolderId($folderName);
                 $id = $this->uploadFile($file, $folderID);
                 $entity->$field = $id;
@@ -102,15 +101,20 @@ class GoogleDrive
         return;
     }
 
-    public function deleteById($fileId)
-    {
-        try {
-            $this->googleService->files->delete($fileId);
-        } catch (\Exception $e) {}
-    }
-
     protected function getFileLink(string $fileId)
     {
-        return $this->googleService->files->get($fileId, ["fields"=>"webViewLink"]);
+        return $this->googleService->files->get($fileId, ["fields" => "webViewLink"]);
+    }
+
+    public function fetchAllFiles()
+    {
+        $files = [];
+        foreach ($this->folders as $folderName => $folderId) {
+            $files[] = $this->googleService->files->listFiles([
+                'q' => "'" . $folderId . "' in parents",
+                'fields' => 'files(webViewLink)'
+            ]);
+        }
+        dd(count($files), $files[0]);
     }
 }
