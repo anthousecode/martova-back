@@ -44,7 +44,8 @@ class GalleryObserver
      */
     public function deleted(Gallery $gallery)
     {
-        dd(1);
+        for ($i=0; $i<5; $i++)
+        Gallery::create([]);
     }
 
     /**
