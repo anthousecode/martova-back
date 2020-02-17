@@ -7,6 +7,7 @@ use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 use Hypweb\Flysystem\GoogleDrive\GoogleDriveAdapter;
 use Google_Client;
+use App\Services\Cloud\GoogleDrive;
 use Illuminate\Support\Str;
 use \Illuminate\Http\Request;
 
@@ -62,6 +63,37 @@ class AppServiceProvider extends ServiceProvider
             Schema::table('areas', function (Blueprint $table) {
                 $table->text('polygon')->nullable();
             });
+        }
+
+        $googleDrive = new GoogleDrive();
+        if (Str::contains(\Request::getRequestUri(), ['/admin/'])) {
+            if ((request()->segment(count(request()->segments())) == '_handle_action_') && (Request::isMethod('post'))) {
+                $action = request('_action') ?? '';
+                if ('Encore_Admin_Grid_Actions_Delete' == $action) {
+                    $modelName = explode('_', (request('_model') ?? ''));
+                    $modelName = end($modelName);
+                    if ($modelName) {
+                        $modelId = request('_key') ?? 0;
+                        $obj = (\App\Models\$modelName)::find($modelId);
+                        $filesToDelete = [];
+                        if (property_exists($obj, 'image')) {
+                            $filesToDelete[] = $obj->image;
+                        }
+                        if (property_exists($obj, 'plan')) {
+                            $filesToDelete[] = $obj->plan;
+                        }
+                        if (property_exists($obj, 'survey')) {
+                            $filesToDelete[] = $obj->survey;
+                        }
+                        if (property_exists($obj, 'video')) {
+                            $filesToDelete[] = $obj->video;
+                        }
+                        foreach ($filesToDelete as $file) {
+                            $googleDrive->deleteFileById($file);
+                        }
+                    }
+                }
+            }
         }
     }
 
