@@ -7,7 +7,6 @@ use App\Services\Cloud\GoogleDrive;
 
 class FilesClear extends Command
 {
-    protected $googleDrive;
     /**
      * The name and signature of the console command.
      *
@@ -27,10 +26,9 @@ class FilesClear extends Command
      *
      * @param GoogleDrive $googleDrive
      */
-    public function __construct(GoogleDrive $googleDrive)
+    public function __construct()
     {
         parent::__construct();
-        $this->googleDrive = $googleDrive;
     }
 
     /**
@@ -40,7 +38,8 @@ class FilesClear extends Command
      */
     public function handle()
     {
-         /*$files=*/$this->googleDrive->fetchAllFiles();
+        $googleDrive = new GoogleDrive();
+         /*$files=*/$googleDrive->fetchAllFiles();
 
     }
 }
