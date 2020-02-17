@@ -10,6 +10,16 @@ use Google_Client;
 use App\Services\Cloud\GoogleDrive;
 use Illuminate\Support\Str;
 use \Illuminate\Http\Request;
+use App\Models\Area;
+use App\Models\AreaStatus;
+use App\Models\Gallery;
+use App\Models\CategoryInfrastructure;
+use App\Models\Comment;
+use App\Models\Infrastructure;
+use App\Models\Menu;
+use App\Models\News;
+use App\Models\NewsLike;
+use App\Models\Page;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -74,7 +84,7 @@ class AppServiceProvider extends ServiceProvider
                     $modelName = end($modelName);
                     if ($modelName) {
                         $modelId = request('_key') ?? 0;
-                        $obj = call_user_func(['\App\\Models\\' . $modelName, 'find'], $modelId);
+                        $obj = $modelName::find($modelId);
                         $filesToDelete = [];
                         if (property_exists($obj, 'image')) {
                             $filesToDelete[] = $obj->image;
