@@ -65,7 +65,7 @@ class AppServiceProvider extends ServiceProvider
         }
 
         $googleDrive = new \App\Services\Cloud\GoogleDrive();
-        dd($googleDrive->fetchAllFiles());
+        dd($googleDrive->fetchAllFiles() ?? 2);
     }
 
     /**
