@@ -109,7 +109,12 @@ class GoogleDrive
     public function fetchAllFiles()
     {
         $files = [];
-        foreach ($this->folders[0] as $folderName => $folderId) {
+        $foldersIds = [];
+        foreach ($this->folders as $folderName => $folderId) {
+            $foldersIds[] = $folderId;
+        }
+        dd($foldersIds);
+        foreach ($foldersIds as $folderId) {
             $files[] = $this->googleService->files->listFiles([
                 'q' => "'" . $folderId . "' in parents",
                 'fields' => 'files(webViewLink)',
