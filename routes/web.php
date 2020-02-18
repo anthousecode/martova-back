@@ -33,6 +33,8 @@ Route::get('get-drive-file/{link}', function($link) {
     curl_close($ch);
     // $info = curl_getinfo($ch);
 
+    return $res;
+
 });
 
 /*
