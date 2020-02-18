@@ -25,6 +25,7 @@ Route::get('/360', function () {
 
 Route::get('get-drive-file', function(\Illuminate\Http\Request $request) {
     $link = $request->link;
+    dd($link);
     $ch = curl_init();
     curl_setopt($ch, CURLOPT_URL, $link);
     curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
