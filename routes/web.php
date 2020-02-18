@@ -22,6 +22,19 @@ Route::get('/3d', function () {
 Route::get('/360', function () {
     return view('360');
 })->name('360p');
+
+Route::get('get-drive-file/{link}', function($link) {
+    $ch = curl_init();
+    curl_setopt($ch, CURLOPT_URL, $link);
+    curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+
+    $res = curl_exec($ch);
+
+    curl_close($ch);
+    // $info = curl_getinfo($ch);
+
+});
+
 /*
 Route::get('/clear-unused-images', function () {
     $googleDrive = new \App\Services\Cloud\GoogleDrive();
