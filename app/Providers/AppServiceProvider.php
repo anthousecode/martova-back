@@ -75,7 +75,7 @@ class AppServiceProvider extends ServiceProvider
             });
         }
 
-      // \App\Models\Gallery::observe()
+       \App\Models\Gallery::observe(\App\Observers\GalleryObserver::class);
 
         /*$googleDrive = new GoogleDrive();
         if (Str::contains(\Request::getRequestUri(), ['/admin/'])) {
