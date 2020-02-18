@@ -2,7 +2,7 @@
 
 namespace App\Observers;
 
-use App\Gallery;
+use App\Models\Gallery;
 
 class GalleryObserver
 {
