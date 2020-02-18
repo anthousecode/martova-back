@@ -36,7 +36,8 @@ class GalleryObserver
      */
     public function deleted(Gallery $gallery)
     {
-
+        $googleDrive = new \App\Services\Cloud\GoogleDrive;
+        $gallery->deleteFileById($gallery);
     }
 
     /**
