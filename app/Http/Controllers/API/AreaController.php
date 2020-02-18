@@ -227,7 +227,7 @@ class AreaController extends Controller
             return response()->json(['message' => 'Area not found'], 404);
         }
 
-        $filesIds = AreaImage::where('number', $area->number)
+        $filesIds = AreaImage::where('area_number', $area->number)
             ->get()
             ->pluck('image_id')
             ->toArray();
