@@ -112,6 +112,18 @@ class AreasController extends AdminController
                 "yellow" => "Желтый",
             ]);
 
+            $form->editing(function (Form $form) {
+                if ($form->image) {
+                    $this->googleDrive->deleteFileById($form->model()->image);
+                }
+                if ($form->plan) {
+                    $this->googleDrive->deleteFileById($form->model()->plan);
+                }
+                if ($form->survey) {
+                    $this->googleDrive->deleteFileById($form->model()->survey);
+                }
+            });
+
             $form->saved(function($form){
                 $this->googleDrive->storeFileOnAdminSaving('areas_images',
                     $form->image,

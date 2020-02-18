@@ -96,6 +96,10 @@ class NewsController extends AdminController
             $form->ckeditor('ua_description', 'Описание (укр.)');
         });
 
+        $form->editing(function (Form $form) {
+            $this->googleDrive->deleteFileById($form->model()->image);
+        });
+
         $form->saved(function(Form $form){
             if ($form->isCreating()){
                 \App\Models\News::find($form->model()->id)->update([

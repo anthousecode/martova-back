@@ -108,6 +108,15 @@ class InfrastructureController extends AdminController
             $form->ckeditor('ua_description', 'Описание');
         });
 
+        $form->editing(function (Form $form) {
+            if ($form->image) {
+                $this->googleDrive->deleteFileById($form->model()->image);
+            }
+            if ($form->video) {
+                $this->googleDrive->deleteFileById($form->model()->video);
+            }
+        });
+
         $form->saved(function($form){
             $this->googleDrive->storeFileOnAdminSaving('infrastructure_3d_images',
                 $form->image,

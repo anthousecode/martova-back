@@ -116,5 +116,8 @@ class AppServiceProvider extends ServiceProvider
     public function boot()
     {
         \App\Models\Gallery::observe(\App\Observers\GalleryObserver::class);
+        \App\Models\Area::observe(\App\Observers\AreaObserver::class);
+        \App\Models\Infrastructure::observe(\App\Observers\InfrastructureObserver::class);
+        \App\Models\News::observe(\App\Observers\NewsObserver::class);
     }
 }
