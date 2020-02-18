@@ -23,9 +23,8 @@ Route::get('/360', function () {
     return view('360');
 })->name('360p');
 
-Route::get('get-drive-file/{link}', function($link) {
-    $link = preg_replace('/[]/', '', $link);
-    dd($link);
+Route::get('get-drive-file', function(\Illuminate\Http\Request $request) {
+    $link = $request->link;
     $ch = curl_init();
     curl_setopt($ch, CURLOPT_URL, $link);
     curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
