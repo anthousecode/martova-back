@@ -40,11 +40,17 @@ Route::namespace('API')->group(function () {
     Route::get('/show-specific/{id}', ['uses' => 'AreaController@show', 'as' => 'show_specific']);
     Route::get('/download-plan/{id}', ['uses' => 'AreaController@downloadPlan', 'as' => 'download_plan']);
     Route::get('/download-survey/{id}', ['uses' => 'AreaController@downloadSurvey', 'as' => 'download_survey']);
+    Route::get('/get-area-images/{area_id}', ['uses' => 'AreaController@fetchAreaImages']);
+
     Route::get('/pages', ['uses' => 'PagesController@fetchPages']);
     Route::get('/page/{slug}', ['uses' => 'PagesController@getByUniqueSlug']);
+
     Route::get('/news', ['uses' => 'NewsController@fetchNews']);
+
     Route::get('/infrastructure-items', ['uses' => 'InfrastructureController@fetchInfrastructureItems']);
+
     Route::get('/gallery-items', ['uses' => 'GalleryController@fetchGalleryItems']);
+
     Route::get('/news_comments/{news_id}', ['uses' => 'CommentController@getComments']);
 
 });

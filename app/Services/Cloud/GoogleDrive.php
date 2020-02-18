@@ -27,6 +27,7 @@ class GoogleDrive
         'infrastructure_videos' => '1CItSnHth9MIZmhc-sqVfXqtH6SQAMEJC',
         'gallery_images' => '1JH3k3LFWUbrAz-cOydqETMjof7rcFwD2',
         'news_images' => '17dhKe5BCxGyJORpE9InTwiiSAm5uumXB',
+        'areas_3d_images' => '1Nahv3H6tyzeOHZGMXMFOvu1jtiGZrySj',
     ];
 
     public function __construct()
@@ -101,7 +102,7 @@ class GoogleDrive
         return;
     }
 
-    protected function getFileLink(string $fileId)
+    public function getFileLink(string $fileId)
     {
         return $this->googleService->files->get($fileId, ["fields" => "webViewLink"]);
     }

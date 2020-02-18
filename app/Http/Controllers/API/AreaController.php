@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Models\Area;
 use App\Http\Resources\Area as AreaResource;
 use App\Services\Cloud\GoogleDrive;
+use App\Models\AreaImage;
 
 class AreaController extends Controller
 {
@@ -159,12 +160,8 @@ class AreaController extends Controller
     public function downloadPlan($id = null)
     {
         $filePath = Area::select('plan')->where('id', $id)->get()->pluck('plan')->toArray()[0];
-//        $filePath = public_path() . '/upload/' . $filePath;
-//        $headers = [
-//           // 'Content-type' => 'application/xml'
-//        ];
-//        return response()->download($filePath, 'plan', $headers);
-       return $this->googleDrive->downloadFile($filePath);
+
+        return $this->googleDrive->downloadFile($filePath);
     }
 
     /**
@@ -190,13 +187,58 @@ class AreaController extends Controller
      */
     public function downloadSurvey($id = null)
     {
-          $filePath = Area::select('survey')->where('id', $id)->get()->pluck('survey')->toArray()[0];
-//        $filePath = public_path() . '/upload/' . $filePath;
-//        $headers = [
-//            'Accept' => 'application/dwg',
-//            'Accept' => 'application/pdf',
-//        ];
-//        return response()->download('/' . $filePath, 'survey', $headers);
-          return $this->googleDrive->downloadFile($filePath);
+        $filePath = Area::select('survey')->where('id', $id)->get()->pluck('survey')->toArray()[0];
+
+        return $this->googleDrive->downloadFile($filePath);
     }
+
+    /**
+     * @OA\Get(
+     *     operationId="FetchAreaImagesByNumber",
+     *     summary="Get all images for specific area entity by its unique number",
+     *     path="/get-area-images/{area_id}",
+     *     tags={"All"},
+     *     @OA\Parameter(
+     *         name="area_id",
+     *         in="path",
+     *         description="Unique area identifier"
+     *     ),
+     *     @OA\Response(
+     *         response=200,
+     *         description="OK",
+     *         @OA\MediaType(
+     *             mediaType="application/json",
+     *             @OA\Property(
+     *                 type="array",
+     *                 property="links",
+     *                 description="Files links to display",
+     *                 @OA\Items(
+     *                     type="string"
+     *                 )
+     *             )
+     *         )
+     *      )
+     * )
+     */
+    public function fetchAreaImages($area_id)
+    {
+        $area = Area::find($area_id);
+        if (!$area) {
+            return response()->json(['message' => 'Area not found'], 404);
+        }
+
+        $filesIds = AreaImage::where('number', $area->number)
+            ->get()
+            ->pluck('image_id')
+            ->toArray();
+
+        $areaFilesLinks = [];
+        foreach ($filesIds as $fId) {
+            $areaFilesLinks[] = $this->googleDrive->getFileLink($fId);
+        }
+        $areaFilesLinks = array_unique($areaFilesLinks);
+
+        return json_encode(['links' => $areaFilesLinks]);
+    }
+
 }

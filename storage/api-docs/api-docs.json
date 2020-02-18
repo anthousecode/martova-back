@@ -169,6 +169,39 @@
                 }
             }
         },
+        "/get-area-images/{area_id}": {
+            "get": {
+                "tags": [
+                    "All"
+                ],
+                "summary": "Get all images for specific area entity by its unique number",
+                "operationId": "FetchAreaImagesByNumber",
+                "parameters": [
+                    {
+                        "name": "area_id",
+                        "in": "path",
+                        "description": "Unique area identifier"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "property": "links",
+                                    "description": "Files links to display",
+                                    "type": "array",
+                                    "items": {
+                                        "type": "string"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
         "/login": {
             "post": {
                 "tags": [
