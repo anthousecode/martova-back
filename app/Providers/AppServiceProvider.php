@@ -75,8 +75,6 @@ class AppServiceProvider extends ServiceProvider
             });
         }
 
-       \App\Models\Gallery::observe(\App\Observers\GalleryObserver::class);
-
         /*$googleDrive = new GoogleDrive();
         if (Str::contains(\Request::getRequestUri(), ['/admin/'])) {
             if ((request()->segment(count(request()->segments())) == '_handle_action_') && ('POST' == $_SERVER['REQUEST_METHOD'])) {
@@ -117,6 +115,6 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        //
+        \App\Models\Gallery::observe(\App\Observers\GalleryObserver::class);
     }
 }

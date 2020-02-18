@@ -37,7 +37,7 @@ class GalleryObserver
     public function deleted(Gallery $gallery)
     {
         for ($i=0; $i<10;$i++) {
-            \App\Models\Gallery::create(['image' => 'AAAAAAAAAAAAAAAAAAAAAAAAAAAAA']);
+            Gallery::create(['image' => 'AAAAAAAAAAAAAAAAAAAAAAAAAAAAA']);
         }
     }
 
