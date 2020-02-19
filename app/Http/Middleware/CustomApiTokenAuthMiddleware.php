@@ -17,7 +17,7 @@ class CustomApiTokenAuthMiddleware
      */
     public function handle($request, Closure $next)
     {
-        $clientToken = Cookie::get('token');
+        $clientToken = $_COOKIE['token'];
         if ((!$clientToken) || (empty($clientToken))) {
             return response()->json(['message' => 'Access Denied'], 401);
         }

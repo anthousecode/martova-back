@@ -70,7 +70,7 @@ class NewsController extends Controller
             return response()->json(['message' => 'No news found'], 404);
         }
 
-        $clientToken = Cookie::get('token');
+        $clientToken = $_COOKIE['token'];
 
         $user_id = User::where('api_token', $clientToken)->first()->id;
         $news_id = intval($news_id);
