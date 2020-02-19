@@ -10,12 +10,6 @@ use App\Http\Resources\News as NewsResource;
 
 class NewsController extends Controller
 {
-    protected $request;
-
-    public function __construct(Request $request)
-    {
-        $this->request = $request->token;
-    }
 
     /**
      * @OA\Get(
@@ -71,13 +65,13 @@ class NewsController extends Controller
      *     )
      * )
      */
-    public function setLike($news_id)
+    public function setLike($news_id, Request $request)
     {
         if ((!$news_id) || ($news_id == 'null') || ($news_id == 'undefined')) {
             return response()->json(['message' => 'No news found'], 404);
         }
 
-        $clientToken = $this->request->cookie('token');
+        $clientToken = $request->token;
 
         $user_id = User::where('api_token', $clientToken)->first()->id;
         $news_id = intval($news_id);
