@@ -29,6 +29,6 @@ class SocialiteController extends Controller
     {
         $key = $this->authentifier->authenticatedCallbackHandler($driver);
 
-        return redirect()->away('martovariverside.com/News/?key=' . $key);
+        return redirect()->away('http://martovariverside.com/News/?key=' . $key);
     }
 }
