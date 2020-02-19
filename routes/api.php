@@ -28,7 +28,7 @@ Route::namespace('API')->group(function () {
         Route::post('/add_comment/{news_id}', ['uses' => 'CommentController@addComment']);
         Route::post('logout', 'AuthController@logout');
         Route::delete('/delete_comment/{comment_id}', ['uses' => 'CommentController@deleteComment'])->middleware('admin');
-        Route::post('/news_like/{news_id}', ['uses' => 'NewsController@setLike']);
+        Route::put('/news_like/{news_id}', ['uses' => 'NewsController@setLike']);
     });
 
     Route::post('login', ['uses' => 'AuthController@login', 'as' => 'login']);
