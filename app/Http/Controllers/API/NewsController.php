@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Models\News;
 use App\Models\NewsLike;
 use App\Http\Resources\News as NewsResource;
+use App\User;
 
 class NewsController extends Controller
 {
