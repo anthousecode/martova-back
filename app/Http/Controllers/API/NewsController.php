@@ -14,7 +14,7 @@ class NewsController extends Controller
 
     public function __construct(Request $request)
     {
-        $this->request = $request->cookie('token');
+        $this->request = $request->token;
     }
 
     /**
