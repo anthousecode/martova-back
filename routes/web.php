@@ -27,9 +27,10 @@ Route::get('get-user-info/{key}', function ($key) {
     return \App\User::where('api_token', $key)->first()->except('password')->toArray();
 });
 
-Route::post('get-drive-file', function(\Illuminate\Http\Request $request) {
+Route::get('get-drive-file', function (\Illuminate\Http\Request $request) {
     $link = $request->link;
-    dd($link);
+
+    $link = substr($link, 0, strpos($link, "?"));
     $ch = curl_init();
     curl_setopt($ch, CURLOPT_URL, $link);
     curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
