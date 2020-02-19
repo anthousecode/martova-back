@@ -175,7 +175,7 @@ class AuthController extends Controller
      */
     public function logout(Request $request)
     {
-        $token = $_COOKIE['token'];
+        $token = $request->cookie('token');
 
         User::where('api_token', $token)->update([
             'api_token' => null,

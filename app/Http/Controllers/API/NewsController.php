@@ -10,6 +10,13 @@ use App\Http\Resources\News as NewsResource;
 
 class NewsController extends Controller
 {
+    protected $request;
+
+    public function __construct(Request $request)
+    {
+        $this->request = $request->cookie('token');
+    }
+
     /**
      * @OA\Get(
      *     path="/news",
@@ -70,7 +77,7 @@ class NewsController extends Controller
             return response()->json(['message' => 'No news found'], 404);
         }
 
-        $clientToken = $_COOKIE['token'];
+        $clientToken = $this->request->cookie('token');
 
         $user_id = User::where('api_token', $clientToken)->first()->id;
         $news_id = intval($news_id);
