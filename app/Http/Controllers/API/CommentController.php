@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Models\Comment;
 use App\User;
 use Illuminate\Support\Facades\Validator;
+use App\Http\Resources\Comment as CommentResource;
 
 class CommentController extends Controller
 {
@@ -98,7 +99,7 @@ class CommentController extends Controller
     {
         $comments = Comment::where('news_id', intval($news_id))->with(['news', 'author'])->get();
 
-        return response()->json(['data' => $comments], 200);
+        return CommentResource::collection($comments);
     }
 
     /**
