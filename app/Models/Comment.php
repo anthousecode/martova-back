@@ -4,7 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use App\Models\News;
-use App\Models\User;
+use App\User;
 
 class Comment extends Model
 {
