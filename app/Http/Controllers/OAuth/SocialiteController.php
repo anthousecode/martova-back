@@ -10,7 +10,6 @@ namespace App\Http\Controllers\OAuth;
 
 use App\Http\Controllers\Controller;
 use App\Services\Util\Authentifier;
-use Illuminate\Support\Facades\Redirect;
 
 class SocialiteController extends Controller
 {
@@ -30,6 +29,6 @@ class SocialiteController extends Controller
     {
         $key = $this->authentifier->authenticatedCallbackHandler($driver);
 
-        return Redirect::to('martovariverside.com/News/?key=' . $key);
+        return redirect()->away('martovariverside.com/News/?key=' . $key);
     }
 }
