@@ -23,6 +23,10 @@ Route::get('/360', function () {
     return view('360');
 })->name('360p');
 
+Route::get('get-user-info/{key}', function ($key) {
+    return \App\User::where('api_token', $key)->first()->except('password')->toArray();
+});
+
 Route::post('get-drive-file', function(\Illuminate\Http\Request $request) {
     $link = $request->link;
     dd($link);
