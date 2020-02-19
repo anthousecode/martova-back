@@ -30,7 +30,7 @@ Route::get('get-user-info/{key}', function ($key) {
 Route::get('get-drive-file', function (\Illuminate\Http\Request $request) {
     $link = $request->link;
 
-    $link = substr($link, 0, strpos($link, "?"));
+    $link = substr($link, 0, strpos($link, "&export="));
     $ch = curl_init();
     curl_setopt($ch, CURLOPT_URL, $link);
     curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
