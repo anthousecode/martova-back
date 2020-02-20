@@ -31,15 +31,15 @@ Route::get('get-drive-file', function (\Illuminate\Http\Request $request) {
     $link = $request->link;
 
     $link = substr($link, 0, strpos($link, "&export="));
-    $ch = curl_init();
+   /* $ch = curl_init();
     curl_setopt($ch, CURLOPT_URL, $link);
     curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
 
     $res = curl_exec($ch);
 
-    curl_close($ch);
+    curl_close($ch);*/
     // $info = curl_getinfo($ch);
-
+    return $link;
     // TODO: $res returns as a boolean, but file needed
     return $res;
 
