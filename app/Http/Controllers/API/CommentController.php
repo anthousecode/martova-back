@@ -54,6 +54,10 @@ class CommentController extends Controller
      */
     public function addComment($news_id, Request $request)
     {
+        if (!$request->text) {
+            $request->text = ':img';
+        }
+
         $clientToken = $request->token;
         $userId = User::where('api_token', $clientToken)->first()->id;
 

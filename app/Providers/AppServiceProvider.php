@@ -80,10 +80,7 @@ class AppServiceProvider extends ServiceProvider
                 $table->string('image')->nullable();
             });
         }
-
-        Schema::table('comments', function(Blueprint $table) {
-            $table->text('text')->nullable()->change();
-        });
+        
     }
 
     /**
