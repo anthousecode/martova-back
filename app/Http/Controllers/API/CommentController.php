@@ -54,15 +54,6 @@ class CommentController extends Controller
      */
     public function addComment($news_id, Request $request)
     {
-        // post /add_comment/{news_id}
-        $validator = Validator::make($request->all(), [
-            'text' => 'string|min:1',
-        ]);
-
-        if ($validator->fails()) {
-            return response()->json(['message' => $validator->errors()], 422);
-        }
-
         $clientToken = $request->token;
         $userId = User::where('api_token', $clientToken)->first()->id;
 
