@@ -41,6 +41,7 @@ Route::namespace('API')->group(function () {
     Route::get('/download-plan/{id}', ['uses' => 'AreaController@downloadPlan', 'as' => 'download_plan']);
     Route::get('/download-survey/{id}', ['uses' => 'AreaController@downloadSurvey', 'as' => 'download_survey']);
     Route::get('/get-area-images/{area_id}', ['uses' => 'AreaController@fetchAreaImages']);
+    Route::get('/get-file/{file_id}', ['uses' => 'AreaController@getFile']);
 
     Route::get('/pages', ['uses' => 'PagesController@fetchPages']);
     Route::get('/page/{slug}', ['uses' => 'PagesController@getByUniqueSlug']);

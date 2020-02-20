@@ -241,4 +241,11 @@ class AreaController extends Controller
         return json_encode(['links' => $areaFilesLinks]);
     }
 
+    public function getFile(string $file_id)
+    {
+        return response()->streamDownload(function () use ($file_id) {
+            echo file_get_contents($this->googleDrive->getFile($file_id));
+        }, 'placeholder');
+    }
+
 }

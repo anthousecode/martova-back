@@ -66,6 +66,16 @@ class GoogleDrive
         return \Illuminate\Support\Facades\Response::download($path, 'file', []);
     }
 
+    public function getFile(string $fileId)
+    {
+        $file = $this->googleService->files->get($fileId, ['alt' => 'media']);
+
+        $path = public_path() . '/placeholder';
+        File::put($path, $file->getBody()->getContents());
+
+        return $path;
+    }
+
     protected function uploadFile(/*UploadedFile*/
         $file, string $folderID): string
     {
