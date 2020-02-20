@@ -62,6 +62,9 @@ class PagesController extends Controller
      */
     public function fetchPages()
     {
-        return json_encode(['pages' => Page::orderBy('order', 'asc')->get()]);
+        $pages = \Cache::remember('all_pages', 1440, function () {
+            return Page::orderBy('order', 'asc')->get();
+        });
+        return json_encode(['pages' => $pages]);
     }
 }

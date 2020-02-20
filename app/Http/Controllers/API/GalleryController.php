@@ -32,12 +32,8 @@ class GalleryController extends Controller
      */
     public function fetchGalleryItems()
     {
-        // $indexURL = \URL::to('/');
-        $items = Gallery::all()/*->map(function($item) use ($indexURL) {
-                 $item['image'] = $indexURL . '/upload/' . $item['image'];
-                 return $item;
-        })->toArray()*/;
-
-        return GalleryResource::collection($items);
+        return \Cache::remember('all_gallry_items', 1440, function(){
+            return GalleryResource::collection(Gallery::all());
+        });
     }
 }
