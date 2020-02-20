@@ -56,7 +56,7 @@ class CommentController extends Controller
     {
         // post /add_comment/{news_id}
         $validator = Validator::make($request->all(), [
-            'text' => 'required|min:1',
+            'text' => 'string|min:1',
         ]);
 
         if ($validator->fails()) {
