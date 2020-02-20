@@ -28,6 +28,7 @@ class GoogleDrive
         'gallery_images' => '1JH3k3LFWUbrAz-cOydqETMjof7rcFwD2',
         'news_images' => '17dhKe5BCxGyJORpE9InTwiiSAm5uumXB',
         'areas_3d_images' => '1Nahv3H6tyzeOHZGMXMFOvu1jtiGZrySj',
+        'comments_images' => '1zCBgnxmr6ViN8BNlwPUbmqoxoTHt03qz',
     ];
 
     public function __construct()

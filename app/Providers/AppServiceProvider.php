@@ -75,37 +75,11 @@ class AppServiceProvider extends ServiceProvider
             });
         }
 
-        /*$googleDrive = new GoogleDrive();
-        if (Str::contains(\Request::getRequestUri(), ['/admin/'])) {
-            if ((request()->segment(count(request()->segments())) == '_handle_action_') && ('POST' == $_SERVER['REQUEST_METHOD'])) {
-                $action = request('_action') ?? '';
-                if ('Encore_Admin_Grid_Actions_Delete' == $action) {
-                    $modelName = explode('_', (request('_model') ?? ''));
-                    $modelName = end($modelName);
-                    if ($modelName) {
-                        $modelId = request('_key') ?? 0;
-                        //$obj = $modelName::find($modelId);
-                        $obj = call_user_func('\\App\\Models\\'. $modelName . '::find', $modelId);
-                        $filesToDelete = [];
-                        if (property_exists($obj, 'image')) {
-                            $filesToDelete[] = $obj->image;
-                        }
-                        if (property_exists($obj, 'plan')) {
-                            $filesToDelete[] = $obj->plan;
-                        }
-                        if (property_exists($obj, 'survey')) {
-                            $filesToDelete[] = $obj->survey;
-                        }
-                        if (property_exists($obj, 'video')) {
-                            $filesToDelete[] = $obj->video;
-                        }
-                        foreach ($filesToDelete as $file) {
-                            $googleDrive->deleteFileById($file);
-                        }
-                    }
-                }
-            }
-        }*/
+        if (!Schema::hasColumn('comments', 'image')) {
+            Schema::table('comments', function(Blueprint $table) {
+                $table->string('image')->nullable();
+            });
+        }
     }
 
     /**

@@ -8,9 +8,17 @@ use App\Models\Comment;
 use App\User;
 use Illuminate\Support\Facades\Validator;
 use App\Http\Resources\Comment as CommentResource;
+use App\Services\Cloud\GoogleDrive;
 
 class CommentController extends Controller
 {
+    protected $googleDrive;
+
+    public function __construct(GoogleDrive $googleDrive)
+    {
+        $this->googleDrive = $googleDrive;
+    }
+
     /**
      * @OA\Post(
      *     path="/add_comment/{news_id}",
@@ -58,11 +66,20 @@ class CommentController extends Controller
         $clientToken = $request->token;
         $userId = User::where('api_token', $clientToken)->first()->id;
 
-        Comment::create([
+        $comment = Comment::create([
             'news_id' => intval($news_id),
             'user_id' => $userId,
             'text' => $request->text,
         ]);
+        $image = $request->file('image') ?? null;
+        if (!is_null($image)) {
+            $this->googleDrive->storeFileOnAdminSaving('comments_images',
+                $image,
+                Comment::class,
+                $comment->id,
+                'image'
+            );
+        }
 
         return response()->json(['message' => 'OK'], 200);
     }
