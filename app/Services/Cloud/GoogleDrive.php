@@ -69,7 +69,7 @@ class GoogleDrive
     public function getFile(string $fileId)
     {
         $file = $this->googleService->files->get($fileId, ['alt' => 'media']);
-
+        return $file;
         $path = public_path() . '/placeholder';
         File::put($path, $file->getBody()->getContents());
 
