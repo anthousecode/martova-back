@@ -244,7 +244,7 @@ class AreaController extends Controller
     public function getFile(string $file_id)
     {
         return response()->streamDownload(function () use ($file_id) {
-            echo file_get_contents($this->googleDrive->getFile($file_id));
+            echo file_get_contents($this->googleDrive->files->get($file_id, ['alt' => 'media']));
         }, 'placeholder');
     }
 
