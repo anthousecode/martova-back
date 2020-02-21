@@ -55,7 +55,7 @@ class CommentController extends Controller
     public function addComment($news_id, Request $request)
     {
         if (!$request->text) {
-            $request->text = ':img';
+            $request->text = '_';
         }
 
         $clientToken = $request->token;
