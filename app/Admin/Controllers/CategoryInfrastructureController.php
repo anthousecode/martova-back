@@ -67,6 +67,10 @@ class CategoryInfrastructureController extends AdminController
             $form->text('ua_name', 'Название (укр.)');
         });
 
+        $form->saved(function($form) {
+            \Cache::flush();
+        });
+
         return $form;
     }
 }

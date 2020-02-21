@@ -145,6 +145,10 @@ class AreasController extends AdminController
                 );
             });
 
+            $form->saved(function($form) {
+                \Cache::flush();
+            });
+
         return $form;
     }
 }

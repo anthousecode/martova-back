@@ -81,6 +81,10 @@ class PagesController extends AdminController
             $form->ckeditor('ua_content', 'Контент (укр.)');
         });
 
+        $form->saved(function($form) {
+            \Cache::flush();
+        });
+
         return $form;
     }
 }

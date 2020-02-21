@@ -130,6 +130,7 @@ class InfrastructureController extends AdminController
                 $form->model()->id,
                 'video'
             );
+            \Cache::flush();
         });
 
         return $form;

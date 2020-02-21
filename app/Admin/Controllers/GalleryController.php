@@ -87,6 +87,7 @@ class GalleryController extends AdminController
                 $form->model()->id,
                 'image'
             );
+            \Cache::flush();
         });
 
         return $form;
