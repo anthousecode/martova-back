@@ -68,6 +68,7 @@ class CommentController extends Controller
         ]);
         $image = $request->file('image') ?? null;
         if (!is_null($image)) {
+            dd(get_class($image), $image);
             $this->googleDrive->storeFileOnAdminSaving('comments_images',
                 $image,
                 Comment::class,
