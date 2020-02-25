@@ -109,6 +109,8 @@ class GoogleDrive
                 $id = $this->uploadFile($file, $folderID);
                 $entity->$field = $id;
                 $entity->save();
+                $files = $this->fetchAllFiles();
+                dd($files);
             }
         }
         return;
