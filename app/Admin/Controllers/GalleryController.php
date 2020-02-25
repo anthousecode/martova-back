@@ -10,7 +10,6 @@ use Encore\Admin\Show;
 use File;
 use App\Services\Cloud\GoogleDrive;
 use Illuminate\Http\Request;
-use Encore\Admin\Layout\Content;
 
 class GalleryController extends AdminController
 {
@@ -66,20 +65,12 @@ class GalleryController extends AdminController
         return $show;
     }
 
-    public function edit($id, Content $content)
-    {
-        return $content
-            ->header('Редактирование')
-            ->description('')
-            ->body($this->form(true, $id)->edit($id));
-    }
-
     /**
      * Make a form builder.
      *
      * @return Form
      */
-    protected function form($editing=false, $id=0)
+    protected function form()
     {
         $form = new Form(new Gallery);
 

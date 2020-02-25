@@ -100,6 +100,12 @@ class NewsController extends AdminController
             });
         });
 
+        $form->saving(function($form) {
+            if ($form->model()->image) {
+                $this->googleDrive->deleteFileById($form->model()->image);
+            }
+        });
+
         $form->saved(function(Form $form){
             if ($form->isCreating()){
                 \App\Models\News::find($form->model()->id)->update([
