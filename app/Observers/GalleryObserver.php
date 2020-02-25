@@ -33,7 +33,12 @@ class GalleryObserver
      */
     public function updated(Gallery $gallery)
     {
-        $file = $this->googleDrive->getFile($gallery->image);
+        $file = null;
+        try {
+            $file = $this->googleDrive->getFile($gallery->image);
+        } catch (\Exception $e) {
+            return;
+        }
         if ($file) {
             $this->googleDrive->storeFileOnAdminSaving('gallery_images',
                 $file,
