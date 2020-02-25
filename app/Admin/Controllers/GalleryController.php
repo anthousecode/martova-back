@@ -68,7 +68,6 @@ class GalleryController extends AdminController
 
     public function edit($id, Content $content)
     {
-        dump(1);
         return $content
             ->header('Редактирование')
             ->description('')
@@ -82,15 +81,13 @@ class GalleryController extends AdminController
      */
     protected function form($editing=false, $id=0)
     {
-        dd($editing, $id);
         $form = new Form(new Gallery);
 
         $form->image('image', 'Изображение');
 
-        $edit = $editing;
-        $form->saving(function($form) use ($edit){
-            dd($edit);
-            if ($edit) {
+        $form->saving(function($form) use ($editing){
+            dd($editing);
+            if ($editing) {
                 $this->googleDrive->deleteFileById($form->image);
             }
         });
