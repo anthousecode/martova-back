@@ -30,7 +30,7 @@ class Comment extends JsonResource
             'author' => $this->author,
             'text' => $this->text,
             'image' => $this->image ? sprintf("https://drive.google.com/uc?id=%s&export=download", $this->image) : '',
-            'file_type' => $fileType,
+            'image_type' => $fileType,
             'created_at' => $this->created_at,
             'updated_at' => $this->updated_at,
         ];
