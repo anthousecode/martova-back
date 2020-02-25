@@ -10,6 +10,7 @@ use Encore\Admin\Show;
 use File;
 use App\Services\Cloud\GoogleDrive;
 use Illuminate\Http\Request;
+use Encore\Admin\Layout\Content;
 
 class GalleryController extends AdminController
 {
@@ -65,16 +66,30 @@ class GalleryController extends AdminController
         return $show;
     }
 
+    public function edit($id, Content $content)
+    {
+        return $content
+            ->header('Редактирование')
+            ->description('')
+            ->body($this->form(true, $id)->edit($id));
+    }
+
     /**
      * Make a form builder.
      *
      * @return Form
      */
-    protected function form()
+    protected function form($editing=false)
     {
         $form = new Form(new Gallery);
 
         $form->image('image', 'Изображение');
+
+        $form->saving(function($form) use ($editing){
+            if ($editing) {
+                $this->googleDrive->deleteFileById($form->image);
+            }
+        });
 
         $form->saved(function (Form $form) {
             $this->googleDrive->storeFileOnAdminSaving('gallery_images',
