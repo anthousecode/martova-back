@@ -94,6 +94,12 @@ class NewsController extends AdminController
         })->tab('UA', function (Form $form) {
             $form->text('ua_name', 'Название (укр.)');
             $form->ckeditor('ua_description', 'Описание (укр.)');
+        })->tab('Comments', function (Form $form) {
+            $form->hasMany('comments', 'Комментарии', function (Form\NestedForm $form) {
+                $form->image('image', 'Файл')->addElementClass('btn-clear__hidden');
+                $form->string('user_id', 'Автор');
+                $form->text('text', 'Комментарий');
+            });
         });
 
         $form->saved(function(Form $form){
