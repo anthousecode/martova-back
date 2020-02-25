@@ -68,7 +68,7 @@ class GalleryController extends AdminController
 
     public function edit($id, Content $content)
     {
-        dd(1);
+        dump(1);
         return $content
             ->header('Редактирование')
             ->description('')
@@ -82,6 +82,7 @@ class GalleryController extends AdminController
      */
     protected function form($editing=false, $id=0)
     {
+        dd($editing, $id);
         $form = new Form(new Gallery);
 
         $form->image('image', 'Изображение');
