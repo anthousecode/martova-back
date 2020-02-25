@@ -97,7 +97,7 @@ class NewsController extends AdminController
         })->tab('Comments', function (Form $form) {
             $form->hasMany('comments', 'Комментарии', function (Form\NestedForm $form) {
                 $form->image('image', 'Файл')->addElementClass('btn-clear__hidden')->disable();
-                $form->text('user_id', 'Автор')->disable();
+                $form->text('author.name', 'Автор')->disable();
                 $form->text('text', 'Комментарий')->disable();
             });
         });
