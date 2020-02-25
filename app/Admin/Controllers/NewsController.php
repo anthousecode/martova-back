@@ -97,7 +97,7 @@ class NewsController extends AdminController
         });
 
         $form->editing(function (Form $form) {
-            $this->googleDrive->deleteFileById($form->model()->image);
+           // $this->googleDrive->deleteFileById($form->model()->image);
         });
 
         $form->saved(function(Form $form){
@@ -111,12 +111,12 @@ class NewsController extends AdminController
                     'updated_at' => Carbon::now()->toDateTimeString()
                 ]);
             }
-            $this->googleDrive->storeFileOnAdminSaving('news_images',
-                $form->image,
-                News::class,
-                $form->model()->id,
-                'image'
-            );
+//            $this->googleDrive->storeFileOnAdminSaving('news_images',
+//                $form->image,
+//                News::class,
+//                $form->model()->id,
+//                'image'
+//            );
             \Cache::flush();
         });
 

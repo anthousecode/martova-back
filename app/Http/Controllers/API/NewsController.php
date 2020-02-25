@@ -11,7 +11,6 @@ use App\User;
 
 class NewsController extends Controller
 {
-
     /**
      * @OA\Get(
      *     path="/news",
