@@ -113,8 +113,10 @@ class GoogleDrive
                 $filesInTable = $model::whereIn($field, array_keys($files))->get()->pluck($field)->toArray();
                 $files = array_diff($files, $filesInTable);
                 foreach ($files as $f) {
-                    if ($this->getFile($f)) {
+                    try {
                         $this->deleteFileById($f);
+                    } catch (\Exception $e) {
+                        continue;
                     }
                 }
             }
