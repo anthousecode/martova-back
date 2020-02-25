@@ -33,6 +33,7 @@ class GalleryObserver
      */
     public function updated(Gallery $gallery)
     {
+        dd($gallery->image);
         $this->googleDrive->storeFileOnAdminSaving('gallery_images',
             $gallery->image,
             Gallery::class,
