@@ -38,11 +38,7 @@ class GalleryObserver
 
     public function updating(Gallery $gallery)
     {
-//        try {
-//            $this->googleDrive->deleteFileById($gallery->image);
-//        } catch (\Exception $e) {
-//            return;
-//        }
+
     }
 
     /**

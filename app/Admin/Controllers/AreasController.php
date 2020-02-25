@@ -10,6 +10,7 @@ use Encore\Admin\Show;
 use App\Models\AreaStatus;
 use App\Services\Cloud\GoogleDrive;
 use Illuminate\Http\Request;
+use Encore\Admin\Layout\Content;
 
 class AreasController extends AdminController
 {
@@ -83,12 +84,20 @@ class AreasController extends AdminController
         return $show;
     }
 
+    public function edit($id, Content $content)
+    {
+        return $content
+            ->header('Редактирование')
+            ->description('')
+            ->body($this->form(true, $id)->edit($id));
+    }
+
     /**
      * Make a form builder.
      *
      * @return Form
      */
-    protected function form()
+    protected function form($editing=false)
     {
             $form = new Form(new Area);
             $form->select('status_id', 'Статус Участка')
@@ -111,6 +120,14 @@ class AreasController extends AdminController
                 "blue" => "Голубой",
                 "yellow" => "Желтый",
             ]);
+
+            $form->saving(function($form) use ($editing){
+                if ($editing) {
+                    $this->googleDrive->deleteFileById($form->image);
+                    $this->googleDrive->deleteFileById($form->plan);
+                    $this->googleDrive->deleteFileById($form->survey);
+                }
+            });
 
             $form->saved(function($form){
                 $this->googleDrive->storeFileOnAdminSaving('areas_images',
