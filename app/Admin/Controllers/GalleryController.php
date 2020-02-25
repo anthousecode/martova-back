@@ -88,7 +88,7 @@ class GalleryController extends AdminController
        // session(['gallery_edit' => $editing]);
         $form->saving(function($form) {
          //   if (session()->get('gallery_edit')) {
-            dd($form);
+            dd($this->googleDrive->getFile($form->model()->image));
             try {
                 $this->googleDrive->deleteFileById($form->model()->image);
             } catch (\Exception $e){}
