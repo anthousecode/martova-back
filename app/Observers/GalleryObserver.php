@@ -33,29 +33,16 @@ class GalleryObserver
      */
     public function updated(Gallery $gallery)
     {
-//        $file = null;
-//        try {
-//            $file = $this->googleDrive->getFile($gallery->image);
-//        } catch (\Exception $e) {
-//            return;
-//        }
-//        if ($file) {
-//            $this->googleDrive->storeFileOnAdminSaving('gallery_images',
-//                $file,
-//                Gallery::class,
-//                $gallery->id,
-//                'image'
-//            );
-//        }
+
     }
 
     public function updating(Gallery $gallery)
     {
-        try {
-            $this->googleDrive->deleteFileById($gallery->image);
-        } catch (\Exception $e) {
-            return;
-        }
+//        try {
+//            $this->googleDrive->deleteFileById($gallery->image);
+//        } catch (\Exception $e) {
+//            return;
+//        }
     }
 
     /**
