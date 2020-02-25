@@ -87,9 +87,9 @@ class AppServiceProvider extends ServiceProvider
             });
         }
 
-        Schema::table('comments', function(Blueprint $table){
-            $table->mediumText('text')->change();
-        });
+//        Schema::table('comments', function(Blueprint $table){
+//            $table->mediumText('text')->change();
+//        });
         
     }
 
