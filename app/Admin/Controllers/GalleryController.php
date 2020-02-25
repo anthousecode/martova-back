@@ -68,6 +68,7 @@ class GalleryController extends AdminController
 
     public function edit($id, Content $content)
     {
+        dd(1);
         return $content
             ->header('Редактирование')
             ->description('')
