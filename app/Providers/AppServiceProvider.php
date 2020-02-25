@@ -86,6 +86,10 @@ class AppServiceProvider extends ServiceProvider
                 $table->string('file_type')->nullable();
             });
         }
+
+        Schema::table('comments', function(Blueprint $table){
+            $table->mediumText('text')->change();
+        });
         
     }
 
