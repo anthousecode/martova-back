@@ -107,7 +107,7 @@ class NewsController extends AdminController
                     'updated_at' => Carbon::now()->toDateTimeString()
                 ]);
             }
-            $this->googleDrive->deleteFileById($form->model()->image);
+            $this->googleDrive->deleteFileById(News::where('id', $form->model()->id)->first()->image);
             $this->googleDrive->storeFileOnAdminSaving('news_images',
                 $form->image,
                 News::class,
