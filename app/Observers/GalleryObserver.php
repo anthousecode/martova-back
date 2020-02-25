@@ -3,9 +3,17 @@
 namespace App\Observers;
 
 use App\Models\Gallery;
+use App\Services\Cloud\GoogleDrive;
 
 class GalleryObserver
 {
+    protected $googleDrive;
+
+    public function __construct(GoogleDrive $google)
+    {
+        $this->googleDrive = $google;
+    }
+
     /**
      * Handle the gallery "created" event.
      *
@@ -25,7 +33,17 @@ class GalleryObserver
      */
     public function updated(Gallery $gallery)
     {
-        //
+        $this->googleDrive->storeFileOnAdminSaving('gallery_images',
+            $gallery->image,
+            Gallery::class,
+            $gallery->id,
+            'image'
+        );
+    }
+
+    public function updating(Gallery $gallery)
+    {
+       $this->googleDrive->deleteFileById($gallery->image);
     }
 
     /**
@@ -36,8 +54,7 @@ class GalleryObserver
      */
     public function deleted(Gallery $gallery)
     {
-        $googleDrive = new \App\Services\Cloud\GoogleDrive;
-        $googleDrive->deleteFileById($gallery->image);
+        $this->googleDrive->deleteFileById($gallery->image);
     }
 
     /**
