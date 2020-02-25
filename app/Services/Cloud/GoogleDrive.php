@@ -111,8 +111,8 @@ class GoogleDrive
                 $entity->save();
                 $files = $this->fetchAllFiles();
                 $filesInTable = $model::whereIn($field, array_keys($files))->get()->pluck($field)->toArray();
-                $files = array_diff($files, $filesInTable);
-                dd($files);
+               // $files = array_diff($files, $filesInTable);
+                dd($files, $filesInTable);
             }
         }
         return;
