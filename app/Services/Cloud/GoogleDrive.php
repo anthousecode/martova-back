@@ -104,7 +104,7 @@ class GoogleDrive
         if (!is_null($file)) {
             if (UploadedFile::class == get_class($file)) {
                 $entity = $model::find($entityID);
-                $foo = $this->deleteFileById($entity->$field);
+                //$this->deleteFileById($entity->$field);
                 $folderID = $this->getFolderId($folderName);
                 $id = $this->uploadFile($file, $folderID);
                 $entity->$field = $id;
