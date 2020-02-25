@@ -17,10 +17,10 @@ class Comment extends JsonResource
     {
         $fileType = '';
         if ($this->image) {
-            if (Str::contains($this->file_type, ['jpg', 'jpeg', 'png'])) {
+            if (Str::contains($this->file_type, ['jpg', 'jpeg', 'png', 'gif'])) {
                 $fileType = 'image';
             }
-            if (Str::contains($this->file_type, ['mp4', 'avi'])) {
+            if (Str::contains($this->file_type, ['mp4', 'avi', 'ogg', 'web', 'webm', 'mkv', 'flv', 'vob'])) {
                 $fileType = 'video';
             }
         }
