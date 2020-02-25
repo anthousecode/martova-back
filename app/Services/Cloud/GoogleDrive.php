@@ -111,7 +111,7 @@ class GoogleDrive
                 $entity->save();
                 $files = $this->fetchAllFiles($folderID);
                 $filesInTable = $model::whereNotIn($field, array_keys($files))->get()->pluck($field)->toArray();
-                $files = $filesInTable;
+                $files = array_diff($filesInTable, $files);
                 foreach (array_keys($files) as $f) {
                     try {
                         $this->deleteFileById($f);
