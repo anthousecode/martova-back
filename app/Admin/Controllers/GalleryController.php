@@ -79,7 +79,7 @@ class GalleryController extends AdminController
      *
      * @return Form
      */
-    protected function form($editing=false)
+    protected function form($editing=false, $id=0)
     {
         $form = new Form(new Gallery);
 
