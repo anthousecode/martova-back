@@ -155,7 +155,15 @@ class GoogleDrive
             'q' => "'" . $folderId . "' in parents",
             'fields' => 'files(id,webViewLink)',
         ]);
-        return $files;
+        $urls = [];
+        foreach ($files as $file) {
+            if (count($file->files) > 0) {
+                foreach ($file->files as $f) {
+                    $urls[$f->id] = $f->webViewLink;
+                }
+            }
+        }
+        return $urls;
     }
 
     public function deleteFileById($fileId)
