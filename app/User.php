@@ -39,8 +39,4 @@ class User extends Authenticatable
         'isAdmin' => 'boolean',
     ];
 
-    public function comments()
-    {
-        return $this->hasMany(\App\Models\Comment::class, 'user_id', 'id');
-    }
 }
