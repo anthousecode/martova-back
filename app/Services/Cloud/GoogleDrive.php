@@ -109,9 +109,9 @@ class GoogleDrive
                 $id = $this->uploadFile($file, $folderID);
                 $entity->$field = $id;
                 $entity->save();
-                $files = $this->getFilesForFolder($folderID);
+                $files = $this->fetchAllFiles($folderID);
                 $filesInTable = $model::whereIn($field, array_keys($files))->get()->pluck($field)->toArray();
-               // $files = array_diff($files, $filesInTable);
+                // $files = array_diff($files, $filesInTable);
                 dd($files, $filesInTable);
             }
         }
@@ -123,12 +123,16 @@ class GoogleDrive
         return $this->googleService->files->get($fileId, ["fields" => "webViewLink"]);
     }
 
-    public function fetchAllFiles()
+    public function fetchAllFiles($folId = null)
     {
         $files = [];
         $foldersIds = [];
-        foreach ($this->folders as $folderName => $folderId) {
-            $foldersIds[] = $folderId;
+        if (is_null($folId)) {
+            foreach ($this->folders as $folderName => $folderId) {
+                $foldersIds[] = $folderId;
+            }
+        } else {
+            $foldersIds[] = $folId;
         }
         foreach ($foldersIds as $folderId) {
             $files[] = $this->googleService->files->listFiles([
@@ -137,23 +141,6 @@ class GoogleDrive
             ]);
         }
 
-        $urls = [];
-        foreach ($files as $file) {
-            if (count($file->files) > 0) {
-                foreach ($file->files as $f) {
-                    $urls[$f->id] = $f->webViewLink;
-                }
-            }
-        }
-        return $urls;
-    }
-
-    public function getFilesForFolder(string $folderId)
-    {
-        $files = $this->googleService->files->listFiles([
-            'q' => "'" . $folderId . "' in parents",
-            'fields' => 'files(id,webViewLink)',
-        ]);
         $urls = [];
         foreach ($files as $file) {
             if (count($file->files) > 0) {
