@@ -12,7 +12,7 @@ class NewsObserver
      * @param  \App\ModelsNews  $modelsNews
      * @return void
      */
-    public function created(ModelsNews $modelsNews)
+    public function created(News $modelsNews)
     {
         //
     }
@@ -23,7 +23,7 @@ class NewsObserver
      * @param  \App\ModelsNews  $modelsNews
      * @return void
      */
-    public function updated(ModelsNews $modelsNews)
+    public function updated(News $modelsNews)
     {
         //
     }
@@ -34,7 +34,7 @@ class NewsObserver
      * @param  \App\ModelsNews  $modelsNews
      * @return void
      */
-    public function deleted(ModelsNews $modelsNews)
+    public function deleted(News $modelsNews)
     {
         $googleDrive = new \App\Services\Cloud\GoogleDrive;
         $googleDrive->deleteFileById($modelsNews->image);
@@ -46,7 +46,7 @@ class NewsObserver
      * @param  \App\ModelsNews  $modelsNews
      * @return void
      */
-    public function restored(ModelsNews $modelsNews)
+    public function restored(News $modelsNews)
     {
         //
     }
@@ -57,7 +57,7 @@ class NewsObserver
      * @param  \App\ModelsNews  $modelsNews
      * @return void
      */
-    public function forceDeleted(ModelsNews $modelsNews)
+    public function forceDeleted(News $modelsNews)
     {
         //
     }
