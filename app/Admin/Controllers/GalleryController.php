@@ -87,6 +87,7 @@ class GalleryController extends AdminController
 
         $edit = $editing;
         $form->saving(function($form) use ($edit){
+            dd($edit);
             if ($edit) {
                 $this->googleDrive->deleteFileById($form->image);
             }
