@@ -97,7 +97,7 @@ class NewsController extends AdminController
         })->tab('Comments', function (Form $form) {
             $form->hasMany('comments', 'Комментарии', function (Form\NestedForm $form) {
                 $form->image('image', 'Файл')->customFormat(function($item){
-                    return 'AAAAA'.$item;
+                    return sprintf("https://drive.google.com/uc?id=%s&export=download", $item);
                 })->addElementClass('btn-clear__hidden')->disable();
                 $form->text('author.email', 'Автор')->disable();
                 $form->text('text', 'Комментарий')->disable();
