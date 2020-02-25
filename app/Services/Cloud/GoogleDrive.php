@@ -109,7 +109,7 @@ class GoogleDrive
                 $id = $this->uploadFile($file, $folderID);
                 $entity->$field = $id;
                 $entity->save();
-                $files = $this->fetchAllFiles();
+                $files = $this->getFilesForFolder($folderID);
                 $filesInTable = $model::whereIn($field, array_keys($files))->get()->pluck($field)->toArray();
                // $files = array_diff($files, $filesInTable);
                 dd($files, $filesInTable);
@@ -146,6 +146,15 @@ class GoogleDrive
             }
         }
         return $urls;
+    }
+
+    public function getFilesForFolder(string $folderId)
+    {
+        $files = $this->googleService->files->listFiles([
+            'q' => "'" . $folderId . "' in parents",
+            'fields' => 'files(id,webViewLink)',
+        ]);
+        return $files;
     }
 
     public function deleteFileById($fileId)
