@@ -80,6 +80,12 @@ class AppServiceProvider extends ServiceProvider
                 $table->string('image')->nullable();
             });
         }
+
+        if (!Schema::hasColumn('comments', 'file_type')) {
+            Schema::table('comments', function(Blueprint $table){
+                $table->string('file_type')->nullable();
+            });
+        }
         
     }
 
