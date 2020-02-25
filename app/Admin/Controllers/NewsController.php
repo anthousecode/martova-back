@@ -96,11 +96,9 @@ class NewsController extends AdminController
             $form->ckeditor('ua_description', 'Описание (укр.)');
         })->tab('Comments', function (Form $form) {
             $form->hasMany('comments', 'Комментарии', function (Form\NestedForm $form) {
-                $form->image('image', 'Файл')->customFormat(function($item){
-                    return sprintf("https://drive.google.com/uc?id=%s&export=download", $item);
-                })->addElementClass('btn-clear__hidden')->disable();
-                $form->text('author.email', 'Автор')->disable();
-                $form->text('text', 'Комментарий')->disable();
+                $form->image('image', 'Файл')->addElementClass('btn-clear__hidden')->readonly();
+                $form->text('author.email', 'Автор')->readonly();
+                $form->text('text', 'Комментарий')->readonly();
             });
         });
 
