@@ -97,7 +97,7 @@ class NewsController extends AdminController
         });
 
         $form->editing(function (Form $form) {
-           // $this->googleDrive->deleteFileById($form->model()->image);
+            $this->googleDrive->deleteFileById($form->model()->image);
         });
 
         $form->saved(function(Form $form){
