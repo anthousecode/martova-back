@@ -74,9 +74,9 @@ class CommentController extends Controller
                 $comment->id,
                 'image'
             );
+            $comment->file_type = $image->getClientOriginalExtension();
+            $comment->save();
         }
-        $comment->file_type = $image->getClientOriginalExtension();
-        $comment->save();
 
         return response()->json(['message' => 'OK'], 200);
     }
