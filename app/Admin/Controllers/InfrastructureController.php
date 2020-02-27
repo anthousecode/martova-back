@@ -100,24 +100,27 @@ class InfrastructureController extends AdminController
         $form->icon('icon', 'Иконка');
         $form->time('time', 'Время');
         $form->file('video', 'Видео');
-        $form->tab('RU', function(Form $form){
+        $form->tab('RU', function (Form $form) {
             $form->text('ru_name', 'Название');
             $form->ckeditor('ru_description', 'Описание');
-        })->tab('UA', function(Form $form) {
+        })->tab('UA', function (Form $form) {
             $form->text('ua_name', 'Название');
             $form->ckeditor('ua_description', 'Описание');
         });
 
-        $form->saving(function($form) {
-            if ($form->model()->image) {
-                $this->googleDrive->deleteFileById($form->model()->image);
-            }
-            if ($form->model()->video) {
-                $this->googleDrive->deleteFileById($form->model()->video);
+        $form->saving(function ($form) {
+            try {
+                if ($form->model()->image) {
+                    $this->googleDrive->deleteFileById($form->model()->image);
+                }
+                if ($form->model()->video) {
+                    $this->googleDrive->deleteFileById($form->model()->video);
+                }
+            } catch (\Exception $e) {
             }
         });
 
-        $form->saved(function($form){
+        $form->saved(function ($form) {
             $this->googleDrive->storeFileOnAdminSaving('infrastructure_3d_images',
                 $form->image,
                 Infrastructure::class,

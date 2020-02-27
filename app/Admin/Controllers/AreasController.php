@@ -90,20 +90,20 @@ class AreasController extends AdminController
      */
     protected function form()
     {
-            $form = new Form(new Area);
-            $form->select('status_id', 'Статус Участка')
-                ->options(AreaStatus::all()->pluck('ru_name', 'id'));
-            $form->text('number', 'Номер')->disable();
-            $form->decimal('square', 'Площадь');
-            $form->decimal('price', 'Цена');
-            $form->text('cad_number', 'Кадастровый номер');
-            $form->text('polygon', 'Координаты');
-            $form->text('stroke', 'Цвет границы');
-            $form->image('image', 'Изображение');
-            $form->file('plan', 'Кадастровый план (XML/TXT/PDF)')->rules('mimes:xml,txt,pdf');
-            $form->file('survey', 'Геодезическая съемка (PDF/DWG)')->rules('mimes:pdf,dwg');
-            $form->text('color', 'Цвет');
-            $form->select('default_color', 'Цвета по умолчанию')
+        $form = new Form(new Area);
+        $form->select('status_id', 'Статус Участка')
+            ->options(AreaStatus::all()->pluck('ru_name', 'id'));
+        $form->text('number', 'Номер')->disable();
+        $form->decimal('square', 'Площадь');
+        $form->decimal('price', 'Цена');
+        $form->text('cad_number', 'Кадастровый номер');
+        $form->text('polygon', 'Координаты');
+        $form->text('stroke', 'Цвет границы');
+        $form->image('image', 'Изображение');
+        $form->file('plan', 'Кадастровый план (XML/TXT/PDF)')->rules('mimes:xml,txt,pdf');
+        $form->file('survey', 'Геодезическая съемка (PDF/DWG)')->rules('mimes:pdf,dwg');
+        $form->text('color', 'Цвет');
+        $form->select('default_color', 'Цвета по умолчанию')
             ->options([
                 "red" => "Красный",
                 "green" => "Зеленый",
@@ -112,7 +112,8 @@ class AreasController extends AdminController
                 "yellow" => "Желтый",
             ]);
 
-            $form->saving(function($form) {
+        $form->saving(function ($form) {
+            try {
                 if ($form->model()->image) {
                     $this->googleDrive->deleteFileById($form->model()->image);
                 }
@@ -122,32 +123,34 @@ class AreasController extends AdminController
                 if ($form->model()->survey) {
                     $this->googleDrive->deleteFileById($form->model()->survey);
                 }
-            });
+            } catch (\Exception $e) {
+            }
+        });
 
-            $form->saved(function($form){
-                $this->googleDrive->storeFileOnAdminSaving('areas_images',
-                    $form->image,
-                    Area::class,
-                    $form->model()->id,
-                    'image'
-                );
-                $this->googleDrive->storeFileOnAdminSaving('areas_cad_plans',
-                    $form->plan,
-                    Area::class,
-                    $form->model()->id,
-                    'plan'
-                );
-                $this->googleDrive->storeFileOnAdminSaving('areas_geo_record',
-                    $form->survey,
-                    Area::class,
-                    $form->model()->id,
-                    'survey'
-                );
-            });
+        $form->saved(function ($form) {
+            $this->googleDrive->storeFileOnAdminSaving('areas_images',
+                $form->image,
+                Area::class,
+                $form->model()->id,
+                'image'
+            );
+            $this->googleDrive->storeFileOnAdminSaving('areas_cad_plans',
+                $form->plan,
+                Area::class,
+                $form->model()->id,
+                'plan'
+            );
+            $this->googleDrive->storeFileOnAdminSaving('areas_geo_record',
+                $form->survey,
+                Area::class,
+                $form->model()->id,
+                'survey'
+            );
+        });
 
-            $form->saved(function($form) {
-                \Cache::flush();
-            });
+        $form->saved(function ($form) {
+            \Cache::flush();
+        });
 
         return $form;
     }

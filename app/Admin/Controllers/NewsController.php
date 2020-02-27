@@ -100,16 +100,19 @@ class NewsController extends AdminController
             });
         });
 
-        $form->saving(function($form) {
-            if ($form->model()->image) {
-                $this->googleDrive->deleteFileById($form->model()->image);
+        $form->saving(function ($form) {
+            try {
+                if ($form->model()->image) {
+                    $this->googleDrive->deleteFileById($form->model()->image);
+                }
+            } catch (\Exception $e) {
             }
         });
 
-        $form->saved(function(Form $form){
-            if ($form->isCreating()){
+        $form->saved(function (Form $form) {
+            if ($form->isCreating()) {
                 \App\Models\News::find($form->model()->id)->update([
-                    'created_at'=>Carbon::now()->toDateTimeString(),
+                    'created_at' => Carbon::now()->toDateTimeString(),
                     'updated_at' => Carbon::now()->toDateTimeString()
                 ]);
             } else {
