@@ -47,6 +47,7 @@ class AreasController extends AdminController
         $grid->column('image', 'Изображение');
         $grid->column('plan', 'Кадастровый план');
         $grid->column('survey', 'Геодезическая съемка');
+        $grid->column('print_plan', 'План для печати');
         $grid->column('color', 'Цвет');
         $grid->column('default_color', 'Цвет по умолчанию');
         $grid->column('created_at', 'Время создания');
@@ -75,6 +76,7 @@ class AreasController extends AdminController
         $show->field('image', 'Изображение');
         $show->field('plan', 'Кадастровый план');
         $show->field('survey', 'Геодезическая съемка');
+        $show->field('print_plan', 'План для печати');
         $show->field('color', 'Цвет');
         $show->field('default_color', 'Цвет по умолчанию');
         $show->field('created_at', 'Время создания');
@@ -102,6 +104,7 @@ class AreasController extends AdminController
         $form->image('image', 'Изображение');
         $form->file('plan', 'Кадастровый план (XML/TXT/PDF)')->rules('mimes:xml,txt,pdf');
         $form->file('survey', 'Геодезическая съемка (PDF/DWG)')->rules('mimes:pdf,dwg');
+        $form->file('print_plan', 'План для печати (PDF)')->rules('mimes:pdf');
         $form->text('color', 'Цвет');
         $form->select('default_color', 'Цвета по умолчанию')
             ->options([
@@ -122,6 +125,9 @@ class AreasController extends AdminController
                 }
                 if ($form->model()->survey) {
                     $this->googleDrive->deleteFileById($form->model()->survey);
+                }
+                if ($form->model()->print_plan) {
+                    $this->googleDrive->deleteFileById($form->model()->print_plan);
                 }
             } catch (\Exception $e) {
             }
@@ -145,6 +151,12 @@ class AreasController extends AdminController
                 Area::class,
                 $form->model()->id,
                 'survey'
+            );
+            $this->googleDrive->storeFileOnAdminSaving('areas_print_plans',
+                $form->print_plan,
+                Area::class,
+                $form->model()->id,
+                'print_plan'
             );
         });
 

@@ -29,6 +29,7 @@ class GoogleDrive
         'news_images' => '17dhKe5BCxGyJORpE9InTwiiSAm5uumXB',
         'areas_3d_images' => '1Nahv3H6tyzeOHZGMXMFOvu1jtiGZrySj',
         'comments_images' => '1zCBgnxmr6ViN8BNlwPUbmqoxoTHt03qz',
+        'areas_print_plans' => '1plYVjtTzsfK1ME5whA6K94cPIDT6coRv',
     ];
 
     public function __construct()
@@ -104,21 +105,10 @@ class GoogleDrive
         if (!is_null($file)) {
             if (UploadedFile::class == get_class($file)) {
                 $entity = $model::find($entityID);
-                //$this->deleteFileById($entity->$field);
                 $folderID = $this->getFolderId($folderName);
                 $id = $this->uploadFile($file, $folderID);
                 $entity->$field = $id;
                 $entity->save();
-//                $files = $this->fetchAllFiles($folderID);
-//                $filesInTable = $model::whereNotIn($field, array_keys($files))->get()->pluck($field)->toArray();
-//                $files = array_diff($files, $filesInTable);
-//                foreach (array_keys($files) as $f) {
-//                    try {
-//                        $this->deleteFileById($f);
-//                    } catch (\Exception $e) {
-//                        continue;
-//                    }
-//                }
             }
         }
         return;

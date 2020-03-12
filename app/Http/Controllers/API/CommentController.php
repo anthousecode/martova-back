@@ -52,6 +52,20 @@ class CommentController extends Controller
      *     )
      * )
      */
+
+    /**
+     * @param Request $request
+     */
+    public function foo (Request $request)
+    {
+        return;
+    }
+
+    /**
+     * @param $news_id
+     * @param Request $request
+     * @return \Illuminate\Http\JsonResponse
+     */
     public function addComment($news_id, Request $request)
     {
         if (!$request->text) {

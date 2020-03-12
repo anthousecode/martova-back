@@ -87,6 +87,12 @@ class AppServiceProvider extends ServiceProvider
             });
         }
 
+        if (!Schema::hasColumn('areas', 'print_plan')) {
+            Schema::table('areas', function(Blueprint $table){
+                $table->string('print_plan')->nullable();
+            });
+        }
+
 //        Schema::table('comments', function(Blueprint $table){
 //            $table->mediumText('text')->change();
 //        });

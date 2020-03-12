@@ -42,6 +42,7 @@ class Area extends JsonResource
             'image' => sprintf("https://drive.google.com/uc?id=%s&export=download", $this->image),
             'plan' => sprintf("https://drive.google.com/uc?id=%s&export=download", $this->plan),
             'survey' => sprintf("https://drive.google.com/uc?id=%s&export=download", $this->survey),
+            'print_plan' => sprintf("https://drive.google.com/uc?id=%s&export=download", $this->print_plan),
         ];
     }
 }
