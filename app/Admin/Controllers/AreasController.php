@@ -45,16 +45,16 @@ class AreasController extends AdminController
         $grid->column('square', 'Площадь');
         $grid->column('price', 'Цена');
         $grid->column('image', 'Изображение')->display(function($image){
-            return  sprintf("<img style='width: 100px; height: 100px; display: block' src='https://drive.google.com/uc?id=%s&export=download'>", $image);
+            return  sprintf("<img alt='...' style='width: 100px; height: 100px; display: block' src='https://drive.google.com/uc?id=%s&export=download'>", $image);
         });
         $grid->column('plan', 'Кадастровый план')->display(function($plan){
-            return  sprintf("<img style='width: 100px; height: 100px; display: block' src='https://drive.google.com/uc?id=%s&export=download'>", $plan);
+            return  sprintf("<img alt='...' style='width: 100px; height: 100px; display: block' src='https://drive.google.com/uc?id=%s&export=download'>", $plan);
         });
         $grid->column('survey', 'Геодезическая съемка')->display(function($survey){
-            return  sprintf("<img style='width: 100px; height: 100px; display: block' src='https://drive.google.com/uc?id=%s&export=download'>", $survey);
+            return  sprintf("<img alt='...' style='width: 100px; height: 100px; display: block' src='https://drive.google.com/uc?id=%s&export=download'>", $survey);
         });
         $grid->column('print_plan', 'План для печати')->display(function($print_plan){
-            return  sprintf("<img style='width: 100px; height: 100px; display: block' src='https://drive.google.com/uc?id=%s&export=download'>", $print_plan);
+            return  sprintf("<img alt='...' style='width: 100px; height: 100px; display: block' src='https://drive.google.com/uc?id=%s&export=download'>", $print_plan);
         });
         $grid->column('color', 'Цвет');
         $grid->column('default_color', 'Цвет по умолчанию');
