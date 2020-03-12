@@ -152,8 +152,10 @@ class GoogleDrive
     public function deleteFileById($fileId)
     {
         try {
-            if (!Str::contains($fileId, ['images/'])) {
-                $this->googleService->files->delete($fileId);
+            if ($fileId) {
+                if (!Str::contains($fileId, ['images/'])) {
+                    $this->googleService->files->delete($fileId);
+                }
             }
         } catch (Exception $e) {
             return $e->getMessage();

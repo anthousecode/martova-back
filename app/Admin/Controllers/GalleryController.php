@@ -40,7 +40,9 @@ class GalleryController extends AdminController
         $grid = new Grid(new Gallery);
 
         $grid->column('id', 'Идентификатор');
-        $grid->column('image', 'Изображение');
+        $grid->column('image', 'Изображение')->display(function($image){
+            return  sprintf("<img style='width: 100px; height: 100px; display: block' src='https://drive.google.com/uc?id=%s&export=download'>", $image);
+        });
         $grid->column('created_at', 'Время создания');
         $grid->column('updated_at', 'Время обновления');
 
