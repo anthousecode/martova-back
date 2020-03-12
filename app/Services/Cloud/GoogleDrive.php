@@ -13,6 +13,7 @@ use Google_Service_Drive;
 use Google_Service_Drive_DriveFile;
 use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\File;
+use Illuminate\Support\Str;
 
 class GoogleDrive
 {
@@ -104,11 +105,11 @@ class GoogleDrive
     {
         if (!is_null($file)) {
             if (UploadedFile::class == get_class($file)) {
-                $entity = $model::find($entityID);
-                $folderID = $this->getFolderId($folderName);
-                $id = $this->uploadFile($file, $folderID);
-                $entity->$field = $id;
-                $entity->save();
+                    $entity = $model::find($entityID);
+                    $folderID = $this->getFolderId($folderName);
+                    $id = $this->uploadFile($file, $folderID);
+                    $entity->$field = $id;
+                    $entity->save();
             }
         }
         return;
@@ -151,7 +152,9 @@ class GoogleDrive
     public function deleteFileById($fileId)
     {
         try {
-            $this->googleService->files->delete($fileId);
+            if (!Str::contains($fileId, ['images/'])) {
+                $this->googleService->files->delete($fileId);
+            }
         } catch (Exception $e) {
             return $e->getMessage();
         }
