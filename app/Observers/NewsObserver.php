@@ -37,7 +37,7 @@ class NewsObserver
     public function deleted(News $modelsNews)
     {
         $googleDrive = new \App\Services\Cloud\GoogleDrive;
-        $googleDrive->deleteFileById($modelsNews->image);
+        $googleDrive->deleteFile($modelsNews->image);
     }
 
     /**

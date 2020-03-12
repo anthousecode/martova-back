@@ -81,7 +81,7 @@ class GalleryController extends AdminController
         $form->saving(function ($form) {
             try {
                 if ($form->model()->image) {
-                    $this->googleDrive->deleteFileById($form->model()->image);
+                    $this->googleDrive->deleteFile($form->model()->image);
                 }
             } catch (\Exception $e) {
             }

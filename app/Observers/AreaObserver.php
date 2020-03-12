@@ -37,9 +37,9 @@ class AreaObserver
     public function deleted(Area $modelsArea)
     {
         $googleDrive = new \App\Services\Cloud\GoogleDrive;
-        $googleDrive->deleteFileById($modelsArea->image);
-        $googleDrive->deleteFileById($modelsArea->plan);
-        $googleDrive->deleteFileById($modelsArea->survey);
+        $googleDrive->deleteFile($modelsArea->image);
+        $googleDrive->deleteFile($modelsArea->plan);
+        $googleDrive->deleteFile($modelsArea->survey);
     }
 
     /**

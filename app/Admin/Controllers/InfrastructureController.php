@@ -111,10 +111,10 @@ class InfrastructureController extends AdminController
         $form->saving(function ($form) {
             try {
                 if ($form->model()->image) {
-                    $this->googleDrive->deleteFileById($form->model()->image);
+                    $this->googleDrive->deleteFile($form->model()->image);
                 }
                 if ($form->model()->video) {
-                    $this->googleDrive->deleteFileById($form->model()->video);
+                    $this->googleDrive->deleteFile($form->model()->video);
                 }
             } catch (\Exception $e) {
             }

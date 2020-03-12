@@ -49,7 +49,7 @@ class GalleryObserver
      */
     public function deleted(Gallery $gallery)
     {
-        $this->googleDrive->deleteFileById($gallery->image);
+        $this->googleDrive->deleteFile($gallery->image);
     }
 
     /**

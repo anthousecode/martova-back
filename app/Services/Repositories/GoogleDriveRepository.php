@@ -2,12 +2,13 @@
 /**
  * Created by PhpStorm.
  * User: alex
- * Date: 11.02.20
- * Time: 20:45
+ * Date: 12.03.20
+ * Time: 23:24
  */
 
-namespace App\Services\Cloud;
+namespace App\Services\Repositories;
 
+use App\Services\Repositories\Abstractions\IMediaManager;
 use Google_Client;
 use Google_Service_Drive;
 use Google_Service_Drive_DriveFile;
@@ -15,7 +16,11 @@ use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Str;
 
-class GoogleDrive
+/**
+ * Class GoogleDriveRepository
+ * @package App\Services\Repositories
+ */
+class GoogleDriveRepository implements IMediaManager
 {
     protected $googleService;
 
@@ -58,7 +63,7 @@ class GoogleDrive
         return $result->getFiles();
     }
 
-    public function downloadFile(string $fileID)
+    public function downloadFile(string $fileID): \Symfony\Component\HttpFoundation\StreamedResponse
     {
         $file = $this->googleService->files->get($fileID, ['alt' => 'media']);
 
@@ -68,18 +73,13 @@ class GoogleDrive
         return \Illuminate\Support\Facades\Response::download($path, 'file', []);
     }
 
-    public function getFile(string $fileId)
+    public function getFile(string $fileId): string
     {
         $file = $this->googleService->files->get($fileId, ['alt' => 'media']);
         return $file;
-        $path = public_path() . '/placeholder';
-        File::put($path, $file->getBody()->getContents());
-
-        return $path;
     }
 
-    protected function uploadFile(/*UploadedFile*/
-        $file, string $folderID): string
+    protected function uploadFile(UploadedFile $file, string $folderID): string
     {
         $fileMetadata = new Google_Service_Drive_DriveFile([
             'name' => $file->getClientOriginalName(),
@@ -105,11 +105,11 @@ class GoogleDrive
     {
         if (!is_null($file)) {
             if (UploadedFile::class == get_class($file)) {
-                    $entity = $model::find($entityID);
-                    $folderID = $this->getFolderId($folderName);
-                    $id = $this->uploadFile($file, $folderID);
-                    $entity->$field = $id;
-                    $entity->save();
+                $entity = $model::find($entityID);
+                $folderID = $this->getFolderId($folderName);
+                $id = $this->uploadFile($file, $folderID);
+                $entity->$field = $id;
+                $entity->save();
             }
         }
         return;
@@ -149,7 +149,7 @@ class GoogleDrive
         return $urls;
     }
 
-    public function deleteFileById($fileId)
+    public function deleteFile($fileId)
     {
         try {
             if ($fileId) {
@@ -158,7 +158,6 @@ class GoogleDrive
                 }
             }
         } catch (Exception $e) {
-            return $e->getMessage();
         }
         return true;
     }

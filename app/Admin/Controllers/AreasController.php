@@ -126,16 +126,16 @@ class AreasController extends AdminController
         $form->saving(function ($form) {
             try {
                 if ($form->model()->image) {
-                    $this->googleDrive->deleteFileById($form->model()->image);
+                    $this->googleDrive->deleteFile($form->model()->image);
                 }
                 if ($form->model()->plan) {
-                    $this->googleDrive->deleteFileById($form->model()->plan);
+                    $this->googleDrive->deleteFile($form->model()->plan);
                 }
                 if ($form->model()->survey) {
-                    $this->googleDrive->deleteFileById($form->model()->survey);
+                    $this->googleDrive->deleteFile($form->model()->survey);
                 }
                 if ($form->model()->print_plan) {
-                    $this->googleDrive->deleteFileById($form->model()->print_plan);
+                    $this->googleDrive->deleteFile($form->model()->print_plan);
                 }
             } catch (\Exception $e) {
             }

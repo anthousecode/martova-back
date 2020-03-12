@@ -37,8 +37,8 @@ class InfrastructureObserver
     public function deleted(Infrastructure $modelsInfrastructure)
     {
         $googleDrive = new \App\Services\Cloud\GoogleDrive;
-        $googleDrive->deleteFileById($modelsInfrastructure->image);
-        $googleDrive->deleteFileById($modelsInfrastructure->video);
+        $googleDrive->deleteFile($modelsInfrastructure->image);
+        $googleDrive->deleteFile($modelsInfrastructure->video);
     }
 
     /**
