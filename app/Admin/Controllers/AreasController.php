@@ -44,7 +44,9 @@ class AreasController extends AdminController
         $grid->column('number', 'Номер');
         $grid->column('square', 'Площадь');
         $grid->column('price', 'Цена');
-        $grid->column('image', 'Изображение');
+        $grid->column('image', 'Изображение')->display(function($image){
+            return  sprintf("https://drive.google.com/uc?id=%s&export=download", $image);
+        });
         $grid->column('plan', 'Кадастровый план');
         $grid->column('survey', 'Геодезическая съемка');
         $grid->column('print_plan', 'План для печати');
