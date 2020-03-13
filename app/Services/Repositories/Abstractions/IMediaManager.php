@@ -17,20 +17,20 @@ interface IMediaManager
      * @param string $path
      * @return \Symfony\Component\HttpFoundation\StreamedResponse
      */
-    public function downloadFile(string $path): \Symfony\Component\HttpFoundation\StreamedResponse;
+    public function downloadFile(string $path): ?\Symfony\Component\HttpFoundation\StreamedResponse;
 
     /**
      * @param string $path
      * @return string
      */
-    public function getFile(string $path): string;
+    public function getFile(string $path);
 
     /**
      * @param \Illuminate\Http\UploadedFile $file
      * @param string $path
      * @return string
      */
-    public function uploadFile(\Illuminate\Http\UploadedFile $file, string $path): string;
+    public function uploadFile(\Illuminate\Http\UploadedFile $file, ?string $path): string;
 
     /**
      * @param string $path

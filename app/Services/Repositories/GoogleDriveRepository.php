@@ -63,7 +63,7 @@ class GoogleDriveRepository implements IMediaManager
         return $result->getFiles();
     }
 
-    public function downloadFile(string $fileID): \Symfony\Component\HttpFoundation\StreamedResponse
+    public function downloadFile(string $fileID): ?\Symfony\Component\HttpFoundation\StreamedResponse
     {
         $file = $this->googleService->files->get($fileID, ['alt' => 'media']);
 
@@ -73,13 +73,13 @@ class GoogleDriveRepository implements IMediaManager
         return \Illuminate\Support\Facades\Response::download($path, 'file', []);
     }
 
-    public function getFile(string $fileId): string
+    public function getFile(string $fileId)
     {
         $file = $this->googleService->files->get($fileId, ['alt' => 'media']);
         return $file;
     }
 
-    protected function uploadFile(UploadedFile $file, string $folderID): string
+    public function uploadFile(\Illuminate\Http\UploadedFile $file, ?string $folderID): string
     {
         $fileMetadata = new Google_Service_Drive_DriveFile([
             'name' => $file->getClientOriginalName(),
@@ -101,21 +101,16 @@ class GoogleDriveRepository implements IMediaManager
         return $newFILE->id;
     }
 
-    public function storeFileOnAdminSaving($folderName, $file, $model, $entityID, $field)
+    public function storeFileOnAdminSaving(string $folderName, \Illuminate\Http\UploadedFile $file, string $model, int $entityID, string $field): void
     {
-        if (!is_null($file)) {
-            if (UploadedFile::class == get_class($file)) {
-                $entity = $model::find($entityID);
-                $folderID = $this->getFolderId($folderName);
-                $id = $this->uploadFile($file, $folderID);
-                $entity->$field = $id;
-                $entity->save();
-            }
-        }
-        return;
+        $entity = $model::find($entityID);
+        $folderID = $this->getFolderId($folderName);
+        $id = $this->uploadFile($file, $folderID);
+        $entity->$field = $id;
+        $entity->save();
     }
 
-    public function getFileLink(string $fileId)
+    public function getFileLink(string $fileId): string
     {
         return $this->googleService->files->get($fileId, ["fields" => "webViewLink"]);
     }
@@ -149,16 +144,12 @@ class GoogleDriveRepository implements IMediaManager
         return $urls;
     }
 
-    public function deleteFile($fileId)
+    public function deleteFile(string $fileId): void
     {
         try {
-            if ($fileId) {
-                if (!Str::contains($fileId, ['images/'])) {
-                    $this->googleService->files->delete($fileId);
-                }
-            }
-        } catch (Exception $e) {
+            $this->googleService->files->delete($fileId);
+        } catch (\Exception $e) {
+            report(\Carbon\Carbon::now()->toDateTimeString() . ': ' . $e->getMessage());
         }
-        return true;
     }
 }

@@ -6,18 +6,10 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Area;
 use App\Http\Resources\Area as AreaResource;
-use App\Services\Cloud\GoogleDrive;
 use App\Models\AreaImage;
 
 class AreaController extends Controller
 {
-    protected $googleDrive;
-
-    public function __construct(GoogleDrive $googleDrive)
-    {
-        $this->googleDrive = $googleDrive;
-    }
-
     /**
      * @OA\Get(
      *  path="/search-area/{num}",
@@ -163,7 +155,7 @@ class AreaController extends Controller
     {
         $filePath = Area::select('plan')->where('id', $id)->get()->pluck('plan')->toArray()[0];
 
-        return $this->googleDrive->downloadFile($filePath);
+        return \MediaManager::downloadFile($filePath);
     }
 
     /**
@@ -191,7 +183,7 @@ class AreaController extends Controller
     {
         $filePath = Area::select('survey')->where('id', $id)->get()->pluck('survey')->toArray()[0];
 
-        return $this->googleDrive->downloadFile($filePath);
+        return \MediaManager::downloadFile($filePath);
     }
 
     /**
@@ -236,7 +228,7 @@ class AreaController extends Controller
 
         $areaFilesLinks = [];
         foreach ($filesIds as $fId) {
-            $areaFilesLinks[] = $this->googleDrive->getFileLink($fId);
+            $areaFilesLinks[] = \MediaManager::getFileLink($fId);
         }
         $areaFilesLinks = array_unique($areaFilesLinks);
 
@@ -246,7 +238,7 @@ class AreaController extends Controller
     public function getFile(string $file_id)
     {
         return response()->streamDownload(function () use ($file_id) {
-            echo file_get_contents($this->googleDrive->getFile($file_id));
+            echo file_get_contents(\MediaManager::getFile($file_id));
         }, 'placeholder');
     }
 

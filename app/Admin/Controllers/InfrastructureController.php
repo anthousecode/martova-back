@@ -9,17 +9,13 @@ use Encore\Admin\Grid;
 use Encore\Admin\Show;
 use App\Models\CategoryInfrastructure;
 use Illuminate\Http\Request;
-use App\Services\Cloud\GoogleDrive;
 
 class InfrastructureController extends AdminController
 {
-    protected $googleDrive;
-
     protected $request;
 
-    public function __construct(GoogleDrive $googleDrive, Request $request)
+    public function __construct(Request $request)
     {
-        $this->googleDrive = $googleDrive;
         $this->request = $request;
     }
 
@@ -111,23 +107,24 @@ class InfrastructureController extends AdminController
         $form->saving(function ($form) {
             try {
                 if ($form->model()->image) {
-                    $this->googleDrive->deleteFile($form->model()->image);
+                    \MediaManager::deleteFile($form->model()->image);
                 }
                 if ($form->model()->video) {
-                    $this->googleDrive->deleteFile($form->model()->video);
+                    \MediaManager::deleteFile($form->model()->video);
                 }
             } catch (\Exception $e) {
+                report(\Carbon\Carbon::now()->toDateTimeString() . ': ' . $e->getMessage());
             }
         });
 
         $form->saved(function ($form) {
-            $this->googleDrive->storeFileOnAdminSaving('infrastructure_3d_images',
+            \MediaManager::storeFileOnAdminSaving('infrastructure_3d_images',
                 $form->image,
                 Infrastructure::class,
                 $form->model()->id,
                 'image'
             );
-            $this->googleDrive->storeFileOnAdminSaving('infrastructure_videos',
+            \MediaManager::storeFileOnAdminSaving('infrastructure_videos',
                 $form->video,
                 Infrastructure::class,
                 $form->model()->id,

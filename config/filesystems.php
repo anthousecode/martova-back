@@ -55,6 +55,14 @@ return [
             'visibility' => 'public',
         ],
 
+        # Main
+        'admin' => [
+            'driver' => 'local',
+            'root' => public_path('upload'),
+            'visibility' => 'public',
+            'url' => env('APP_URL').'/uploads',
+        ],
+
         's3' => [
             'driver' => 's3',
             'key' => env('AWS_ACCESS_KEY_ID'),
@@ -64,31 +72,9 @@ return [
             'url' => env('AWS_URL'),
         ],
 
-        'admin' => [
-            'driver' => 'local',
-            'root' => public_path('upload'),
-            'visibility' => 'public',
-            'url' => env('APP_URL').'/uploads',
-        ],
-
-//        'google' => [
-//            'driver' => 'google',
-//            'clientId' => config('services.google.client_id'),
-//            'clientSecret' => config('services.google.client_secret'),
-//            'refreshToken' => config('services.google.refresh_token'),
-//            'folderId' => config('services.google.folder_id'),
-//            'visibility' => 'public',
-//        ],
          'google' => [
-            // 'driver' => 'google',
-//             'domains' => [
-//                 'https'     => 'sweews.herokuapp.com',
-//             ],
              'access_key'=> config('services.google.client_id'),  //AccessKey
              'secret_key'=> config('services.google.client_secret'),  //SecretKey
-           //  'bucket'    => '',  //Bucket
-           //  'notify_url'=> '',  //
-           //  'url'       => 'http://of8kfibjo.bkt.clouddn.com/',
          ],
 
     ],

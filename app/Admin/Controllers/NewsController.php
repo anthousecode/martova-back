@@ -10,17 +10,13 @@ use Encore\Admin\Grid;
 use Encore\Admin\Show;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
-use App\Services\Cloud\GoogleDrive;
 
 class NewsController extends AdminController
 {
-    protected $googleDrive;
-
     protected $request;
 
-    public function __construct(GoogleDrive $googleDrive, Request $request)
+    public function __construct(Request $request)
     {
-        $this->googleDrive = $googleDrive;
         $this->request = $request;
     }
 
@@ -103,9 +99,10 @@ class NewsController extends AdminController
         $form->saving(function ($form) {
             try {
                 if ($form->model()->image) {
-                    $this->googleDrive->deleteFile($form->model()->image);
+                    \MediaManager::deleteFile($form->model()->image);
                 }
             } catch (\Exception $e) {
+                report(\Carbon\Carbon::now()->toDateTimeString() . ': ' . $e->getMessage());
             }
         });
 
@@ -120,7 +117,7 @@ class NewsController extends AdminController
                     'updated_at' => Carbon::now()->toDateTimeString()
                 ]);
             }
-            $this->googleDrive->storeFileOnAdminSaving('news_images',
+            \MediaManager::storeFileOnAdminSaving('news_images',
                 $form->image,
                 News::class,
                 $form->model()->id,

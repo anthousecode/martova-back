@@ -8,17 +8,9 @@ use App\Models\Comment;
 use App\User;
 use Illuminate\Support\Facades\Validator;
 use App\Http\Resources\Comment as CommentResource;
-use App\Services\Cloud\GoogleDrive;
 
 class CommentController extends Controller
 {
-    protected $googleDrive;
-
-    public function __construct(GoogleDrive $googleDrive)
-    {
-        $this->googleDrive = $googleDrive;
-    }
-
     /**
      * @OA\Post(
      *     path="/add_comment/{news_id}",
@@ -52,20 +44,6 @@ class CommentController extends Controller
      *     )
      * )
      */
-
-    /**
-     * @param Request $request
-     */
-    public function foo (Request $request)
-    {
-        return;
-    }
-
-    /**
-     * @param $news_id
-     * @param Request $request
-     * @return \Illuminate\Http\JsonResponse
-     */
     public function addComment($news_id, Request $request)
     {
         if (!$request->text) {
@@ -82,7 +60,7 @@ class CommentController extends Controller
         ]);
         $image = $request->file('image') ?? null;
         if (!is_null($image)) {
-            $this->googleDrive->storeFileOnAdminSaving('comments_images',
+            \MediaManager::storeFileOnAdminSaving('comments_images',
                 $image,
                 Comment::class,
                 $comment->id,

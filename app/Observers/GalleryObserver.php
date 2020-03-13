@@ -3,17 +3,9 @@
 namespace App\Observers;
 
 use App\Models\Gallery;
-use App\Services\Cloud\GoogleDrive;
 
 class GalleryObserver
 {
-    protected $googleDrive;
-
-    public function __construct(GoogleDrive $google)
-    {
-        $this->googleDrive = $google;
-    }
-
     /**
      * Handle the gallery "created" event.
      *
@@ -49,7 +41,7 @@ class GalleryObserver
      */
     public function deleted(Gallery $gallery)
     {
-        $this->googleDrive->deleteFile($gallery->image);
+        \MediaManager::deleteFile($gallery->image);
     }
 
     /**

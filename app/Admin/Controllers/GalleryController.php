@@ -8,18 +8,14 @@ use Encore\Admin\Form;
 use Encore\Admin\Grid;
 use Encore\Admin\Show;
 use File;
-use App\Services\Cloud\GoogleDrive;
 use Illuminate\Http\Request;
 
 class GalleryController extends AdminController
 {
-    protected $googleDrive;
-
     protected $request;
 
-    public function __construct(GoogleDrive $googleDrive, Request $request)
+    public function __construct(Request $request)
     {
-        $this->googleDrive = $googleDrive;
         $this->request = $request;
     }
 
@@ -81,14 +77,15 @@ class GalleryController extends AdminController
         $form->saving(function ($form) {
             try {
                 if ($form->model()->image) {
-                    $this->googleDrive->deleteFile($form->model()->image);
+                    \MediaManager::deleteFile($form->model()->image);
                 }
             } catch (\Exception $e) {
+                report(\Carbon\Carbon::now()->toDateTimeString() . ': ' . $e->getMessage());
             }
         });
 
         $form->saved(function (Form $form) {
-            $this->googleDrive->storeFileOnAdminSaving('gallery_images',
+            \MediaManager::storeFileOnAdminSaving('gallery_images',
                 $form->image,
                 Gallery::class,
                 $form->model()->id,

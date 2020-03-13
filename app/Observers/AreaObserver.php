@@ -36,10 +36,9 @@ class AreaObserver
      */
     public function deleted(Area $modelsArea)
     {
-        $googleDrive = new \App\Services\Cloud\GoogleDrive;
-        $googleDrive->deleteFile($modelsArea->image);
-        $googleDrive->deleteFile($modelsArea->plan);
-        $googleDrive->deleteFile($modelsArea->survey);
+        \MediaManager::deleteFile($modelsArea->image);
+        \MediaManager::deleteFile($modelsArea->plan);
+        \MediaManager::deleteFile($modelsArea->survey);
     }
 
     /**

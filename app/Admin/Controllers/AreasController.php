@@ -8,18 +8,14 @@ use Encore\Admin\Form;
 use Encore\Admin\Grid;
 use Encore\Admin\Show;
 use App\Models\AreaStatus;
-use App\Services\Cloud\GoogleDrive;
 use Illuminate\Http\Request;
 
 class AreasController extends AdminController
 {
-    protected $googleDrive;
-
     protected $request;
 
-    public function __construct(GoogleDrive $googleDrive, Request $request)
+    public function __construct(Request $request)
     {
-        $this->googleDrive = $googleDrive;
         $this->request = $request;
     }
 
@@ -126,41 +122,42 @@ class AreasController extends AdminController
         $form->saving(function ($form) {
             try {
                 if ($form->model()->image) {
-                    $this->googleDrive->deleteFile($form->model()->image);
+                    \MediaManager::deleteFile($form->model()->image);
                 }
                 if ($form->model()->plan) {
-                    $this->googleDrive->deleteFile($form->model()->plan);
+                    \MediaManager::deleteFile($form->model()->plan);
                 }
                 if ($form->model()->survey) {
-                    $this->googleDrive->deleteFile($form->model()->survey);
+                    \MediaManager::deleteFile($form->model()->survey);
                 }
                 if ($form->model()->print_plan) {
-                    $this->googleDrive->deleteFile($form->model()->print_plan);
+                    \MediaManager::deleteFile($form->model()->print_plan);
                 }
             } catch (\Exception $e) {
+                report(\Carbon\Carbon::now()->toDateTimeString() . ': ' . $e->getMessage());
             }
         });
 
         $form->saved(function ($form) {
-            $this->googleDrive->storeFileOnAdminSaving('areas_images',
+            \MediaManager::storeFileOnAdminSaving('areas_images',
                 $form->image,
                 Area::class,
                 $form->model()->id,
                 'image'
             );
-            $this->googleDrive->storeFileOnAdminSaving('areas_cad_plans',
+            \MediaManager::storeFileOnAdminSaving('areas_cad_plans',
                 $form->plan,
                 Area::class,
                 $form->model()->id,
                 'plan'
             );
-            $this->googleDrive->storeFileOnAdminSaving('areas_geo_record',
+            \MediaManager::storeFileOnAdminSaving('areas_geo_record',
                 $form->survey,
                 Area::class,
                 $form->model()->id,
                 'survey'
             );
-            $this->googleDrive->storeFileOnAdminSaving('areas_print_plans',
+            \MediaManager::storeFileOnAdminSaving('areas_print_plans',
                 $form->print_plan,
                 Area::class,
                 $form->model()->id,

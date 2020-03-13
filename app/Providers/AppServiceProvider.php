@@ -5,24 +5,13 @@ namespace App\Providers;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
-use Hypweb\Flysystem\GoogleDrive\GoogleDriveAdapter;
-use Google_Client;
-use App\Services\Cloud\GoogleDrive;
-use Illuminate\Support\Str;
-use \Illuminate\Http\Request;
-use App\Models\Area;
-use App\Models\AreaStatus;
-use App\Models\Gallery;
-use App\Models\CategoryInfrastructure;
-use App\Models\Comment;
-use App\Models\Infrastructure;
-use App\Models\Menu;
-use App\Models\News;
-use App\Models\NewsLike;
-use App\Models\Page;
+use App\Services\Repositories\Abstractions\IMediaManager;
+use App\Services\Repositories\FilesystemRepository;
 
 class AppServiceProvider extends ServiceProvider
 {
+    // CENTRALIZED MEDIA-MANAGEMENT REPOSITORY DEFINITION
+    private const MEDIA_MANAGER_IMPLEMENTATION = FilesystemRepository::class;
     /**
      * Register any application services.
      *
@@ -33,6 +22,12 @@ class AppServiceProvider extends ServiceProvider
         \URL::forceScheme('https');
         $this->app->register(\L5Swagger\L5SwaggerServiceProvider::class);
 
+        $this->app->bind(IMediaManager::class, self::MEDIA_MANAGER_IMPLEMENTATION);
+        $this->app->bind('media_manager', function () {
+            return new (self::MEDIA_MANAGER_IMPLEMENTATION);
+        });
+
+        // db stuff ...
         if (!Schema::hasColumn('users', 'api_token')) {
             Schema::table('users', function (Blueprint $table) {
                 $table->string('api_token', 36)->nullable();
