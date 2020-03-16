@@ -23,7 +23,7 @@ class Area extends JsonResource
                     'x' => $foo[$i], 'y' => (array_key_exists(($i+1), $foo)) ? $foo[$i+1] : 0,
                 ];
             }
-        }
+	}
         $this->polygon = json_encode($bar);
         return [
             'id' => $this->id,
@@ -39,10 +39,10 @@ class Area extends JsonResource
                 'fill' => $this->color ?? $this->default_color,
                 'stroke' => $this->stroke,
             ],
-            'image' => sprintf("https://drive.google.com/uc?id=%s&export=download", $this->image),
-            'plan' => sprintf("https://drive.google.com/uc?id=%s&export=download", $this->plan),
-            'survey' => sprintf("https://drive.google.com/uc?id=%s&export=download", $this->survey),
-            'print_plan' => sprintf("https://drive.google.com/uc?id=%s&export=download", $this->print_plan),
+	    'image' => \MediaManager::getFileLink($this->image),
+            'plan' => \MediaManager::getFileLink($this->plan),
+            'survey' => \MediaManager::getFileLink($this->survey),
+            'print_plan' => \MediaManager::getFileLink($this->print_plan),
         ];
     }
 }

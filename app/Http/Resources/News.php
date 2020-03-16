@@ -21,7 +21,7 @@ class News extends JsonResource
             'ua_name' => $this->ua_name,
             'ru_description' => $this->ru_description,
             'ua_description' => $this->ua_description,
-            'image' => sprintf("https://drive.google.com/uc?id=%s&export=download", $this->image),
+            'image' => \MediaManager::getFileLink($this->image),
             'likes_count' => $this->likes_count ?? 0,
             'comments_count' => $this->comments_count ?? 0,
             'created_at' => $this->created_at,

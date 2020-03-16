@@ -80,17 +80,17 @@ class GalleryController extends AdminController
                     \MediaManager::deleteFile($form->model()->image);
                 }
             } catch (\Exception $e) {
-                report(\Carbon\Carbon::now()->toDateTimeString() . ': ' . $e->getMessage());
+                logException(__CLASS__, __METHOD__, $e->getMessage());
             }
         });
 
         $form->saved(function (Form $form) {
-            \MediaManager::storeFileOnAdminSaving('gallery_images',
+          \MediaManager::storeFileOnAdminSaving('gallery_images',
                 $form->image,
                 Gallery::class,
                 $form->model()->id,
                 'image'
-            );
+	  );
             \Cache::flush();
         });
 

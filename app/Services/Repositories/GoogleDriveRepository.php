@@ -40,13 +40,17 @@ class GoogleDriveRepository implements IMediaManager
 
     public function __construct()
     {
+	try {
         $client = new Google_Client();
         $client->setApplicationName(config('services.google.name'));
         $client->addScope(\Google_Service_Drive::DRIVE, \Google_Service_Drive::DRIVE_FILE, \Google_Service_Drive::DRIVE_APPDATA);
         $client->setDeveloperKey(config('services.google.key'));
         putenv('GOOGLE_APPLICATION_CREDENTIALS=' . public_path() . '/martova-5f65bbf30170.json');
         $client->useApplicationDefaultCredentials();
-        $this->googleService = new Google_Service_Drive($client);
+	$this->googleService = new Google_Service_Drive($client);
+        } catch(\Exception $e) {
+          logException(__CLASS__, __METHOD__, $e->getMessage());
+	}
     }
 
     public function getFolderId(string $name): string
@@ -56,31 +60,47 @@ class GoogleDriveRepository implements IMediaManager
 
     protected function getFilesByFolderId(string $folderID)
     {
+	try {
         $result = $this->googleService->files->listFiles([
             'q' => sprintf("'%s' in parents", $folderID),
             'fields' => 'files(*)',
         ]);
-        return $result->getFiles();
+	$files = $result->getFiles();
+	} catch (\Exception $e) {
+		logException(__CLASS__, __METHOD__, $e->getMessage());
+		return [];
+	}
+	return $files;
     }
 
     public function downloadFile(string $fileID): ?\Symfony\Component\HttpFoundation\StreamedResponse
     {
+	try {
         $file = $this->googleService->files->get($fileID, ['alt' => 'media']);
 
         $path = public_path() . '/placeholder';
         File::put($path, $file->getBody()->getContents());
-
+        } catch (\Exception $e) {
+           logException(__CLASS__, __METHOD__, $e->getMessage());
+	   return null;
+	}
         return \Illuminate\Support\Facades\Response::download($path, 'file', []);
     }
 
     public function getFile(string $fileId)
     {
-        $file = $this->googleService->files->get($fileId, ['alt' => 'media']);
+	try {
+		$file = $this->googleService->files->get($fileId, ['alt' => 'media']);
+	} catch (\Exception $e) {
+           logException(__CLASS__, __METHOD__, $e->getMessage());
+	   return '';
+	}
         return $file;
     }
 
     public function uploadFile(\Illuminate\Http\UploadedFile $file, ?string $folderID): string
     {
+	try {
         $fileMetadata = new Google_Service_Drive_DriveFile([
             'name' => $file->getClientOriginalName(),
             'parents' => [$folderID],
@@ -97,22 +117,40 @@ class GoogleDriveRepository implements IMediaManager
         $newPermission = new \Google_Service_Drive_Permission();
         $newPermission->setType('anyone');
         $newPermission->setRole('reader');
-        $this->googleService->permissions->create($newFILE->id, $newPermission);
+	$this->googleService->permissions->create($newFILE->id, $newPermission);
+	 } catch (\Exception $e){
+		 logException(__CLASS__, __METHOD__, $e->getMessage());
+		 return '';
+	 }
         return $newFILE->id;
     }
 
     public function storeFileOnAdminSaving(string $folderName, \Illuminate\Http\UploadedFile $file, string $model, int $entityID, string $field): void
     {
-        $entity = $model::find($entityID);
+	    
+	    $entity = $model::find($entityID);
+	    try {
         $folderID = $this->getFolderId($folderName);
-        $id = $this->uploadFile($file, $folderID);
+	$id = $this->uploadFile($file, $folderID);
+	    } catch (\Exception $e) {
+ logException(__CLASS__, __METHOD__, $e->getMessage());
+	}
         $entity->$field = $id;
-        $entity->save();
+	$entity->save();
+	    
     }
 
-    public function getFileLink(string $fileId): string
+    public function getFileLink(?string $fileId): string
     {
-        return $this->googleService->files->get($fileId, ["fields" => "webViewLink"]);
+	    if (!is_null($fileId)) { 
+		    try {
+			    $this->googleService->files->get($fileId, ["fields" => "webViewLink"]);
+		    } catch (\Exception $e) {
+			    logException(__CLASS__, __METHOD__, $e->getMessage());
+			    return '';
+		    }
+	 } 
+	 return '';
     }
 
     public function fetchAllFiles($folId = null)
@@ -125,13 +163,15 @@ class GoogleDriveRepository implements IMediaManager
             }
         } else {
             $foldersIds[] = $folId;
-        }
+	}
+	try {
         foreach ($foldersIds as $folderId) {
             $files[] = $this->googleService->files->listFiles([
                 'q' => "'" . $folderId . "' in parents",
                 'fields' => 'files(id,webViewLink)',
             ]);
-        }
+	}
+	
 
         $urls = [];
         foreach ($files as $file) {
@@ -140,7 +180,11 @@ class GoogleDriveRepository implements IMediaManager
                     $urls[$f->id] = $f->webViewLink;
                 }
             }
-        }
+	} 
+	} catch (\Exception $e) {
+           logException(__CLASS__, __METHOD__, $e->getMessage());
+	   return [];
+	}
         return $urls;
     }
 
@@ -149,7 +193,8 @@ class GoogleDriveRepository implements IMediaManager
         try {
             $this->googleService->files->delete($fileId);
         } catch (\Exception $e) {
-            report(\Carbon\Carbon::now()->toDateTimeString() . ': ' . $e->getMessage());
+		logException(__CLASS__, __METHOD__, $e->getMessage());
+		return;
         }
     }
 }

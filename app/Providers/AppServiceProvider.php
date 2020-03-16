@@ -10,8 +10,6 @@ use App\Services\Repositories\FilesystemRepository;
 
 class AppServiceProvider extends ServiceProvider
 {
-    // CENTRALIZED MEDIA-MANAGEMENT REPOSITORY DEFINITION
-    private const MEDIA_MANAGER_IMPLEMENTATION = FilesystemRepository::class;
     /**
      * Register any application services.
      *
@@ -19,13 +17,17 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        \URL::forceScheme('https');
+       //\URL::forceScheme('https');
         $this->app->register(\L5Swagger\L5SwaggerServiceProvider::class);
 
-        $this->app->bind(IMediaManager::class, self::MEDIA_MANAGER_IMPLEMENTATION);
-        $this->app->bind('media_manager', function () {
-            return new (self::MEDIA_MANAGER_IMPLEMENTATION);
-        });
+	// CENTRALIZED MEDIA-MANAGEMENT REPOSITORY DEFINITION
+        $this->app->bind(IMediaManager::class, config('filesystems.repository'));
+	 $this->app->bind('media_manager', function () {
+            return app(config('filesystems.repository'));
+	 });
+
+	// helpers ...
+	require_once app_path('Services/Helpers/Logger.php');
 
         // db stuff ...
         if (!Schema::hasColumn('users', 'api_token')) {

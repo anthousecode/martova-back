@@ -45,7 +45,7 @@ interface IMediaManager
      * @param string $path
      * @return string
      */
-    public function getFileLink(string $path): string;
+    public function getFileLink(?string $path): string;
 
     /**
      * @param string $path

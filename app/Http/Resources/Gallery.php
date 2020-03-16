@@ -16,7 +16,7 @@ class Gallery extends JsonResource
     {
         return [
             'id' => $this->id,
-            'image' => sprintf("https://drive.google.com/uc?id=%s&export=download", $this->image),
+            'image' => \MediaManager::getFileLink($this->image),
             'created_at' => $this->created_at,
             'updated_at' => $this->updated_at,
         ];

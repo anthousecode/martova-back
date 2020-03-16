@@ -15,6 +15,8 @@ return [
 
     'default' => env('FILESYSTEM_DRIVER', 'local'),
 
+    'repository' => 'App\Services\Repositories\FilesystemRepository',
+
     /*
     |--------------------------------------------------------------------------
     | Default Cloud Filesystem Disk
@@ -50,17 +52,17 @@ return [
 
         'public' => [
             'driver' => 'local',
-            'root' => storage_path('app/public'),
-            'url' => env('APP_URL').'/storage',
-            'visibility' => 'public',
+   'root' => public_path('uploads'),
+   'url' => env('APP_URL').'/uploads',
+   'visibility' => 'public',
         ],
 
         # Main
         'admin' => [
             'driver' => 'local',
-            'root' => public_path('upload'),
-            'visibility' => 'public',
+            'root' => public_path('uploads'),
             'url' => env('APP_URL').'/uploads',
+            'visibility' => 'public',
         ],
 
         's3' => [

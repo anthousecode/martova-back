@@ -26,7 +26,7 @@ class FilesystemRepository implements IMediaManager
         try {
             $file = $this->storage->get($filePath);
         } catch (\Exception $e) {
-            report(\Carbon\Carbon::now()->toDateTimeString() . ': ' . $e->getMessage());
+            logException(__CLASS__, __METHOD__, $e->getMessage());
             return null;
         }
         return \Illuminate\Support\Facades\Response::download($file, 'file', []);
@@ -37,7 +37,7 @@ class FilesystemRepository implements IMediaManager
         try {
             $file = $this->storage->get($filePath);
         } catch (\Exception $e) {
-            report(\Carbon\Carbon::now()->toDateTimeString() . ': ' . $e->getMessage());
+            logException(__CLASS__, __METHOD__, $e->getMessage());
             return null;
         }
         return $file;
@@ -46,32 +46,42 @@ class FilesystemRepository implements IMediaManager
     public function uploadFile(UploadedFile $file, ?string $path): string
     {
         try {
-            $fileName = uniqid('', true) . $file->getClientOriginalName() . $file->getClientOriginalExtension();
+            $fileName = uniqid('', true) . $file->getClientOriginalName();
             $path = $this->storage->put($fileName, $file);
         } catch (\Exception $e) {
-            report(\Carbon\Carbon::now()->toDateTimeString() . ': ' . $e->getMessage());
-            return null;
+            logException(__CLASS__, __METHOD__, $e->getMessage());
+            return '';
         }
         return $path;
     }
 
+    // DEPRECATED BECAUSE OF ADMIN PANEL SAVING
     public function storeFileOnAdminSaving(string $path, UploadedFile $file, string $model, int $entityID, string $fieldName): void
     {
-        $entity = $model::find($entityID);
-        $path = $this->uploadFile($file, null);
+    /*    $entity = $model::find($entityID);
+	    try {
+	       $path = $this->uploadFile($file, null);
+	    } catch (\Exception $e) {
+               logException(__CLASS__, __METHOD__, $e->getMessage());
+	       return;
+            }
         $entity->$fieldName = $path;
         $entity->save();
+      */
     }
 
-    public function getFileLink(string $path): string
+    public function getFileLink(?string $path): string
     {
-        try {
-            $src = $this->storage->url($path);
-        } catch (\Exception $e) {
-            report(\Carbon\Carbon::now()->toDateTimeString() . ': ' . $e->getMessage());
-            return null;
-        }
-        return $src;
+	if (!is_null($path)) { 
+          try {
+              $src = $this->storage->url($path);
+	  } catch (\Exception $e) {
+	      logException(__CLASS__, __METHOD__, $e->getMessage());
+              return '';
+       	  }
+          return $src;
+	} 
+        return '';
     }
 
     public function deleteFile(string $path): void
@@ -79,7 +89,8 @@ class FilesystemRepository implements IMediaManager
         try {
             $this->storage->delete($path);
         } catch (\Exception $e) {
-            report(\Carbon\Carbon::now()->toDateTimeString() . ': ' . $e->getMessage());
+		logException(__CLASS__, __METHOD__, $e->getMessage());
+		return; 
         }
     }
 }

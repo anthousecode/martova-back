@@ -8,7 +8,7 @@
 
 namespace App\Services\Facades;
 
-use Illuminate/Support/Facades/Facade;
+use Illuminate\Support\Facades\Facade;
 
 class MediaManager extends Facade
 {

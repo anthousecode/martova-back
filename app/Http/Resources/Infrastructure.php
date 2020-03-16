@@ -28,8 +28,8 @@ class Infrastructure extends JsonResource
             'ua_description' => $this->ua_description,
             'icon' => $this->icon,
             'timing' => $this->timing,
-            'image' => sprintf("https://drive.google.com/uc?id=%s&export=download", $this->image),
-            'video' => sprintf("https://drive.google.com/uc?id=%s&export=download", $this->video),
+            'image' => \MediaManager::getFileLink($this->image),
+            'video' => \MediaManager::getFileLink($this->video),
             'created_at' => $this->created_at,
             'updated_at' => $this->updated_at,
         ];

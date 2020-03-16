@@ -29,7 +29,7 @@ class Comment extends JsonResource
             'news' => $this->news,
             'author' => $this->author,
             'text' => $this->text,
-            'image' => $this->image ? sprintf("https://drive.google.com/uc?id=%s&export=download", $this->image) : '',
+            'image' => \MediaManager::getFileLink($this->image),
             'image_type' => $fileType,
             'created_at' => $this->created_at,
             'updated_at' => $this->updated_at,
