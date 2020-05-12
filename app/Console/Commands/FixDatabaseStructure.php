@@ -102,12 +102,11 @@ class FixDatabaseStructure extends Command
         Schema::table('comments', function (Blueprint $table) {
             $table->mediumText('text')->change();
         });
-*/
 
         Schema::table('areas', function (Blueprint $table) {
             $table->float('square', 8, 4)->nullable()->change();
         });
-
+*/
 
     }
 }
