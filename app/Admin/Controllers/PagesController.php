@@ -30,8 +30,8 @@ class PagesController extends AdminController
         $grid->column('slug', 'Элемент URL');
         $grid->column('order', 'Порядок');
         $grid->column('ru_title', 'Заголовок');
-        $grid->column('ru_meta_description', 'Описание');
-        $grid->column('ru_content', 'Контент');
+      //  $grid->column('ru_meta_description', 'Описание');
+     //   $grid->column('ru_content', 'Контент');
         $grid->column('created_at', 'Время создания');
         $grid->column('updated_at', 'Время обновления');
 

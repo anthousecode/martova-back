@@ -40,7 +40,7 @@ class NewsController extends AdminController
         $grid->column('is_published', 'Опубликовано');
         $grid->column('ru_name', 'Название');
         $grid->column('ru_description', 'Описание');
-        $grid->column('image', 'Изображение');
+       // $grid->column('image', 'Изображение');
         $grid->column('created_at', 'Дата создания');
         $grid->column('updated_at', 'Дата обновления');
 
@@ -97,7 +97,7 @@ class NewsController extends AdminController
         });
 
         $form->saving(function ($form) {
-	try { 
+	try {
                 if ($form->image && ($form->model()->image != $form->image)) {
                     \MediaManager::deleteFile($form->model()->image);
                 }

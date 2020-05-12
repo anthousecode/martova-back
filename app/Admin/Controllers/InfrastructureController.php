@@ -42,7 +42,7 @@ class InfrastructureController extends AdminController
         $grid->column('Y', 'Расположение по оси Y');
         $grid->column('ru_name', 'Название');
         $grid->column('ru_description', 'Описание');
-        $grid->column('icon', 'Иконка');
+   //     $grid->column('icon', 'Иконка');
         $grid->column('timing', 'Время');
   //      $grid->column('video', 'Видео');
         $grid->column('created_at', 'Время создания');
