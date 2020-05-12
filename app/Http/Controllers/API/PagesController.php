@@ -25,7 +25,7 @@ class PagesController extends Controller
      *         @OA\MediaType(
      *           mediaType="application/json",
      *           @OA\Property(
-     *               property="pages",
+     *               property="page",
      *               type="array",
      *               description="All pages",
      *               @OA\Items()
@@ -34,9 +34,11 @@ class PagesController extends Controller
      *     )
      * )
      */
-    public function getByUniqueTitle($slug = null)
+    public function getByUniqueSlug($slug = null)
     {
-        return json_encode(['pages' => Page::where('slug', $slug)->get()->toArray()]);
+	 $page = Page::where('slug', $slug)->first();
+         
+	 return json_encode(['page' => $page], JSON_UNESCAPED_UNICODE);
     }
 
     /**
@@ -62,9 +64,8 @@ class PagesController extends Controller
      */
     public function fetchPages()
     {
-        $pages = \Cache::remember('all_pages', 1440, function () {
-            return Page::orderBy('order', 'asc')->get();
-        });
-        return json_encode(['pages' => $pages]);
+        $pages = Page::orderBy('order', 'asc')->get();
+        
+        return json_encode(['pages' => $pages], JSON_UNESCAPED_UNICODE);
     }
 }

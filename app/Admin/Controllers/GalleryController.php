@@ -72,26 +72,25 @@ class GalleryController extends AdminController
     {
         $form = new Form(new Gallery);
 
-        $form->image('image', 'Изображение');
+        $form->image('image', 'Изображение')->required();
 
-        $form->saving(function ($form) {
+	$form->saving(function ($form) {
             try {
-                if ($form->model()->image) {
+                if ($form->image && ($form->model()->image != $form->image)) {
                     \MediaManager::deleteFile($form->model()->image);
-                }
+		}
             } catch (\Exception $e) {
                 logException(__CLASS__, __METHOD__, $e->getMessage());
             }
         });
 
-        $form->saved(function (Form $form) {
+	$form->saved(function (Form $form) {
           \MediaManager::storeFileOnAdminSaving('gallery_images',
                 $form->image,
                 Gallery::class,
                 $form->model()->id,
                 'image'
-	  );
-            \Cache::flush();
+	);
         });
 
         return $form;

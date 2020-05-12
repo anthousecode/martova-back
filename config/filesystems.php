@@ -14,7 +14,8 @@ return [
     */
 
     'default' => env('FILESYSTEM_DRIVER', 'local'),
-
+    
+    # Change value, if you need other way to manage files
     'repository' => 'App\Services\Repositories\FilesystemRepository',
 
     /*
@@ -49,12 +50,18 @@ return [
             'driver' => 'local',
             'root' => storage_path('app'),
         ],
+ 
+        'ren' => [
+            'driver' => 'local',
+	    'root' => storage_path(),
+	    'visibility' => 'public',
+	],
 
         'public' => [
             'driver' => 'local',
-   'root' => public_path('uploads'),
-   'url' => env('APP_URL').'/uploads',
-   'visibility' => 'public',
+            'root' => public_path('uploads'),
+            'url' => env('APP_URL').'/uploads',
+            'visibility' => 'public',
         ],
 
         # Main

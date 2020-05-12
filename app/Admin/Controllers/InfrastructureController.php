@@ -37,14 +37,14 @@ class InfrastructureController extends AdminController
 
         $grid->column('id', 'Идентификатор');
         $grid->column('category.ru_name', 'Категория');
-        $grid->column('image', '3D изображение');
+  //      $grid->column('image', '3D изображение');
         $grid->column('X', 'Расположение по оси X');
         $grid->column('Y', 'Расположение по оси Y');
         $grid->column('ru_name', 'Название');
         $grid->column('ru_description', 'Описание');
         $grid->column('icon', 'Иконка');
         $grid->column('timing', 'Время');
-        $grid->column('video', 'Видео');
+  //      $grid->column('video', 'Видео');
         $grid->column('created_at', 'Время создания');
         $grid->column('updated_at', 'Время обновления');
 
@@ -65,14 +65,14 @@ class InfrastructureController extends AdminController
         $show->field('category', 'Категория')->as(function ($default) {
             return $default ? $default->ru_name : '-';
         });
-        $show->field('image', '3D изображение');
+//        $show->field('image', '3D изображение');
         $show->field('X', 'Расположение по оси X');
         $show->field('Y', 'Расположение по оси Y');
         $show->field('ru_name', 'Название');
         $show->field('ru_description', 'Описание');
         $show->field('icon', 'Иконка');
         $show->field('timing', 'Время');
-        $show->field('video', 'Видео');
+ //       $show->field('video', 'Видео');
         $show->field('created_at', 'Время создания');
         $show->field('updated_at', 'Время обновления');
 
@@ -90,12 +90,12 @@ class InfrastructureController extends AdminController
 
         $form->select('category_id', 'Категория объекта инфраструктуры')
             ->options(CategoryInfrastructure::all()->pluck('ru_name', 'id'));
-        $form->image('image', '3D изображение');
+   //     $form->image('image', '3D изображение');
         $form->number('X', 'Расположение по оси X');
         $form->number('Y', 'Расположение по оси Y');
         $form->icon('icon', 'Иконка');
         $form->time('time', 'Время');
-        $form->file('video', 'Видео');
+   //     $form->file('video', 'Видео');
         $form->tab('RU', function (Form $form) {
             $form->text('ru_name', 'Название');
             $form->ckeditor('ru_description', 'Описание');
@@ -104,12 +104,12 @@ class InfrastructureController extends AdminController
             $form->ckeditor('ua_description', 'Описание');
         });
 
-        $form->saving(function ($form) {
+     /*   $form->saving(function ($form) {
             try {
-                if ($form->model()->image) {
-                    \MediaManager::deleteFile($form->model()->image);
+                if ($form->image && ($form->model()->image != $form->image)) {
+                     \MediaManager::deleteFile($form->model()->image);
                 }
-                if ($form->model()->video) {
+                if ($form->video && ($form->model()->video != $form->video)) {
                     \MediaManager::deleteFile($form->model()->video);
                 }
             } catch (\Exception $e) {
@@ -130,8 +130,7 @@ class InfrastructureController extends AdminController
                 $form->model()->id,
                 'video'
             );
-            \Cache::flush();
-        });
+	});*/
 
         return $form;
     }

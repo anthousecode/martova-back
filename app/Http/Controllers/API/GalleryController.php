@@ -32,8 +32,6 @@ class GalleryController extends Controller
      */
     public function fetchGalleryItems()
     {
-        return \Cache::remember('all_gallry_items', 1440, function(){
-            return GalleryResource::collection(Gallery::all());
-        });
+        return GalleryResource::collection(Gallery::all());
     }
 }

@@ -14,7 +14,6 @@ use Illuminate\Routing\Router;
 |
 */
 
-// 3-rd auth parties...
 Route::namespace('OAuth')->prefix('oauth')->middleware('web')->group(function () {
     Route::get('{driver}/authenticate', 'SocialiteController@authenticate');
     Route::get('{driver}/callback', 'SocialiteController@callback');

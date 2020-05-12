@@ -35,7 +35,7 @@ return [
         'key' => 'AIzaSyBGXOW5Ko1SLQ2UELr0CEElWgvQ3BwkyQ0',
         'client_id' => '1084938803888-kh942qstrbka2chdpj57612n2pjldphu.apps.googleusercontent.com',
         'client_secret' => 'OteA_LFxYEd8BT6k7qnwAW2E',
-        'redirect' => 'https://sweews.herokuapp.com/api/oauth/google/callback',
+        'redirect' => 'https://api.martovariverside.com/api/oauth/google/callback',
         'refresh_token' => '1//04nIMtgdj4dfCCgYIARAAGAQSNwF-L9IrNz7yGjcsVBOivLJ_ib41TOulEScWwup3lKDCv-fw9vdJlLLpu1hIEWPOfVzCcT8zUt4',
         'folder_id' => '1fBdTt0SVghIUzD3Qcc3nh1uYZjxv4dwd',
     ],
@@ -43,19 +43,21 @@ return [
     'youtube' => [
         'client_id' => '1084938803888-kh942qstrbka2chdpj57612n2pjldphu.apps.googleusercontent.com',
         'client_secret' => 'OteA_LFxYEd8BT6k7qnwAW2E',
-        'redirect' => 'https://sweews.herokuapp.com/api/oauth/youtube/callback',
+        'redirect' => 'https://api.martovariverside.com/api/oauth/youtube/callback',
     ],
 
     'facebook' => [
          'client_id' => '467278400623639',
          'client_secret' => '2da0c5dd230f7deaf173dabbe6c62f30',
-         'redirect' => 'https://sweews.herokuapp.com/api/oauth/facebook/callback'
+	 #    'redirect' => 'https://sweews.herokuapp.com/api/oauth/facebook/callback'
+	 'redirect' => 'https://api.martovariverside.com/api/oauth/facebook/callback'
     ],
 
     'instagram' => [
         'client_id' => '142856870067904',
         'client_secret' => 'b31021d9d2055eb6afbaf8469c9fb252',
-        'redirect' => 'https://sweews.herokuapp.com/api/oauth/instagram/callback',
+	 #'redirect' => 'https://sweews.herokuapp.com/api/oauth/instagram/callback',
+	'redirect' => 'https://api.martovariverside.com/api/oauth/instagram/callback',
     ],
 
 ];

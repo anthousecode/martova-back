@@ -97,8 +97,8 @@ class NewsController extends AdminController
         });
 
         $form->saving(function ($form) {
-            try {
-                if ($form->model()->image) {
+	try { 
+                if ($form->image && ($form->model()->image != $form->image)) {
                     \MediaManager::deleteFile($form->model()->image);
                 }
             } catch (\Exception $e) {
@@ -123,7 +123,6 @@ class NewsController extends AdminController
                 $form->model()->id,
                 'image'
             );
-            \Cache::flush();
         });
 
         return $form;

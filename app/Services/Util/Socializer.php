@@ -13,8 +13,8 @@ class Socializer
 {
      public function resolveMethodByDriver(string $driver): string
      {
-         $method = 'driver';
-         switch ($driver) {
+        $method = 'driver';
+        switch ($driver) {
              case 'instagram':
                  $method = 'with';
              break;

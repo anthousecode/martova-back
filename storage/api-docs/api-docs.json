@@ -498,7 +498,7 @@
                         "content": {
                             "application/json": {
                                 "schema": {
-                                    "property": "pages",
+                                    "property": "page",
                                     "description": "All pages",
                                     "type": "array",
                                     "items": {}

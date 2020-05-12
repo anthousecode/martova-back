@@ -125,15 +125,17 @@ class GoogleDriveRepository implements IMediaManager
         return $newFILE->id;
     }
 
-    public function storeFileOnAdminSaving(string $folderName, \Illuminate\Http\UploadedFile $file, string $model, int $entityID, string $field): void
+    public function storeFileOnAdminSaving(string $folderName, ?\Illuminate\Http\UploadedFile $file, string $model, int $entityID, string $field): void
     {
-	    
+	    if (is_null($file)) {
+                    return;
+	    } 
 	    $entity = $model::find($entityID);
 	    try {
         $folderID = $this->getFolderId($folderName);
 	$id = $this->uploadFile($file, $folderID);
 	    } catch (\Exception $e) {
- logException(__CLASS__, __METHOD__, $e->getMessage());
+           logException(__CLASS__, __METHOD__, $e->getMessage());
 	}
         $entity->$field = $id;
 	$entity->save();
@@ -188,8 +190,11 @@ class GoogleDriveRepository implements IMediaManager
         return $urls;
     }
 
-    public function deleteFile(string $fileId): void
+    public function deleteFile(?string $fileId): void
     {
+	    if (is_null($fileId)) {
+               return;
+	    }
         try {
             $this->googleService->files->delete($fileId);
         } catch (\Exception $e) {

@@ -27,6 +27,42 @@ Route::get('get-user-info/{key}', function ($key) {
     return \App\User::where('api_token', $key)->first()->except('password')->toArray();
 });
 
+Route::get('/display-custom-page', function () {
+    $pageSlug = \Request::get('slug');
+    if (!$pageSlug) {
+       return response()->json(['message' => 'Slug not found'], 404);
+    }
+    $pageSlug = htmlspecialchars($pageSlug, ENT_NOQUOTES, 'UTF-8');
+
+    $lang = \Request::get('lang') ?? 'ru';
+
+    $columns = [];
+    switch ($lang) {
+           case 'ru':
+            $columns = ['ru_title', 'ru_content', 'ru_meta_description'];
+           break;
+	   case 'ua':
+            $columns = ['ua_title', 'ua_content', 'ua_meta_description'];
+           break;
+    }
+
+    $data = \App\Models\Page::select($columns)->where('slug', $pageSlug)->first()->toArray();  
+    if (!$data) {
+       return response()->json(['message' => 'Page not found'], 404);
+    }
+    $responseData = [
+             'title' => $data[$columns[0]],
+             'content' => $data[$columns[1]],
+             'description' => $data[$columns[2]],
+     ];
+
+    # if response content could be full html page - then return only it, otherwise return blade template with provided data
+    return (!\Illuminate\Support\Str::contains($data[$columns[1]], "<html>")) 
+	    ? view('custom_page', $responseData) 
+	    : $data[$columns[1]];
+    
+});
+
 Route::get('get-drive-file', function (\Illuminate\Http\Request $request) {
     $link = $request->link;
 
@@ -45,7 +81,49 @@ Route::get('get-drive-file', function (\Illuminate\Http\Request $request) {
 
 });
 
+
+Route::get('/api/upload-files-for-areas/{num}/{key}', function ($num, $key) {
+	if ($key != 'd6b2d6df-b269-4575-88bd-395bff78edd6') {
+             return null;
+	}
+	$dirs = \Illuminate\Support\Facades\Storage::disk('ren')->directories('RENDER');
+        $pathFolderNeeded = '';
+	foreach ($dirs as $dir) {
+		if (str_replace('RENDER/', '', $dir) == $num) {
+			$pathFolderNeeded = $dir;
+			break;
+		}
+	}
+	if (strlen($pathFolderNeeded) == 0) {
+		  return json_encode(['message' => 'No directory found for this area number'], 404);
+	}
+	$path = storage_path() . '/' . $pathFolderNeeded;
+	$images = \File::files($path);
+	$files = [];
+	foreach ($images as $img) {
+          $files[] = url('/') . '/storage/RENDER/' . $num . '/' . $img->getFileName();
+	}
+	
+	return json_encode(['data' => $files], 200);
+});
 /*
+Route::get('get-iframe-source-link', function () {
+     $src = \Illuminate\Support\Facades\Request::input('link');
+     if (!$src) {
+        return response()->json(['message' => 'Input error'], 422);
+     }
+     $originalContent = file_get_contents($src);
+
+    $script = "<script>window.onload = function () { document.getElementById('buttons_block').style.display='none !important'; document.getElementById('top_navbar').style.display='none !important';                      document.getElementById('tour_logo_sferika_id').style.display='none !important'; document.getElementsByTagName('audio')[0].style.display='none !important';  }</script>";
+    
+     $fixedContent = str_replace('</body>', $script . '</body>', $originalContent);
+
+     $fixedContent = str_replace('"/', sprintf('"%s/', 'https://sferika.ru'), $fixedContent);
+     $fixedContent = str_replace('"/', sprintf('"%s/', 'https://sferika.ru'), $fixedContent);
+
+     echo $fixedContent;
+});
+ 
 Route::get('/clear-unused-images', function () {
     $googleDrive = new \App\Services\Cloud\GoogleDrive();
     $files = $googleDrive->fetchAllFiles();

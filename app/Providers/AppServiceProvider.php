@@ -17,7 +17,7 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register()
     {
-       //\URL::forceScheme('https');
+        \URL::forceScheme('https');
         $this->app->register(\L5Swagger\L5SwaggerServiceProvider::class);
 
 	// CENTRALIZED MEDIA-MANAGEMENT REPOSITORY DEFINITION
@@ -27,10 +27,10 @@ class AppServiceProvider extends ServiceProvider
 	 });
 
 	// helpers ...
-	require_once app_path('Services/Helpers/Logger.php');
+        require_once app_path('Services/Helpers/Logger.php');
 
         // db stuff ...
-        if (!Schema::hasColumn('users', 'api_token')) {
+     /*   if (!Schema::hasColumn('users', 'api_token')) {
             Schema::table('users', function (Blueprint $table) {
                 $table->string('api_token', 36)->nullable();
             });
@@ -88,7 +88,14 @@ class AppServiceProvider extends ServiceProvider
             Schema::table('areas', function(Blueprint $table){
                 $table->string('print_plan')->nullable();
             });
+	}
+
+	if (!Schema::hasColumn('infrastructures', 'time')) {
+            Schema::table('infrastructures', function(Blueprint $table){
+                $table->string('time')->nullable();
+            });
         }
+      */
 
 //        Schema::table('comments', function(Blueprint $table){
 //            $table->mediumText('text')->change();

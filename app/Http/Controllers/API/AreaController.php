@@ -153,9 +153,13 @@ class AreaController extends Controller
      */
     public function downloadPlan($id = null)
     {
-        $filePath = Area::select('plan')->where('id', $id)->get()->pluck('plan')->toArray()[0];
+	    $filePath = Area::select('plan')->where('id', $id)->get()->pluck('plan')->toArray();
 
-        return \MediaManager::downloadFile($filePath);
+	    if (!$filePath) {
+                return null;
+	    }
+
+        return \MediaManager::downloadFile($filePath[0]);
     }
 
     /**
@@ -181,9 +185,13 @@ class AreaController extends Controller
      */
     public function downloadSurvey($id = null)
     {
-        $filePath = Area::select('survey')->where('id', $id)->get()->pluck('survey')->toArray()[0];
+	    $filePath = Area::select('survey')->where('id', $id)->get()->pluck('survey')->toArray();
 
-        return \MediaManager::downloadFile($filePath);
+	    if (!$filePath) {
+             
+	    }
+
+        return \MediaManager::downloadFile($filePath[0]);
     }
 
     /**

@@ -21,15 +21,15 @@ class FilesystemRepository implements IMediaManager
         $this->storage = Storage::disk('admin');
     }
 
-    public function downloadFile(string $filePath): ?\Symfony\Component\HttpFoundation\StreamedResponse
+    public function downloadFile(string $filePath)//: ?\Symfony\Component\HttpFoundation\StreamedResponse
     {
         try {
-            $file = $this->storage->get($filePath);
+            $file = Storage::disk('admin')->url($filePath);
         } catch (\Exception $e) {
             logException(__CLASS__, __METHOD__, $e->getMessage());
             return null;
-        }
-        return \Illuminate\Support\Facades\Response::download($file, 'file', []);
+	}
+	return response()->download(public_path() . '/uploads/' . $filePath);
     }
 
     public function getFile(string $filePath)
@@ -56,9 +56,12 @@ class FilesystemRepository implements IMediaManager
     }
 
     // DEPRECATED BECAUSE OF ADMIN PANEL SAVING
-    public function storeFileOnAdminSaving(string $path, UploadedFile $file, string $model, int $entityID, string $fieldName): void
+    public function storeFileOnAdminSaving(string $path, ?UploadedFile $file, string $model, int $entityID, string $fieldName): void
     {
-    /*    $entity = $model::find($entityID);
+       if (!$file){
+          return;
+       }
+       $entity = $model::find($entityID);
 	    try {
 	       $path = $this->uploadFile($file, null);
 	    } catch (\Exception $e) {
@@ -66,8 +69,7 @@ class FilesystemRepository implements IMediaManager
 	       return;
             }
         $entity->$fieldName = $path;
-        $entity->save();
-      */
+        $entity->save();  
     }
 
     public function getFileLink(?string $path): string
@@ -84,8 +86,11 @@ class FilesystemRepository implements IMediaManager
         return '';
     }
 
-    public function deleteFile(string $path): void
+    public function deleteFile(?string $path): void
     {
+	    if (is_null($path)) {
+               return;
+	    }
         try {
             $this->storage->delete($path);
         } catch (\Exception $e) {

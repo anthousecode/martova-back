@@ -32,8 +32,6 @@ class InfrastructureController extends Controller
      */
     public function fetchInfrastructureItems()
     {
-        return \Cache::remember('all_infrastructure_items', 1440, function () {
-            return InfrastructureResource::collection(Infrastructure::with('category')->get());
-        });
+        return InfrastructureResource::collection(Infrastructure::with('category')->get());
     }
 }

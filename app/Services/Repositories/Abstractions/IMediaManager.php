@@ -15,9 +15,8 @@ interface IMediaManager
 {
     /**
      * @param string $path
-     * @return \Symfony\Component\HttpFoundation\StreamedResponse
      */
-    public function downloadFile(string $path): ?\Symfony\Component\HttpFoundation\StreamedResponse;
+    public function downloadFile(string $path);//: ?\Symfony\Component\HttpFoundation\StreamedResponse;
 
     /**
      * @param string $path
@@ -39,7 +38,7 @@ interface IMediaManager
      * @param int $entityId
      * @param string $fieldName
      */
-    public function storeFileOnAdminSaving(string $path, \Illuminate\Http\UploadedFile $file, string $model, int $entityId, string $fieldName): void;
+    public function storeFileOnAdminSaving(string $path, ?\Illuminate\Http\UploadedFile $file, string $model, int $entityId, string $fieldName): void;
 
     /**
      * @param string $path
@@ -50,5 +49,5 @@ interface IMediaManager
     /**
      * @param string $path
      */
-    public function deleteFile(string $path): void;
+    public function deleteFile(?string $path): void;
 }

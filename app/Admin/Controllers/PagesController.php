@@ -69,7 +69,7 @@ class PagesController extends AdminController
     {
         $form = new Form(new Page);
 
-        $form->text('slug', 'Элемент URL')->placeholder('http://app.com/...');
+        $form->text('slug', 'Элемент URL')->placeholder('example: Blog');
         $form->number('order', 'Порядок');
         $form->tab('RU', function(Form $form){
             $form->text('ru_title', 'Заголовок (рус.)');
@@ -79,10 +79,6 @@ class PagesController extends AdminController
             $form->text('ua_title', 'Заголовок (укр.)');
             $form->text('ua_meta_description', 'Описание (укр.)');
             $form->ckeditor('ua_content', 'Контент (укр.)');
-        });
-
-        $form->saved(function($form) {
-            \Cache::flush();
         });
 
         return $form;

@@ -119,32 +119,28 @@ class AreasController extends AdminController
                 "yellow" => "Желтый",
             ]);
 
-        $form->saving(function ($form) {
-            try {
-                if ($form->model()->image) {
+	$form->saving(function ($form) {
+		     if ($form->image && ($form->model()->image != $form->image))  {
                     \MediaManager::deleteFile($form->model()->image);
                 }
-                if ($form->model()->plan) {
-                    \MediaManager::deleteFile($form->model()->plan);
+		     if ($form->plan && ($form->model()->plan != $form->plan)) {
+                     \MediaManager::deleteFile($form->model()->plan);
                 }
-                if ($form->model()->survey) {
+		     if ($form->survey && ($form->model()->survey != $form->survey)) {
                     \MediaManager::deleteFile($form->model()->survey);
                 }
-                if ($form->model()->print_plan) {
+		     if ($form->print_plan && ($form->model()->print_plan != $form->print_plan)) {
                     \MediaManager::deleteFile($form->model()->print_plan);
-                }
-            } catch (\Exception $e) {
-                report(\Carbon\Carbon::now()->toDateTimeString() . ': ' . $e->getMessage());
-            }
-        });
-
-        $form->saved(function ($form) {
+		     }
+	 });
+       
+	$form->saved(function ($form) {
             \MediaManager::storeFileOnAdminSaving('areas_images',
                 $form->image,
                 Area::class,
                 $form->model()->id,
                 'image'
-            );
+	    );
             \MediaManager::storeFileOnAdminSaving('areas_cad_plans',
                 $form->plan,
                 Area::class,
@@ -162,13 +158,9 @@ class AreasController extends AdminController
                 Area::class,
                 $form->model()->id,
                 'print_plan'
-            );
+	    );
         });
-
-        $form->saved(function ($form) {
-            \Cache::flush();
-        });
-
+       
         return $form;
     }
 }

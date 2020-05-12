@@ -60,12 +60,14 @@ class CommentController extends Controller
         ]);
         $image = $request->file('image') ?? null;
         if (!is_null($image)) {
-            \MediaManager::storeFileOnAdminSaving('comments_images',
+            /*\MediaManager::storeFileOnAdminSaving('comments_images',
                 $image,
                 Comment::class,
                 $comment->id,
                 'image'
-            );
+	);*/ 
+            $path = \MediaManager::uploadFile($image, $image->getClientOriginalName());
+	    $comment->image = $path;	 
             $comment->file_type = $image->getClientOriginalExtension();
             $comment->save();
         }
