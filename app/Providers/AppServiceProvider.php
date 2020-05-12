@@ -3,8 +3,6 @@
 namespace App\Providers;
 
 use Illuminate\Support\ServiceProvider;
-use Illuminate\Database\Schema\Blueprint;
-use Illuminate\Support\Facades\Schema;
 use App\Services\Repositories\Abstractions\IMediaManager;
 use App\Services\Repositories\FilesystemRepository;
 
