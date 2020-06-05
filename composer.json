@@ -15,6 +15,7 @@
         "encore/laravel-admin": "^1.7",
         "fideloper/proxy": "^4.0",
         "google/apiclient": "^2.0",
+        "guzzlehttp/guzzle": "^6.5",
         "intervention/image": "^2.5",
         "laravel-admin-extensions/multi-language": "^0.0.3",
         "laravel/framework": "^6.2",
@@ -22,6 +23,7 @@
         "laravel/tinker": "^1.0",
         "nao-pon/flysystem-google-drive": "~1.1",
         "ramsey/uuid": "^3.9",
+        "socialiteproviders/foursquare": "^3.0",
         "socialiteproviders/instagram": "^3.0"
     },
     "require-dev": {

@@ -112,6 +112,13 @@ return [
     |
     */
 
-    'password_timeout' => 10800
+    'password_timeout' => 10800,
+
+    'socialited_providers' => [
+        'google',
+        'youtube',
+        'facebook',
+        'instagram',
+    ]
 
 ];

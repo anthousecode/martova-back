@@ -16,6 +16,7 @@ class Socializer
         $method = 'driver';
         switch ($driver) {
              case 'instagram':
+            case 'foursquare':
                  $method = 'with';
              break;
          }

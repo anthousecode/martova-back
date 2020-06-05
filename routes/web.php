@@ -46,7 +46,7 @@ Route::get('/display-custom-page', function () {
            break;
     }
 
-    $data = \App\Models\Page::select($columns)->where('slug', $pageSlug)->first()->toArray();  
+    $data = \App\Models\Page::select($columns)->where('slug', $pageSlug)->first()->toArray();
     if (!$data) {
        return response()->json(['message' => 'Page not found'], 404);
     }
@@ -57,10 +57,10 @@ Route::get('/display-custom-page', function () {
      ];
 
     # if response content could be full html page - then return only it, otherwise return blade template with provided data
-    return (!\Illuminate\Support\Str::contains($data[$columns[1]], "<html>")) 
-	    ? view('custom_page', $responseData) 
+    return (!\Illuminate\Support\Str::contains($data[$columns[1]], "<html>"))
+	    ? view('custom_page', $responseData)
 	    : $data[$columns[1]];
-    
+
 });
 
 Route::get('get-drive-file', function (\Illuminate\Http\Request $request) {
@@ -103,7 +103,7 @@ Route::get('/api/upload-files-for-areas/{num}/{key}', function ($num, $key) {
 	foreach ($images as $img) {
           $files[] = url('/') . '/storage/RENDER/' . $num . '/' . $img->getFileName();
 	}
-	
+
 	return json_encode(['data' => $files], 200);
 });
 /*
@@ -115,7 +115,7 @@ Route::get('get-iframe-source-link', function () {
      $originalContent = file_get_contents($src);
 
     $script = "<script>window.onload = function () { document.getElementById('buttons_block').style.display='none !important'; document.getElementById('top_navbar').style.display='none !important';                      document.getElementById('tour_logo_sferika_id').style.display='none !important'; document.getElementsByTagName('audio')[0].style.display='none !important';  }</script>";
-    
+
      $fixedContent = str_replace('</body>', $script . '</body>', $originalContent);
 
      $fixedContent = str_replace('"/', sprintf('"%s/', 'https://sferika.ru'), $fixedContent);
@@ -123,7 +123,7 @@ Route::get('get-iframe-source-link', function () {
 
      echo $fixedContent;
 });
- 
+
 Route::get('/clear-unused-images', function () {
     $googleDrive = new \App\Services\Cloud\GoogleDrive();
     $files = $googleDrive->fetchAllFiles();
