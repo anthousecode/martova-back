@@ -17,6 +17,12 @@ use Illuminate\Routing\Router;
 Route::namespace('OAuth')->prefix('oauth')->middleware('web')->group(function () {
     Route::get('{driver}/authenticate', 'SocialiteController@authenticate');
     Route::get('{driver}/callback', 'SocialiteController@callback');
+
+    Route::namespace('Services')->prefix('foursquare')->group(function () {
+        Route::get('signin', 'FoursquareController@redirect');
+        Route::get('redirect', 'FoursquareController@authenticatedCallbackHandler');
+        Route::get('checkin', 'FoursquareController@checkin');	
+    });
 });
 
 

@@ -1,16 +1,20 @@
 <?php
 
-
-namespace App\Services\ThirdParties;
+namespace App\Http\Controllers\OAuth\Services;
 
 use GuzzleHttp\Client;
+use Carbon\Carbon;
+use Illuminate\Support\Facades\Request as RequestFacade;
+use Illuminate\Http\Request;
 
-// TODO: it must be controller for foursqure operations
-class Foursquare
+class FoursquareController
 {
     public function redirect()
     {
-        $link = sprintf(
+	$defaultFromLink = 'http://martovariverside.com/News/';    
+	$fromLink = RequestFacade::get('link') ?? $defaultFromLink;
+        session(['from_link' => $fromLink]);
+	$link = sprintf(
             "https://foursquare.com/oauth2/authenticate?client_id=%s&response_type=code&redirect_uri=%s",
             config('services.foursquare.client_id'),
             config('services.foursquare.redirect')
@@ -20,36 +24,36 @@ class Foursquare
 
     public function authenticatedCallbackHandler()
     {
-	    $link = sprintf(
+            $link = sprintf(
 		    "https://foursquare.com/oauth2/access_token?client_id=%s&client_secret=%s&grant_type=authorization_code&redirect_uri=%s&code=%s",
 		    config('services.foursquare.client_id'),
 		    config('services.foursquare.client_secret'),
 		    config('services.foursquare.redirect'),
-		    \Illuminate\Support\Facades\Request::get('code')
+		    RequestFacade::get('code')
 	    );
 
-	    // json "access_token"
-	    return (string) (new Client)
+	    $accessTokenJson = (string) (new Client)
 		    ->request('GET', $link)
 		    ->getBody();
+
+	    return redirect()->away(session('from_link') . '?foursquare_key=' . json_decode($accessTokenJson, true)['access_token']);
     }
 
-    public function checkIn(\Illuminate\Http\Request $request)
+    public function checkin()
     {
-	    $accessToken = $request->access_token;
+	    $accessToken = RequestFacade::get('accessToken');
 	    if (!$accessToken) {
                 return response()->json(['message' => 'Token not found'], 404);
 	    }
 	    // GET /v2/venues/search, response.venues[0].id (using appropriate ll of place)
 	    $venueId = config('services.foursquare.default_venue_id');
-            $link = sprintf(
+	    $link = sprintf(
 		    "https://api.foursquare.com/v2/checkins/add?oauth_token=%s&venueId=%s&v=%s",
 		    $accessToken,
 		    $venueId,
-		    \Carbon\Carbon::now()->format("Ymd")
+		    Carbon::now()->format("Ymd")
 	    );
-            return (string) (new Client)
-                    ->request('POST', $link)
-		    ->getBody();
+            return $link;
     }
 }
+

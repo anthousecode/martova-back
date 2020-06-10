@@ -37,9 +37,10 @@ class Authentifier
     {
         $method = $this->socializer->resolveMethodByDriver($driver);
 
-        $user = Socialite::$method($driver)->stateless()->user();
+	$user = Socialite::$method($driver)->stateless()->user();
+	
         $findUser = User::where('email', $user->email)->first();
-        $newToken = $this->tokenizer->generateUUID();
+        $newToken = property_exists($user, 'token') ? $user->token : $this->tokenizer->generateUUID();
         if ($findUser) {
             $findUser->api_token = $newToken;
             $findUser->save();

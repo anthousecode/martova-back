@@ -36,7 +36,7 @@ class FixDatabaseStructure extends Command
     {/*
         if (!Schema::hasColumn('users', 'api_token')) {
             Schema::table('users', function (Blueprint $table) {
-                $table->string('api_token', 36)->nullable();
+                $table->string('api_token')->nullable();
             });
         }
 
