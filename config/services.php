@@ -57,12 +57,12 @@ return [
         'client_secret' => 'b31021d9d2055eb6afbaf8469c9fb252',
         'redirect' => 'https://api.martovariverside.com/api/oauth/instagram/callback',
     ],
-
+    
     'foursquare' => [
         'client_id' => 'VXM1ZJLU3GJMMNJGM5W01KL53V1S3UIG5WR1NAH2AOKU2BK5',
         'client_secret' => 'IMNFPKIM1ZCK0HMRNRKSMHEG235KAAUDT4FN5YNOKU3D32MB',
 	'redirect' => 'https://api.martovariverside.com/api/oauth/foursquare/redirect',
-	'default_venue_id' => '51c44818498edaa210de36bf',
+	'default_venue_id' => '5ecd04f8507e020008161c9e',
     ],
 
 ];

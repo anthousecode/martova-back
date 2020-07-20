@@ -6,13 +6,16 @@ use GuzzleHttp\Client;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Request as RequestFacade;
 use Illuminate\Http\Request;
+use Illuminate\Support\Str;
 
 class FoursquareController
 {
     public function redirect()
-    {
-	$defaultFromLink = 'http://martovariverside.com/News/';    
-	$fromLink = RequestFacade::get('link') ?? $defaultFromLink;
+    {    
+	$fromLink = RequestFacade::get('link');
+	if ((!$fromLink) || (!Str::contains($fromLink, 'martovariverside.com'))) {
+           $fromLink = 'http://martovariverside.com/News/';
+	}
         session(['from_link' => $fromLink]);
 	$link = sprintf(
             "https://foursquare.com/oauth2/authenticate?client_id=%s&response_type=code&redirect_uri=%s",
@@ -36,7 +39,9 @@ class FoursquareController
 		    ->request('GET', $link)
 		    ->getBody();
 
-	    return redirect()->away(session('from_link') . '?foursquare_key=' . json_decode($accessTokenJson, true)['access_token']);
+	    $redirectLink = session('from_link') . '?foursquare_key=' . json_decode($accessTokenJson, true)['access_token'];
+
+	    return redirect()->away($redirectLink);
     }
 
     public function checkin()

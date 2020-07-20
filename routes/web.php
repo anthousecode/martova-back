@@ -27,6 +27,11 @@ Route::get('get-user-info/{key}', function ($key) {
     return \App\User::where('api_token', $key)->first()->except('password')->toArray();
 });
 
+Route::get('fof', function () {
+
+	return view('sas');
+});
+
 Route::get('/display-custom-page', function () {
     $pageSlug = \Request::get('slug');
     if (!$pageSlug) {

@@ -42,7 +42,8 @@ class Area extends JsonResource
 	    'image' => \MediaManager::getFileLink($this->image),
             'plan' => url('/') . '/api/download-plan/' . $this->id,//\MediaManager::getFileLink($this->plan),
             'survey' => \MediaManager::getFileLink($this->survey),
-            'print_plan' => \MediaManager::getFileLink($this->print_plan),
+	    'print_plan' => \MediaManager::getFileLink($this->print_plan),
+	    'phone_plan' => url('/') . '/uploads/' . $this->plan,
         ];
     }
 }
